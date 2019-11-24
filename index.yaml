@@ -3,14 +3,14 @@ entries:
   wavefront:
   - apiVersion: v1
     appVersion: 1.0.3
-    created: "2019-11-23T22:17:18.873625-05:00"
+    created: "2019-11-23T22:52:29.483095-05:00"
     dependencies:
     - condition: kubeStateMetrics.enabled
       name: kube-state-metrics
       repository: https://kubernetes-charts.storage.googleapis.com/
       version: ^2.2.1
     description: Wavefront Kubernetes collector
-    digest: 81e9c71b79463401e3ef421fa4335a1b2b90f68a4f13f676390c822312523bcc
+    digest: 222f4333480d642505370594cc9f16924364e2b6e097a1775911e7ef0ca0faaa
     home: https://www.wavefront.com
     keywords:
     - metric
@@ -32,7 +32,7 @@ entries:
   wavefront-operator:
   - apiVersion: v1
     appVersion: 0.1.0
-    created: "2019-11-23T22:17:18.878402-05:00"
+    created: "2019-11-23T22:52:29.487904-05:00"
     dependencies:
     - condition: kubeStateMetrics.enabled
       name: kube-state-metrics
@@ -62,7 +62,7 @@ entries:
     version: 0.1.3
   - apiVersion: v1
     appVersion: 0.1.0
-    created: "2019-11-23T22:17:18.876884-05:00"
+    created: "2019-11-23T22:52:29.486313-05:00"
     dependencies:
     - condition: kubeStateMetrics.enabled
       name: kube-state-metrics
@@ -92,7 +92,7 @@ entries:
     version: 0.1.2
   - apiVersion: v1
     appVersion: 0.1.0
-    created: "2019-11-23T22:17:18.875408-05:00"
+    created: "2019-11-23T22:52:29.484775-05:00"
     dependencies:
     - condition: kubeStateMetrics.enabled
       name: kube-state-metrics
@@ -118,4 +118,4 @@ entries:
     urls:
     - wavefront-operator-0.1.1.tgz
     version: 0.1.1
-generated: "2019-11-23T22:17:18.869707-05:00"
+generated: "2019-11-23T22:52:29.480488-05:00"
