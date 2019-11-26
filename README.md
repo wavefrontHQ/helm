@@ -1,4 +1,4 @@
-# Wavefront Operator Helm Chart
+# Wavefront Helm Charts
 
 [Helm](https://helm.sh/) is a package manager for Kubernetes. You can use Helm for installing Wavefront packages in your Kubernetes cluster.
 
