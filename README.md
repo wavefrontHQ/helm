@@ -4,12 +4,11 @@
 
 Available Wavefront packages:
 - [Wavefront Collector for Kubernetes](./wavefront/)
-- [Wavefront Operator](./wavefront-operator/)
 
 ## Installation
 
 ### Add the Wavefront Repo
 ```
-helm repo add wavefront 'https://raw.githubusercontent.com/wavefrontHQ/helm/master/'
+helm repo add wavefront https://wavefronthq.github.io/helm/
 helm repo update
 ```
