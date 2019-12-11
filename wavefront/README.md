@@ -11,6 +11,27 @@ though only one Wavefront Collector for Kubernetes per cluster should be used.
 
 You can learn more about the Wavefront and Kubernetes integration [here](https://docs.wavefront.com/wavefront_kubernetes.html)
 
+## Installation
+
+**Helm 2**
+```
+helm install wavefront/wavefront --name wavefront --namespace wavefront \
+    --set clusterName=<<K8s-CLUSTER-NAME>> \
+    --set wavefront.url=https://<<YOUR_CLUSTER>>.wavefront.com \
+    --set wavefront.token=<<YOUR_API_TOKEN>>
+```
+
+**Helm 3+**
+_If not already done create a namespace to install this chart_
+```
+kubectl create namespace wavefront
+
+helm install wavefront wavefront/wavefront -n wavefront \
+    --set clusterName=<<K8s-CLUSTER-NAME>> \
+    --set wavefront.url=https://<<YOUR_CLUSTER>>.wavefront.com \
+    --set wavefront.token=<<YOUR_API_TOKEN>>
+```
+
 ## Configuration
 
 The [values.yaml](./values.yaml) file contains information about all configuration
