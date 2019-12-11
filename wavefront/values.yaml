@@ -66,7 +66,8 @@ collector:
   #   env: production
   #   region: us-west-2
 
-  ## Events can also be collected and sent to Wavefront
+  ## Events can also be collected and sent to Wavefront.  
+  ## Requires Wavefront Proxy 6.0 or greater.
   ## Events should be filtered before being enabled, see event filtering documentation for details
   ## Ref: https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/blob/master/docs/filtering.md
   events:
