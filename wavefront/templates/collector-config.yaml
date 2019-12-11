@@ -13,6 +13,7 @@ data:
   config.yaml: |
     clusterName: {{ .Values.clusterName }}    
     enableDiscovery: {{ .Values.collector.discovery.enabled }}
+    enableEvents: {{ .Values.collector.events.enabled }}
     defaultCollectionInterval: {{ .Values.collector.interval | default "60s" }}
     flushInterval: {{ .Values.collector.flushInterval | default "10s" }}
     sinkExportDataTimeout: {{ .Values.collector.sinkDelay | default "20s" }}
@@ -111,6 +112,14 @@ data:
           - 'kube.apiserver.etcd.*'
           - 'kube.apiserver.process.*'        
       {{- end }}
+
+    {{- if .Values.collector.events.enabled }}
+    events:
+      {{- if .Values.collector.events.filters }}
+      filters:
+{{ tpl (toYaml .Values.collector.events.filters) . | indent 8 }}        
+      {{- end }}
+    {{- end }}
 
     {{- if .Values.collector.discovery.enabled }}
 

@@ -10,7 +10,7 @@ metadata:
     app.kubernetes.io/component: proxy
   name: {{ template "wavefront.proxy.fullname" . }} 
 spec:
-  replicas: 1
+  replicas: {{ .Values.proxy.replicas }}
   selector:
     matchLabels:
       app.kubernetes.io/name : {{ template "wavefront.fullname" .}}
