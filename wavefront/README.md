@@ -22,7 +22,8 @@ helm install wavefront/wavefront --name wavefront --namespace wavefront \
 ```
 
 **Helm 3+**
-_If not already done create a namespace to install this chart_
+
+_If not already done, create a namespace to install this chart_
 ```
 kubectl create namespace wavefront
 
