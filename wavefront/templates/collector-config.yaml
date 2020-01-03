@@ -93,6 +93,11 @@ data:
       internal_stats_source:
         prefix: kubernetes.
 
+      {{- if .Values.collector.kubernetesState }}
+      kubernetes_state_source:
+        prefix: kubernetes.
+      {{- end }}
+
       telegraf_sources:
       - plugins: []        
 
