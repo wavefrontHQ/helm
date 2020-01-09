@@ -1,5 +1,8 @@
-# OSX trash
-.DS_Store
-
-# Chart dependencies
+### Helm ###
 **/charts/*.tgz
+
+### Intellij ###
+.idea
+
+### macOS ###
+.DS_Store
