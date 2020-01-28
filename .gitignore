@@ -3,3 +3,6 @@
 
 # Chart dependencies
 **/charts/*.tgz
+
+# Build files
+_build/*
