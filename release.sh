@@ -40,7 +40,7 @@ echo "downloading latest index.yaml to ${INDEX_FILE}"
 curl -sL https://raw.githubusercontent.com/wavefrontHQ/helm/gh-pages/index.yaml > ${INDEX_FILE}
 
 echo "generating updated index.yaml"
-helm repo index --url "https://github.com/wavefrontHQ/helm/tree/gh-pages" --merge "${INDEX_FILE}" ${BUILD_DIR}
+helm repo index --merge "${INDEX_FILE}" ${BUILD_DIR}
 
 cp ${BUILD_DIR}/* ${TMP_DIR}
 
