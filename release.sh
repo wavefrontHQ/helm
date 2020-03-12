@@ -3,6 +3,7 @@
 function print_usage_and_exit() {
     echo "Failure: $1"
     echo "Usage: $0 CHART_NAME"
+    echo "Example: $0 wavefront"
     exit 1
 }
 
@@ -20,7 +21,6 @@ fi
 # initialize build variables
 BUILD_DIR="./_build"
 INDEX_FILE=${BUILD_DIR}/index.yaml
-TMP_DIR=`mktemp -d /tmp/wavefront.XXXXXX`
 
 rm -rf ${BUILD_DIR}
 echo "using build directory: ${BUILD_DIR}"
@@ -42,7 +42,5 @@ curl -sL https://raw.githubusercontent.com/wavefrontHQ/helm/gh-pages/index.yaml 
 echo "generating updated index.yaml"
 helm repo index --merge "${INDEX_FILE}" ${BUILD_DIR}
 
-cp ${BUILD_DIR}/* ${TMP_DIR}
-
 echo "Complete. new index and package files can be found under ${BUILD_DIR}"
-echo "Files have also been copied to ${TMP_DIR}"
+echo "Run: 'git checkout gh-pages && cp ${BUILD_DIR}/* .' and commit to update the helm chart"
