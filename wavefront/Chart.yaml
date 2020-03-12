@@ -11,9 +11,7 @@ keywords:
 home: https://www.wavefront.com
 sources:
 - https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes
-- https://github.com/wavefrontHQ/java/tree/master/proxy
+- https://github.com/wavefrontHQ/wavefront-proxy
 maintainers:
 - name: vikramraman
   email: rvikram@vmware.com
-- name: puckpuck
-  email: pierre@wavefront.com
