@@ -1,6 +1,6 @@
 # Wavefront Collector for Kubernetes
 
-[Wavefront](https://wavefront.com) is a cloud-native monitoring and analytics platform that provides 
+[Wavefront](https://wavefront.com) is a cloud-native monitoring and analytics platform that provides
 three dimensional microservices observability with metrics, histograms and OpenTracing-compatible distributed tracing.
 
 ## Introduction
@@ -43,7 +43,7 @@ You will need to provide values for those options for a successful installation 
 
 ## Parameters
 
-The following tables lists the configurable parameters of the Jenkins chart and their default values.
+The following tables lists the configurable parameters of the Wavefront chart and their default values.
 
 | Parameter | Description | Default |
 | --- | --- | --- |
@@ -64,6 +64,7 @@ The following tables lists the configurable parameters of the Jenkins chart and 
 | `collector.useProxy` | Use a Wavefront Proxy to send metrics through | `true` |
 | `collector.proxyAddress` | Non-default Wavefront Proxy address to use, should only be set when `proxy.enabled` is false | `nil` |
 | `collector.apiServerMetrics` | Collect metrics about Kubernetes API server | `false` |
+| `collector.kubernetesState` | Collect metrics about Kubernetes resource states [see more](https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/blob/master/docs/metrics.md#kubernetes-state-source) | `true` |
 | `collector.tags` | Map of tags (key/value) to add to all metrics collected | `nil` |
 | `collector.discovery.enabled` | Rules based and Prometheus endpoints auto-discovery  | `true` |
 | `collector.discovery.annotationPrefix` | Replaces `prometheus.io` as prefix for annotations of auto-discovered Prometheus endpoints | `prometheus.io` |
