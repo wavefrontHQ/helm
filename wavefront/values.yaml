@@ -160,7 +160,7 @@ proxy:
   enabled: true
   image:
     repository: wavefronthq/proxy
-    tag: 5.7
+    tag: 6.1
     pullPolicy: IfNotPresent
 
   ## The number of pod replicas to run for the Wavefront Proxy deployment
