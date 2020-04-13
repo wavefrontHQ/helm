@@ -92,7 +92,7 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `rbac.create` | Create RBAC resources | `true` |
 | `serviceAccount.create` | Create Wavefront service account  | `true` |
 | `serviceAccount.name` | Name of Wavefront service account | `nil` |
-| `kubeStateMetrics.eanbled` | Setup and enable Kube State Metrics for collection | `true` |
+| `kubeStateMetrics.eanbled` | Setup and enable Kube State Metrics for collection | `false` |
 
 
 ## Upgrading
