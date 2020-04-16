@@ -70,7 +70,7 @@ collector:
   #   env: production
   #   region: us-west-2
 
-  ## Events can also be collected and sent to Wavefront.  
+  ## Events can also be collected and sent to Wavefront.
   ## Requires Wavefront Proxy 6.0 or greater.
   ## Events should be filtered before being enabled, see event filtering documentation for details
   ## Ref: https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/blob/master/docs/filtering.md
@@ -83,7 +83,7 @@ collector:
   #     - reason:
   #       - "ScalingReplicaSet"
   #       - "ReplicaSetCreateError"
-  #     - kind: 
+  #     - kind:
   #       - "HorizontalPodAutoscaler"
   #       reason:
   #       - "Failed*"
@@ -162,6 +162,16 @@ proxy:
     repository: wavefronthq/proxy
     tag: 6.1
     pullPolicy: IfNotPresent
+
+  ## Wavefront Collector resource requests and limits
+  ## Ref: http://kubernetes.io/docs/user-guide/compute-resources/
+  resources:
+    requests:
+      cpu: 100m
+      memory: 64Mi
+    limits:
+      cpu: 100m
+      memory: 128Mi
 
   ## The number of pod replicas to run for the Wavefront Proxy deployment
   ## This is usually 1
