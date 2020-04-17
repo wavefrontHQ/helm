@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
     app.kubernetes.io.instance: {{ .Release.Name | quote }}
     app.kubernetes.io/component: proxy
-  name: {{ template "wavefront.proxy.fullname" . }} 
+  name: {{ template "wavefront.proxy.fullname" . }}
 spec:
   replicas: {{ .Values.proxy.replicas }}
   selector:
@@ -85,6 +85,8 @@ spec:
         - containerPort: {{ .Values.proxy.deltaCounterPort }}
           protocol: TCP
         {{- end }}
+        resources:
+{{ toYaml .Values.proxy.resources | trim | indent 10 }}
         securityContext:
           privileged: false
         volumeMounts:
