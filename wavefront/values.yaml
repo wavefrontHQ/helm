@@ -168,10 +168,10 @@ proxy:
   resources:
     requests:
       cpu: 100m
-      memory: 64Mi
+      memory: 1Gi
     limits:
-      cpu: 100m
-      memory: 128Mi
+      cpu: 1000m
+      memory: 4Gi
 
   ## The number of pod replicas to run for the Wavefront Proxy deployment
   ## This is usually 1
