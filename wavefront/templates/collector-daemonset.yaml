@@ -68,7 +68,7 @@ spec:
           mountPath: /etc/collector/
           readOnly: true
     {{- if .Values.priorityClassName }}
-      priorityClassName: {{ .Values.priorityClassName }}
+      priorityClassName: {{ .Values.collector.priorityClassName }}
     {{- end }}     
       volumes:
       - name: procfs
