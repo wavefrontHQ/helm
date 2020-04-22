@@ -89,6 +89,9 @@ spec:
 {{ toYaml .Values.proxy.resources | trim | indent 10 }}
         securityContext:
           privileged: false
+    {{- if .Values.proxy.priorityClassName }}
+      priorityClassName: {{ .Values.proxy.priorityClassName }}
+    {{- end }}
         volumeMounts:
         {{- if .Values.proxy.preprocessor }}
         - name: preprocessor
