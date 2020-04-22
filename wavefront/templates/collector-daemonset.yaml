@@ -67,7 +67,7 @@ spec:
         - name: config
           mountPath: /etc/collector/
           readOnly: true
-    {{- if .Values.priorityClassName }}
+    {{- if .Values.collector.priorityClassName }}
       priorityClassName: {{ .Values.collector.priorityClassName }}
     {{- end }}     
       volumes:
