@@ -149,6 +149,9 @@ collector:
       cpu: 200m
       memory: 256Mi
 
+## Optionally set a priority class name for the collector.
+## Ref: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#priorityclass
+#  priorityClassName: ""
 
 ## Wavefront Proxy is a metrics forwarder that is used to relay metrics to the Wavefront SaaS service.
 ## It can receive metrics from the Wavefront Collector as well as other metrics collection services
@@ -172,6 +175,10 @@ proxy:
     limits:
       cpu: 1000m
       memory: 4Gi
+
+## Optionally set a priority class name for the proxy.
+## Ref: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#priorityclass
+#  priorityClassName: ""
 
   ## The number of pod replicas to run for the Wavefront Proxy deployment
   ## This is usually 1
