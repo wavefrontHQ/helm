@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "wavefront-kubernetes-adapter.fullname" . }}
+  labels:
+{{ include "wavefront-kubernetes-adapter.labels" . | indent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "wavefront-kubernetes-adapter.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "wavefront-kubernetes-adapter.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      serviceAccountName: {{ include "wavefront-kubernetes-adapter.fullname" . }}
+      containers:
+      - name: custom-metrics-apiserver
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        args:
+        - "/wavefront-adapter"
+        - "--wavefront-url={{ required "You must configue a valid URL" .Values.apiserver.wavefrontURL }}"
+        - "--wavefront-token={{ required "You must configue a valid Token" .Values.apiserver.wavefrontToken }}"
+        - "--wavefront-metric-prefix={{ .Values.apiserver.metricPrefix }}"
+        - "--metrics-relist-interval={{ .Values.apiserver.metricRelistInterval }}"
+        - "--cert-dir=/etc/ssl/certs"
+        - "--secure-port=6443"
+        - "--external-metrics-config=/etc/adapter/config.yaml"
+        - "--logtostderr=true"
+        - "--log-level={{ .Values.apiserver.logLevel }}"
+        ports:
+        - containerPort: 6443
+        volumeMounts:
+        - mountPath: /tmp
+          name: temp-vol
+        - mountPath: /etc/adapter/
+          name: config
+          readOnly: true
+      volumes:
+      - name: temp-vol
+        emptyDir: {}
+      - name: config
+        configMap:
+          name: {{ include "wavefront-kubernetes-adapter.fullname" . }}
