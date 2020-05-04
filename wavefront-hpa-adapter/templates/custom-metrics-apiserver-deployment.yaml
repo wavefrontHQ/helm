@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "wavefront-kubernetes-adapter.fullname" . }}
+  name: {{ include "wavefront-hpa-adapter.fullname" . }}
   labels:
-{{ include "wavefront-kubernetes-adapter.labels" . | indent 4 }}
+{{ include "wavefront-hpa-adapter.labels" . | indent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "wavefront-kubernetes-adapter.name" . }}
+      app.kubernetes.io/name: {{ include "wavefront-hpa-adapter.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ include "wavefront-kubernetes-adapter.name" . }}
+        app.kubernetes.io/name: {{ include "wavefront-hpa-adapter.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
-      serviceAccountName: {{ include "wavefront-kubernetes-adapter.fullname" . }}
+      serviceAccountName: {{ include "wavefront-hpa-adapter.fullname" . }}
       containers:
       - name: custom-metrics-apiserver
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -45,4 +45,4 @@ spec:
         emptyDir: {}
       - name: config
         configMap:
-          name: {{ include "wavefront-kubernetes-adapter.fullname" . }}
+          name: {{ include "wavefront-hpa-adapter.fullname" . }}

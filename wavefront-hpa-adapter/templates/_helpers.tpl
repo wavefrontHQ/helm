@@ -2,7 +2,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "wavefront-kubernetes-adapter.name" -}}
+{{- define "wavefront-hpa-adapter.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
@@ -11,7 +11,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "wavefront-kubernetes-adapter.fullname" -}}
+{{- define "wavefront-hpa-adapter.fullname" -}}
 {{- if .Values.fullnameOverride -}}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
@@ -27,16 +27,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "wavefront-kubernetes-adapter.chart" -}}
+{{- define "wavefront-hpa-adapter.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{/*
 Common labels
 */}}
-{{- define "wavefront-kubernetes-adapter.labels" -}}
-app.kubernetes.io/name: {{ include "wavefront-kubernetes-adapter.name" . }}
-helm.sh/chart: {{ include "wavefront-kubernetes-adapter.chart" . }}
+{{- define "wavefront-hpa-adapter.labels" -}}
+app.kubernetes.io/name: {{ include "wavefront-hpa-adapter.name" . }}
+helm.sh/chart: {{ include "wavefront-hpa-adapter.chart" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
@@ -47,9 +47,9 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "wavefront-kubernetes-adapter.serviceAccountName" -}}
+{{- define "wavefront-hpa-adapter.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create -}}
-    {{ default (include "wavefront-kubernetes-adapter.fullname" .) .Values.serviceAccount.name }}
+    {{ default (include "wavefront-hpa-adapter.fullname" .) .Values.serviceAccount.name }}
 {{- else -}}
     {{ default "default" .Values.serviceAccount.name }}
 {{- end -}}
