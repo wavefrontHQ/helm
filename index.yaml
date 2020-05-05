@@ -245,4 +245,14 @@ entries:
     urls:
     - wavefront-1.1.1.tgz
     version: 1.1.1
-generated: "2020-04-22T11:31:07.860649-07:00"
+  wavefront-hpa-adapter:
+  - apiVersion: v1
+    appVersion: 0.9.4
+    created: "2020-05-04T23:13:09.622448-07:00"
+    description: Wavefront HPA Adapter for Kubernetes
+    digest: f941c15b6f9636b1baea8037a94dbe7ab4817a8894b0f780a9bf2a555819a25c
+    name: wavefront-hpa-adapter
+    urls:
+    - wavefront-hpa-adapter-0.1.0.tgz
+    version: 0.1.0
+generated: "2020-05-04T23:13:09.621712-07:00"
