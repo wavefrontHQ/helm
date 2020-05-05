@@ -3,13 +3,16 @@ image:
   tag: 0.9.3
   pullPolicy: IfNotPresent
 
-apiserver:
+## Wavefront URL (cluster) and API Token
+## Required
+wavefront:
   # Wavefront url of the form https://INSTANCE.wavefront.com
-  # wavefrontURL: https://INSTANCE.wavefront.com
+  # url: https://YOUR_CLUSTER.wavefront.com
 
   # Wavefront API token with permissions to query for points
-  # wavefrontToken: 12345678-90ab-cdef-0123-4567890abcde
+  # token: YOUR_API_TOKEN
 
+adapter:
   # Metrics under this prefix are exposed in the custom metrics API.
   metricPrefix: kubernetes
 

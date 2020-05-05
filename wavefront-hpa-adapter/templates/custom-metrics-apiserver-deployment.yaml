@@ -23,15 +23,15 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         args:
         - "/wavefront-adapter"
-        - "--wavefront-url={{ required "You must configue a valid URL" .Values.apiserver.wavefrontURL }}"
-        - "--wavefront-token={{ required "You must configue a valid Token" .Values.apiserver.wavefrontToken }}"
-        - "--wavefront-metric-prefix={{ .Values.apiserver.metricPrefix }}"
-        - "--metrics-relist-interval={{ .Values.apiserver.metricRelistInterval }}"
+        - "--wavefront-url={{ required "You must configue a valid URL" .Values.wavefront.url }}"
+        - "--wavefront-token={{ required "You must configue a valid Token" .Values.wavefront.token }}"
+        - "--wavefront-metric-prefix={{ .Values.adapter.metricPrefix }}"
+        - "--metrics-relist-interval={{ .Values.adapter.metricRelistInterval }}"
         - "--cert-dir=/etc/ssl/certs"
         - "--secure-port=6443"
         - "--external-metrics-config=/etc/adapter/config.yaml"
         - "--logtostderr=true"
-        - "--log-level={{ .Values.apiserver.logLevel }}"
+        - "--log-level={{ .Values.adapter.logLevel }}"
         ports:
         - containerPort: 6443
         volumeMounts:

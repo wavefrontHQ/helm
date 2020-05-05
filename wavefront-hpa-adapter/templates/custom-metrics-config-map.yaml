@@ -7,4 +7,4 @@ metadata:
 data:
   config.yaml: |
     rules:
-{{ .Values.apiserver.rules | toYaml | trim | indent 4 }}
+{{ .Values.adapter.rules | toYaml | trim | indent 4 }}
