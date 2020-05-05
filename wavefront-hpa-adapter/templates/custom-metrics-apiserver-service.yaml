@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "wavefront-hpa-adapter.fullname" . }}
+  labels:
+{{ include "wavefront-hpa-adapter.labels" . | indent 4 }}
+spec:
+  ports:
+  - port: 443
+    targetPort: 6443
+  selector:
+    app.kubernetes.io/name: {{ include "wavefront-hpa-adapter.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
