@@ -23,13 +23,15 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         args:
         - "/wavefront-adapter"
-        - "--wavefront-url={{ required "You must configue a valid URL" .Values.wavefront.url }}"
-        - "--wavefront-token={{ required "You must configue a valid Token" .Values.wavefront.token }}"
+        - "--wavefront-url={{ required "You must configure a valid URL" .Values.wavefront.url }}"
+        - "--wavefront-token={{ required "You must configure a valid Token" .Values.wavefront.token }}"
         - "--wavefront-metric-prefix={{ .Values.adapter.metricPrefix }}"
         - "--metrics-relist-interval={{ .Values.adapter.metricRelistInterval }}"
         - "--cert-dir=/etc/ssl/certs"
         - "--secure-port=6443"
+      {{- if .Values.adapter.rules }}
         - "--external-metrics-config=/etc/adapter/config.yaml"
+      {{- end }}
         - "--logtostderr=true"
         - "--log-level={{ .Values.adapter.logLevel }}"
         ports:
@@ -37,12 +39,16 @@ spec:
         volumeMounts:
         - mountPath: /tmp
           name: temp-vol
+      {{- if .Values.adapter.rules }}
         - mountPath: /etc/adapter/
           name: config
           readOnly: true
+      {{- end }}
       volumes:
       - name: temp-vol
         emptyDir: {}
+    {{- if .Values.adapter.rules }}
       - name: config
         configMap:
           name: {{ include "wavefront-hpa-adapter.fullname" . }}
+    {{- end }}

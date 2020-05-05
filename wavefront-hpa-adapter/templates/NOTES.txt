@@ -1,0 +1,21 @@
+{{- $validUrl := and (.Values.wavefront.url) (ne .Values.wavefront.url "https://YOUR_CLUSTER.wavefront.com") -}}
+{{- $validToken := and (.Values.wavefront.token) (ne .Values.wavefront.token "YOUR_API_TOKEN") -}}
+
+{{- if or (not $validUrl) (not $validToken) }}
+
+##### ERROR:
+You did not specify a valid URL or Token for Wavefront.
+If you do not have a Wavefront instance you can get a free trial here
+
+https://www.wavefront.com/sign-up
+
+If you already have access to Wavefront please specify your URL and Token then try again.
+#####
+{{- end }}
+
+
+Wavefront HPA Adapter is setup and configured on your Kubernetes cluster.
+
+Visit this link to see how to autoscale your workloads using metrics in Wavefront
+
+https://github.com/wavefrontHQ/wavefront-kubernetes-adapter/blob/master/docs/introduction.md#getting-started
