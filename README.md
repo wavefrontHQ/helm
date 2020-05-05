@@ -4,6 +4,7 @@
 
 Available Wavefront packages:
 - [Wavefront Collector for Kubernetes](./wavefront/)
+- [Wavefront HPA Adapter for Kubernetes](./wavefront-hpa-adapter/)
 
 ## Installation
 
