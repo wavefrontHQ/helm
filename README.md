@@ -13,3 +13,5 @@ Available Wavefront packages:
 helm repo add wavefront https://wavefronthq.github.io/helm/
 helm repo update
 ```
+### Install a chart
+Follow the steps within the packages listed above to install the relevant chart.
