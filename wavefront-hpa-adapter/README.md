@@ -51,3 +51,8 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `adapter.metricRelistInterval` | Interval at which to fetch the list of custom metric names from Wavefront | `10m` |
 | `adapter.logLevel` | Min logging level (info, debug, trace) | `info` |
 | `adapter.rules` | Static configuration for external metrics [see more](https://github.com/wavefrontHQ/wavefront-kubernetes-adapter/blob/master/docs/introduction.md#static-configuration-file) | `nil` |
+| `resources` | Define node labels for pod assignment | `nil` |
+| `priorityClassName` | Specify a priority class | `nil` |
+| `nodeSelector` | Define a nodeSelector | `nil` |
+| `tolerations` | Define node taints to tolerate | `nil` |
+| `resources` | Define node/pod affinities | `nil` |
