@@ -28,3 +28,19 @@ adapter:
   #     name: azure.vm.cpu
   #   - query: 'ts(aws.sqs.approximatenumberofmessagesvisible)'
   #     name: aws.sqs.messagesvisible
+
+resources: {}
+  # limits:
+  #   cpu: 50m
+  #   memory: 100Mi
+  # requests:
+  #   cpu: 5m
+  #   memory: 20Mi
+
+priorityClassName: ""
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

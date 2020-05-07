@@ -44,6 +44,25 @@ spec:
           name: config
           readOnly: true
       {{- end }}
+      {{- with .Values.resources }}
+        resources:
+        {{- toYaml . | trim | nindent 10 }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | trim | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | trim | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | trim | nindent 8 }}
+      {{- end }}
+      {{- with .Values.priorityClassName }}
+      priorityClassName: {{ toYaml . | trim }}
+      {{- end }}
       volumes:
       - name: temp-vol
         emptyDir: {}
