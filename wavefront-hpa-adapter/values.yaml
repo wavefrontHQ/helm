@@ -31,11 +31,11 @@ adapter:
 
 resources: {}
   # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
+  #   cpu: 50m
+  #   memory: 100Mi
   # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+  #   cpu: 5m
+  #   memory: 20Mi
 
 priorityClassName: ""
 
