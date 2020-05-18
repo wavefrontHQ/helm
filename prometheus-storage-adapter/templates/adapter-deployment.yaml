@@ -1,0 +1,46 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: {{ include "prometheus-storage-adapter.fullname" . }}
+  labels:
+    app.kubernetes.io/name : {{ template "prometheus-storage-adapter.fullname" . }}
+    helm.sh/chart: {{ template "prometheus-storage-adapter.chart" . }}
+    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+    app.kubernetes.io.instance: {{ .Release.Name | quote }}
+    app.kubernetes.io/component: prometheus-storage-adapter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name : {{ template "prometheus-storage-adapter.fullname" .}}
+      app.kubernetes.io/component: prometheus-storage-adapter
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name : {{ template "prometheus-storage-adapter.fullname" .}}
+        app.kubernetes.io/component: prometheus-storage-adapter
+    spec:
+      containers:
+      - name: prometheus-storage-adapter
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        command:
+        - /bin/adapter
+        - -listen={{ .Values.adapter.listenPort }}
+        {{- if .Values.proxy.enabled }}
+        - -proxy={{ .Release.Name }}-wavefront-proxy.{{ .Release.Namespace }}.svc.cluster.local
+        {{- else }}
+        - -proxy={{ .Values.adapter.proxyHost }}
+        {{- end }}
+        {{- if .Values.adapter.proxyPort }}
+        - -proxy-port={{ .Values.adapter.proxyPort }}
+        {{- end }}
+        {{- if .Values.adapter.prefix }}
+        - -prefix={{ .Values.adapter.prefix }}
+        {{- end }}
+        {{- if .Values.adapter.enableDebug }}
+        - -debug
+        {{- end }}
+        {{- if .Values.adapter.tags }}
+        - -tags={{ .Values.adapter.tags }}
+        {{- end }}

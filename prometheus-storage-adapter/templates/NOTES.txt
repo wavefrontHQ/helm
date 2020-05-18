@@ -1,0 +1,1 @@
+Prometheus Storage Adapter for Wavefront is setup and configured on your Kubernetes cluster.

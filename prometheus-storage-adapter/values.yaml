@@ -1,0 +1,50 @@
+image:
+  repository: wavefronthq/prometheus-storage-adapter
+  tag: 1.0.2
+  pullPolicy: IfNotPresent
+
+adapter:
+  ## Port/address to listen on in the format `[address:]port`.
+  ## If no address is specified, the adapter listens on all interfaces.
+  ## Required
+  listenPort: 1234
+
+  ## The Wavefront proxy host address.
+  ## The proxy can be anywhere network reachable including outside of the cluster.
+  ## Required if `proxy.enabled` is set to false.
+  # proxyHost: ""
+
+  ## The Wavefront proxy port. Defaults to 2878.
+  # proxyPort: 2878
+
+  ## whether to enable debug logging. defaults to false.
+  # enableDebug: false
+
+  ## Prefix for metric names. If omitted, no prefix is added.
+  # prefix: ""
+
+  ## A comma separated list of tags to be added to each point tag.
+  ## Specified in the format "tag1=value1,tag2=value2" etc.
+  # tags: ""
+
+## Wavefront Proxy is a metrics forwarder that is used to relay metrics to the Wavefront SaaS service.
+## It can receive metrics from the Prometheus Storage Adapter as well as other metrics collection services
+## within your cluster. The proxy also supports preprocessor rules to allow you to further filter
+## and enhance your metric names, and tags. Should network connectivity fall between the proxy and
+## Wavefront SaaS service, the proxy will buffer metrics and flush when connectivity resumes.
+## Ref: https://docs.wavefront.com/proxies.html
+proxy:
+  enabled: true
+
+## DO NOT EDIT
+## This chart depends on the "wavefront" chart for proxy deployments.
+## The values below override the default values in the wavefront chart
+## as relevant to the prometheus storage adpater and are not meant to
+## be changed by end users.
+wavefront:
+  collector:
+    enabled: false
+  rbac:
+    create: false
+  serviceAccount:
+    create: false
