@@ -27,6 +27,26 @@ adapter:
   ## Specified in the format "tag1=value1,tag2=value2" etc.
   # tags: ""
 
+
+## Wavefront Storage Adapter resource requests and limits
+## Make sure to keep requests and limits equal to keep the pods in the Guaranteed QoS class
+## Ref: http://kubernetes.io/docs/user-guide/compute-resources/
+resources: {}
+  # limits:
+  #   cpu: 200m
+  #   memory: 256Mi
+  # requests:
+  #   cpu: 50m
+  #   memory: 20Mi
+
+priorityClassName: ""
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
 ## Wavefront Proxy is a metrics forwarder that is used to relay metrics to the Wavefront SaaS service.
 ## It can receive metrics from the Prometheus Storage Adapter as well as other metrics collection services
 ## within your cluster. The proxy also supports preprocessor rules to allow you to further filter
