@@ -1,5 +1,32 @@
 apiVersion: v1
 entries:
+  prometheus-storage-adapter:
+  - apiVersion: v1
+    appVersion: 1.0.2
+    created: "2020-05-18T22:19:47.011426-07:00"
+    dependencies:
+    - condition: proxy.enabled
+      name: wavefront
+      repository: https://wavefronthq.github.io/helm/
+      version: ^1.2.1
+    description: Wavefront Remote Storage Adapter for Prometheus
+    digest: 6c39a37256d46f8941e1ebc50e09a1ef37ae8a8f07f5f620417293c0e8c42b9b
+    home: https://www.wavefront.com
+    keywords:
+    - metric
+    - monitoring
+    - observability
+    - alerting
+    - adapter
+    maintainers:
+    - email: rvikram@vmware.com
+      name: vikramraman
+    name: prometheus-storage-adapter
+    sources:
+    - https://github.com/wavefrontHQ/prometheus-storage-adapter
+    urls:
+    - prometheus-storage-adapter-0.1.0.tgz
+    version: 0.1.0
   wavefront:
   - apiVersion: v1
     appVersion: 1.1.0
@@ -277,4 +304,4 @@ entries:
     urls:
     - wavefront-hpa-adapter-0.1.0.tgz
     version: 0.1.0
-generated: "2020-05-08T11:41:24.239002-07:00"
+generated: "2020-05-18T22:19:47.006594-07:00"
