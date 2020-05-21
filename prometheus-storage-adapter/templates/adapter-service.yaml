@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "prometheus-storage-adapter.fullname" . }}
+  labels:
+    app.kubernetes.io/name : {{ template "prometheus-storage-adapter.fullname" . }}
+    helm.sh/chart: {{ template "prometheus-storage-adapter.chart" . }}
+    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+    app.kubernetes.io.instance: {{ .Release.Name | quote }}
+    app.kubernetes.io/component: prometheus-storage-adapter
+spec:
+  selector:
+    app.kubernetes.io/name : {{ template "prometheus-storage-adapter.fullname" .}}
+    app.kubernetes.io/component: prometheus-storage-adapter
+  ports:
+    - name: adapter-port
+      protocol: TCP
+      port: {{ .Values.adapter.listenPort }}
+      targetPort: {{ .Values.adapter.listenPort }}

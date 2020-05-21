@@ -1,0 +1,46 @@
+image:
+  repository: wavefronthq/wavefront-hpa-adapter
+  tag: 0.9.4
+  pullPolicy: IfNotPresent
+
+## Wavefront URL (cluster) and API Token
+## Required
+wavefront:
+  url: https://YOUR_CLUSTER.wavefront.com
+
+  # Wavefront API token with permissions to query for points
+  token: YOUR_API_TOKEN
+
+adapter:
+  # Metrics under this prefix are exposed via the custom metrics API
+  metricPrefix: kubernetes
+
+  # Interval at which to fetch the list of custom metric names from Wavefront
+  metricRelistInterval: 10m
+
+  # one of info, debug, warn or trace
+  logLevel: info
+
+  # List wavefront queries to transform into external metrics
+  # See https://github.com/wavefrontHQ/wavefront-kubernetes-adapter/blob/master/docs/introduction.md#static-configuration-file
+  # rules:
+  #   - query: 'ts(azure.compute.vm.percentage.cpu)'
+  #     name: azure.vm.cpu
+  #   - query: 'ts(aws.sqs.approximatenumberofmessagesvisible)'
+  #     name: aws.sqs.messagesvisible
+
+resources: {}
+  # limits:
+  #   cpu: 50m
+  #   memory: 100Mi
+  # requests:
+  #   cpu: 5m
+  #   memory: 20Mi
+
+priorityClassName: ""
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

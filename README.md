@@ -4,6 +4,8 @@
 
 Available Wavefront packages:
 - [Wavefront Collector for Kubernetes](./wavefront/)
+- [Wavefront HPA Adapter for Kubernetes](./wavefront-hpa-adapter/)
+- [Wavefront Storage Adapter for Prometheus](./prometheus-storage-adapter/)
 
 ## Installation
 
@@ -12,3 +14,5 @@ Available Wavefront packages:
 helm repo add wavefront https://wavefronthq.github.io/helm/
 helm repo update
 ```
+### Install a chart
+Follow the steps within the packages listed above to install the relevant chart.
