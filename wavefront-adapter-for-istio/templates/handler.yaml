@@ -11,7 +11,7 @@ spec:
   params:
     {{- if and (.Values.adapter.useProxy)  (.Values.proxy.enabled) }} 
     proxy:
-      address: {{ .Release.Name }}-proxy.{{ .Release.Namespace }}.svc.cluster.local:2878
+      address: {{ .Release.Name }}-wavefront-proxy.{{ .Release.Namespace }}.svc.cluster.local:2878
     {{- else if .Values.adapter.useProxy }}
     proxy:
       address: {{ .Values.adapter.proxyAddress }}
