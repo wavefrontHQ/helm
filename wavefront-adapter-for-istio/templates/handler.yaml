@@ -3,21 +3,22 @@ apiVersion: "config.istio.io/v1alpha2"
 kind: handler
 metadata:
   name: wavefront-handler
-  namespace: {{ .Values.namespaces.istio }}
+  namespace: {{ .Values.adapter.istioNamespace }}
 spec:
   adapter: wavefront
   connection:
-    address: "wavefront.{{ .Values.namespaces.adapter }}:8000"
+    address: "wavefront.{{ .Release.Namespace }}:8000"
   params:
-    {{- if .Values.credentials.direct }}
-    direct:
-      server: {{ .Values.credentials.direct.server }}
-      token: {{ .Values.credentials.direct.token }}
-    {{- else if .Values.credentials.proxy }}
+    {{- if and (.Values.adapter.useProxy)  (.Values.proxy.enabled) }} 
     proxy:
-      address: {{ .Values.credentials.proxy.address }}
+      address: {{ .Release.Name }}-wavefront-proxy.{{ .Release.Namespace }}.svc.cluster.local:2878
+    {{- else if .Values.adapter.useProxy }}
+    proxy:
+      address: {{ .Values.adapter.proxyAddress }}
     {{- else }}
-       {{- required "Either credentials.direct or credentials.proxy must be supplied" .Values.error }}
+    direct:
+      server: {{ .Values.wavefront.wavefront.url }}
+      token: {{ .Values.wavefront.wavefront.token }}
     {{- end }}
     flushInterval: {{ .Values.metrics.flushInterval }}
     source: {{ .Values.metrics.source }}
@@ -29,10 +30,8 @@ spec:
     {{- if eq .Values.metrics.tcp true }}
       {{- template "metrics.tcp" . }}
     {{- end }}
-    {{- if .Values.logs }}
     logs:
-      level: {{ .Values.logs.level }}
-    {{- end }}
+      level: {{ .Values.adapter.logLevel }}
 ---
 {{- if eq .Values.metrics.http true }}
   {{- template "instances.http" . }}

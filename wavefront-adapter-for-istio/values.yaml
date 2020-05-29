@@ -1,0 +1,35 @@
+image:
+  repository: vmware/wavefront-adapter-for-istio
+  tag: 0.1.3
+  pullPolicy: Always
+
+adapter:
+  # if set to false, we assume direct ingestion and user needs to provide the
+  # wavefront url and token
+  useProxy: true
+  # proxyAddress: <user can enter manual external proxy address or we infer automatically if proxy.enabled=true>
+ 
+  logLevel: info
+  istioNamespace: istio-system
+
+metrics:
+  flushInterval: 5s
+  source: istio
+  prefix: istio
+  http: true
+  tcp: true
+
+proxy:
+  enabled: true
+
+## DO NOT EDIT
+## This chart depends on the "wavefront" chart for proxy deployments.
+## The values below override the default values in the wavefront chart
+## as relevant to the istio adpater and are not meant to be changed by end users.
+wavefront:
+  collector:
+    enabled: false
+  rbac:
+    create: false
+  serviceAccount:
+    create: false

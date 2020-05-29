@@ -5,7 +5,7 @@ apiVersion: "config.istio.io/v1alpha2"
 kind: instance
 metadata:
   name: tcpsentbytes
-  namespace: {{ .Values.namespaces.adapter }}
+  namespace: {{ .Release.Namespace }}
 spec:
   template: metric
   params:
@@ -19,7 +19,7 @@ apiVersion: "config.istio.io/v1alpha2"
 kind: instance
 metadata:
   name: tcpreceivedbytes
-  namespace: {{ .Values.namespaces.adapter }}
+  namespace: {{ .Release.Namespace }}
 spec:
   template: metric
   params:
@@ -33,7 +33,7 @@ apiVersion: "config.istio.io/v1alpha2"
 kind: instance
 metadata:
   name: tcpconnectionsopened
-  namespace: {{ .Values.namespaces.adapter }}
+  namespace: {{ .Release.Namespace }}
 spec:
   template: metric
   params:
@@ -47,7 +47,7 @@ apiVersion: "config.istio.io/v1alpha2"
 kind: instance
 metadata:
   name: tcpconnectionsclosed
-  namespace: {{ .Values.namespaces.adapter }}
+  namespace: {{ .Release.Namespace }}
 spec:
   template: metric
   params:

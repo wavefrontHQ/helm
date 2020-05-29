@@ -5,39 +5,39 @@ apiVersion: "config.istio.io/v1alpha2"
 kind: rule
 metadata:
   name: wavefront-tcp-rule
-  namespace: {{ .Values.namespaces.istio }}
+  namespace: {{ .Values.adapter.istioNamespace }}
 spec:
   match: context.protocol == "tcp"
   actions:
-  - handler: wavefront-handler.{{ .Values.namespaces.istio }}
+  - handler: wavefront-handler.{{ .Values.adapter.istioNamespace }}
     instances:
-    - tcpsentbytes.instance.{{ .Values.namespaces.adapter }}
-    - tcpreceivedbytes.instance.{{ .Values.namespaces.adapter }}
+    - tcpsentbytes.instance.{{ .Release.Namespace }}
+    - tcpreceivedbytes.instance.{{ .Release.Namespace }}
 ---
 # rule to dispatch tcp connection open metric to handler wavefront-handler
 apiVersion: "config.istio.io/v1alpha2"
 kind: rule
 metadata:
   name: wavefront-tcp-connection-open-rule
-  namespace: {{ .Values.namespaces.istio }}
+  namespace: {{ .Values.adapter.istioNamespace }}
 spec:
   match: context.protocol == "tcp" && connection.event == "open"
   actions:
-  - handler: wavefront-handler.{{ .Values.namespaces.istio }}
+  - handler: wavefront-handler.{{ .Values.adapter.istioNamespace }}
     instances:
-    - tcpconnectionsopened.instance.{{ .Values.namespaces.adapter }}
+    - tcpconnectionsopened.instance.{{ .Release.Namespace }}
 ---
 # rule to dispatch tcp connection close metric to handler wavefront-handler
 apiVersion: "config.istio.io/v1alpha2"
 kind: rule
 metadata:
   name: wavefront-tcp-connection-close-rule
-  namespace: {{ .Values.namespaces.istio }}
+  namespace: {{ .Values.adapter.istioNamespace }}
 spec:
   match: context.protocol == "tcp" && connection.event == "close"
   actions:
-  - handler: wavefront-handler.{{ .Values.namespaces.istio }}
+  - handler: wavefront-handler.{{ .Values.adapter.istioNamespace }}
     instances:
-    - tcpconnectionsclosed.instance.{{ .Values.namespaces.adapter }}
+    - tcpconnectionsclosed.instance.{{ .Release.Namespace }}
 {{- end }}
 
