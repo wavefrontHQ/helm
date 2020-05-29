@@ -40,7 +40,7 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | --- | --- | --- |
 | `wavefront.wavefront.url` | Wavefront URL for your cluster | `https://YOUR_CLUSTER.wavefront.com` |
 | `wavefront.wavefront.token` | Wavefront API Token | `YOUR_API_TOKEN` |
-| `image.repository` | storage adapter image registry and name | `wavefonthq/prometheus-storage-adapter` |
+| `image.repository` | storage adapter image registry and name | `wavefronthq/prometheus-storage-adapter` |
 | `image.tag` | storage adapter image tag | `{TAG_NAME}` |
 | `image.pullPolicy` | storage adapter image pull policy | `IfNotPresent` |
 | `proxy.enabled` | Setup and enable Wavefront proxy to send metrics through | `true` |
