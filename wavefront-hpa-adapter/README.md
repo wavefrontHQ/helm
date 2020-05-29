@@ -44,7 +44,7 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | --- | --- | --- |
 | `wavefront.url` | Wavefront URL for your cluster | `https://YOUR_CLUSTER.wavefront.com` |
 | `wavefront.token` | Wavefront API Token | `YOUR_API_TOKEN` |
-| `image.repository` | Wavefront HPA adapter image registry and name | `wavefonthq/wavefront-hpa-adapter` |
+| `image.repository` | Wavefront HPA adapter image registry and name | `wavefronthq/wavefront-hpa-adapter` |
 | `image.tag` | Wavefront HPA adapter image tag | `{TAG_NAME}` |
 | `image.pullPolicy` | Wavefront HPA adapter image pull policy | `IfNotPresent` |
 | `adapter.metricPrefix` | Metrics under this prefix are exposed via the custom metrics API | `kubernetes` |

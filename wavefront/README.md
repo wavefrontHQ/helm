@@ -51,7 +51,7 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `wavefront.url` | Wavefront URL for your cluster | `https://YOUR_CLUSTER.wavefront.com` |
 | `wavefront.token` | Wavefront API Token | `YOUR_API_TOKEN` |
 | `collector.enabled` | Setup and enable the Wavefront collector to gather metrics | `true` |
-| `collector.image.repository` | Wavefront collector image registry and name | `wavefonthq/wavefront-kubernetes-collector` |
+| `collector.image.repository` | Wavefront collector image registry and name | `wavefronthq/wavefront-kubernetes-collector` |
 | `collector.image.tag` | Wavefront collector image tag | `{TAG_NAME}` |
 | `colletor.image.pullPolicy` | Wavefront collector image pull policy | `IfNotPresent` |
 | `collector.useDaemonset` | Use Wavefront collector in Daemonset mode | `true` |
@@ -71,7 +71,7 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `collector.discovery.config` | Configuration for rules based auto-discovery [see more](https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/blob/master/docs/discovery.md) | `nil` |
 | `collector.resources` | CPU/Memory resource requests/limits | CPU: `200m`/`200m`, Memory: `10Mi`/`256Mi` |
 | `proxy.enabled` | Setup and enable Wavefront proxy to send metrics through | `true` |
-| `proxy.image.repository` | Wavefront proxy image registry and name | `wavefonthq/wavefront-kubernetes-collector` |
+| `proxy.image.repository` | Wavefront proxy image registry and name | `wavefronthq/wavefront-kubernetes-collector` |
 | `proxy.image.tag` | Wavefront proxy image tag | `{TAG_NAME}` |
 | `proxy.image.pullPolicy` | Wavefront proxy image pull policy | `IfNotPresent` |
 | `proxy.replicas` | Replicas to deploy for Wavefront proxy (usually 1) | `1` |
