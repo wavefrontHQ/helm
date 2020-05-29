@@ -71,7 +71,7 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `collector.discovery.config` | Configuration for rules based auto-discovery [see more](https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/blob/master/docs/discovery.md) | `nil` |
 | `collector.resources` | CPU/Memory resource requests/limits | CPU: `200m`/`200m`, Memory: `10Mi`/`256Mi` |
 | `proxy.enabled` | Setup and enable Wavefront proxy to send metrics through | `true` |
-| `proxy.image.repository` | Wavefront proxy image registry and name | `wavefronthq/wavefront-kubernetes-collector` |
+| `proxy.image.repository` | Wavefront proxy image registry and name | `wavefronthq/proxy` |
 | `proxy.image.tag` | Wavefront proxy image tag | `{TAG_NAME}` |
 | `proxy.image.pullPolicy` | Wavefront proxy image pull policy | `IfNotPresent` |
 | `proxy.replicas` | Replicas to deploy for Wavefront proxy (usually 1) | `1` |
