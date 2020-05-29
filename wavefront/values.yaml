@@ -279,3 +279,6 @@ serviceAccount:
 ## will be configured to capture metrics.
 kubeStateMetrics:
   enabled: false
+
+projectPacific:
+  enabled: false
