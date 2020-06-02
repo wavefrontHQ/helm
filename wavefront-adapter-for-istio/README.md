@@ -11,8 +11,11 @@ This chart will deploy the [Wavefront by VMware Adapter for Istio](https://githu
 
 **Helm 3+**
 
+_If not already done, create a namespace to install this chart_
 ```
-helm install wavefront-adapter-for-istio wavefront/wavefront-adapter-for-istio \
+kubectl create namespace wavefront-istio
+
+helm install wavefront-adapter-for-istio wavefront/wavefront-adapter-for-istio --namespace wavefront-istio \
     --set wavefront.wavefront.url=https://<YOUR_CLUSTER>.wavefront.com \
     --set wavefront.wavefront.token=<YOUR_API_TOKEN>
 ```

@@ -4,8 +4,8 @@ image:
   pullPolicy: Always
 
 adapter:
-  # if set to false, we assume direct ingestion and user needs to provide the
-  # wavefront url and token
+  # If set to false, we assume direct ingestion and user needs to provide the
+  # wavefront url and token as command line arguments.
   useProxy: true
   # proxyAddress: <user can enter manual external proxy address or we infer automatically if proxy.enabled=true>
  
@@ -19,6 +19,7 @@ metrics:
   http: true
   tcp: true
 
+# If set to true, user needs to provide the wavefront url and token as command line arguments.
 proxy:
   enabled: true
 
