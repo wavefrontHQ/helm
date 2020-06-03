@@ -1,0 +1,46 @@
+# handler for adapter wavefront
+apiVersion: "config.istio.io/v1alpha2"
+kind: handler
+metadata:
+  name: wavefront-handler
+  namespace: {{ .Values.adapter.istioNamespace }}
+spec:
+  adapter: wavefront
+  connection:
+    address: "wavefront.{{ .Release.Namespace }}:8000"
+  params:
+    {{- if and (.Values.adapter.useProxy)  (.Values.proxy.enabled) }} 
+    proxy:
+      address: {{ .Release.Name }}-wavefront-proxy.{{ .Release.Namespace }}.svc.cluster.local:2878
+    {{- else if .Values.adapter.useProxy }}
+    proxy:
+      address: {{ .Values.adapter.proxyAddress }}
+    {{- else }}
+    direct:
+      server: {{ .Values.wavefront.wavefront.url }}
+      token: {{ .Values.wavefront.wavefront.token }}
+    {{- end }}
+    flushInterval: {{ .Values.metrics.flushInterval }}
+    source: {{ .Values.metrics.source }}
+    prefix: {{ .Values.metrics.prefix }}
+    metrics:
+    {{- if eq .Values.metrics.http true }}
+      {{- template "metrics.http" . }}
+    {{- end }}
+    {{- if eq .Values.metrics.tcp true }}
+      {{- template "metrics.tcp" . }}
+    {{- end }}
+    logs:
+      level: {{ .Values.adapter.logLevel }}
+---
+{{- if eq .Values.metrics.http true }}
+  {{- template "instances.http" . }}
+---
+  {{- template "rule.http" . }}
+{{- end }}
+---
+{{- if eq .Values.metrics.tcp true }}
+  {{- template "instances.tcp" . }}
+---
+  {{- template "rule.tcp" . }}
+{{- end }}
