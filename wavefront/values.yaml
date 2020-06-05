@@ -280,5 +280,8 @@ serviceAccount:
 kubeStateMetrics:
   enabled: false
 
+## Required for project pacific tanzu kubernetes cluster
+## If enabled, required role binding will be installed to handle pod security policy inside
+## tanzu kubernetes cluster.
 projectPacific:
   enabled: false
