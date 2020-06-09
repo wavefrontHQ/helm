@@ -44,7 +44,7 @@ spec:
     {{- end }}   
     {{- if .Values.collector.tolerations }}
       tolerations:
-{{ toYaml .Values.collector.tolerations | indent 8 }}
+{{ toYaml .Values.collector.tolerations | indent 6 }}
     {{- end }}
         volumeMounts:
         - name: config
