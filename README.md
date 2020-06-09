@@ -5,6 +5,7 @@
 Available Wavefront packages:
 - [Wavefront Collector for Kubernetes](./wavefront/)
 - [Wavefront HPA Adapter for Kubernetes](./wavefront-hpa-adapter/)
+- [Wavefront Storage Adapter for Prometheus](./prometheus-storage-adapter/)
 
 ## Installation
 

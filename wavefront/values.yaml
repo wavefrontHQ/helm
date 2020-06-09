@@ -279,3 +279,8 @@ serviceAccount:
 ## will be configured to capture metrics.
 kubeStateMetrics:
   enabled: false
+
+## Required for Project Pacific Kubernetes clusters.
+## If enabled, a role binding to handle pod security policy will be installed within the Kubernetes cluster.
+projectPacific:
+  enabled: false
