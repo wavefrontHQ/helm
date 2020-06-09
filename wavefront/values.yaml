@@ -153,6 +153,11 @@ collector:
 ## Ref: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#priorityclass
 #  priorityClassName: ""
 
+## Optionally set tolerations for the collector
+## Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
+#  tolerations:
+
+
 ## Wavefront Proxy is a metrics forwarder that is used to relay metrics to the Wavefront SaaS service.
 ## It can receive metrics from the Wavefront Collector as well as other metrics collection services
 ## within your cluster. The proxy also supports preprocessor rules to allow you to further filter
@@ -180,6 +185,10 @@ proxy:
 ## Ref: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#priorityclass
 #  priorityClassName: ""
 
+## Optionally set tolerations for the proxy
+## Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
+#  tolerations:
+  
   ## The number of pod replicas to run for the Wavefront Proxy deployment
   ## This is usually 1
   replicas: 1
