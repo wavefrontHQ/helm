@@ -7,7 +7,8 @@ adapter:
   # If set to false, we assume direct ingestion and user needs to provide the
   # wavefront url and token as command line arguments.
   useProxy: true
-  # proxyAddress: <user can enter manual external proxy address or we infer automatically if proxy.enabled=true>
+  # Uncomment below line to provide external proxy address or we infer automatically if proxy.enabled=true
+  #proxyAddress: <proxy-host:proxy-port>
  
   logLevel: info
   istioNamespace: istio-system
