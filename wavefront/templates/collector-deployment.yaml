@@ -42,6 +42,10 @@ spec:
     {{- if .Values.collector.priorityClassName }}
       priorityClassName: {{ .Values.collector.priorityClassName }}
     {{- end }}   
+    {{- if .Values.collector.tolerations }}
+      tolerations:
+{{ toYaml .Values.collector.tolerations | indent 6 }}
+    {{- end }}
         volumeMounts:
         - name: config
           mountPath: /etc/collector/
