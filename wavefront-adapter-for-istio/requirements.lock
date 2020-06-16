@@ -1,6 +1,6 @@
 dependencies:
 - name: wavefront
   repository: https://wavefronthq.github.io/helm/
-  version: 1.2.1
-digest: sha256:d95706b7c9014f2f3005e83edab4ebe739372e9f47f24f81ff77f3bd6cbaac60
-generated: "2020-06-03T15:54:12.848249-07:00"
+  version: 1.2.3
+digest: sha256:781fb907f7c51c906a57e77f53d5f29315df293b909d3dd518325fed1bf516b0
+generated: "2020-06-16T15:15:02.972147572+05:30"
