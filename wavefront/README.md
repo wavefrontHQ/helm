@@ -92,7 +92,7 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `rbac.create` | Create RBAC resources | `true` |
 | `serviceAccount.create` | Create Wavefront service account  | `true` |
 | `serviceAccount.name` | Name of Wavefront service account | `nil` |
-| `kubeStateMetrics.eanbled` | Setup and enable Kube State Metrics for collection | `false` |
+| `kubeStateMetrics.enabled` | Setup and enable Kube State Metrics for collection | `false` |
 | `projectPacific.enabled` | Enable and create role binding for Tanzu kubernetes cluster | `false` |
 
 
