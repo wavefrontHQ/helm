@@ -97,6 +97,10 @@ collector:
   ## auto-discover Prometheus endpoints
   #   annotationPrefix: "wavefront.com"
 
+  ## Whether to enable runtime discovery configurations
+  ## Ref: https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/blob/master/docs/discovery.md#runtime-configurations
+  #   enableRuntimeConfigs: false
+
   ## Can be used to add additional discovery rules
   #   config:
   ## auto-discover a sample prometheus application
@@ -188,7 +192,7 @@ proxy:
 ## Optionally set tolerations for the proxy
 ## Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
 #  tolerations:
-  
+
   ## The number of pod replicas to run for the Wavefront Proxy deployment
   ## This is usually 1
   replicas: 1

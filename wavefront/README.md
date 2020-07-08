@@ -68,6 +68,7 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `collector.tags` | Map of tags (key/value) to add to all metrics collected | `nil` |
 | `collector.discovery.enabled` | Rules based and Prometheus endpoints auto-discovery  | `true` |
 | `collector.discovery.annotationPrefix` | Replaces `prometheus.io` as prefix for annotations of auto-discovered Prometheus endpoints | `prometheus.io` |
+| `collector.discovery.enableRuntimeConfigs` | Enable runtime discovery rules [see more](https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/blob/master/docs/discovery.md#runtime-configurations) | `false` |
 | `collector.discovery.config` | Configuration for rules based auto-discovery [see more](https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/blob/master/docs/discovery.md) | `nil` |
 | `collector.resources` | CPU/Memory resource requests/limits | CPU: `200m`/`200m`, Memory: `10Mi`/`256Mi` |
 | `proxy.enabled` | Setup and enable Wavefront proxy to send metrics through | `true` |

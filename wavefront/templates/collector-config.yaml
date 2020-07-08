@@ -7,11 +7,11 @@ metadata:
     helm.sh/chart: {{ template "wavefront.chart" . }}
     app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
     app.kubernetes.io.instance: {{ .Release.Name | quote }}
-    app.kubernetes.io/component: collector    
+    app.kubernetes.io/component: collector
   name: {{ template "wavefront.collector.fullname" . }}-config
 data:
   config.yaml: |
-    clusterName: {{ .Values.clusterName }}    
+    clusterName: {{ .Values.clusterName }}
     enableDiscovery: {{ .Values.collector.discovery.enabled }}
     enableEvents: {{ .Values.collector.events.enabled }}
     defaultCollectionInterval: {{ .Values.collector.interval | default "60s" }}
@@ -32,7 +32,7 @@ data:
     {{- if .Values.collector.tags }}
       tags:
 {{ tpl (toYaml .Values.collector.tags) . | indent 8 }}
-    {{- end }}     
+    {{- end }}
       filters:
         # Filter out infrequently used kube-state-metrics.
         metricBlacklist:
@@ -69,8 +69,8 @@ data:
 
     sources:
       kubernetes_source:
-        {{- if .Values.collector.useReadOnlyPort }} 
-        url: 
+        {{- if .Values.collector.useReadOnlyPort }}
+        url:
         kubeletPort: 10255
         kubeletHttps: false
         {{- else }}
@@ -88,7 +88,7 @@ data:
         filters:
           metricBlacklist:
           - 'kubernetes.sys_container.*'
-          - 'kubernetes.node.ephemeral_storage.*'    
+          - 'kubernetes.node.ephemeral_storage.*'
 
       internal_stats_source:
         prefix: kubernetes.
@@ -99,7 +99,7 @@ data:
       {{- end }}
 
       telegraf_sources:
-      - plugins: []        
+      - plugins: []
 
       {{- if .Values.collector.apiServerMetrics }}
       # Kubernetes API Server
@@ -115,14 +115,14 @@ data:
           metricWhitelist:
           - 'kube.apiserver.apiserver.*'
           - 'kube.apiserver.etcd.*'
-          - 'kube.apiserver.process.*'        
+          - 'kube.apiserver.process.*'
       {{- end }}
 
     {{- if .Values.collector.events.enabled }}
     events:
       {{- if .Values.collector.events.filters }}
       filters:
-{{ tpl (toYaml .Values.collector.events.filters) . | indent 8 }}        
+{{ tpl (toYaml .Values.collector.events.filters) . | indent 8 }}
       {{- end }}
     {{- end }}
 
@@ -132,8 +132,11 @@ data:
       {{- if .Values.collector.discovery.annotationPrefix }}
       annotation_prefix: {{ .Values.collector.discovery.annotationPrefix | quote }}
       {{- end }}
-      plugins:
+      {{- if .Values.collector.discovery.enableRuntimeConfigs }}
+      enable_runtime_plugins: {{ .Values.collector.discovery.enableRuntimeConfigs }}
+      {{- end }}
 
+      plugins:
 
       # auto-discover kube DNS
       - name: kube-dns-discovery
@@ -155,7 +158,7 @@ data:
           - 'kube.dns.http.requests.total.counter'
           - 'kube.dns.http.response.size.bytes'
           - 'kube.dns.kubedns.dnsmasq.*'
-          - 'kube.dns.process.*'    
+          - 'kube.dns.process.*'
 
       # auto-discover coredns
       - name: coredns-discovery
@@ -169,7 +172,7 @@ data:
         port: 9153
         path: /metrics
         scheme: http
-        prefix: kube.coredns.  
+        prefix: kube.coredns.
         filters:
           metricWhitelist:
           - 'kube.coredns.coredns.cache.*'
@@ -178,8 +181,8 @@ data:
           - 'kube.coredns.coredns.dns.request.size.bytes'
           - 'kube.coredns.coredns.dns.request.type.count.total.counter'
           - 'kube.coredns.coredns.dns.response.rcode.count.total.counter'
-          - 'kube.coredns.coredns.dns.response.size.bytes'          
-          - 'kube.coredns.process.*'      
+          - 'kube.coredns.coredns.dns.response.size.bytes'
+          - 'kube.coredns.process.*'
 
     {{- if .Values.collector.discovery.config }}
 
