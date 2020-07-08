@@ -7,6 +7,26 @@ to publish metrics to [Wavefront by VMware](https://www.wavefront.com/).
 
 This chart will deploy the [Wavefront by VMware Adapter for Istio](https://github.com/vmware/wavefront-adapter-for-istio/) into kubernetes cluster.
 
+## Prerequisites
+
+To deploy this adapter, you will need a cluster with the following setup.
+
+* Kubernetes v1.15.0 or v1.16.0
+* Istio v1.4,v1.5 or v1.6
+* Helm v3.2+
+
+**Note:** From Istio v1.5.x onwards `Mixer` is disabled by default. Enable `Mixer` with the following step:
+
+##### Istio v1.5.x
+```console
+istioctl manifest apply --set values.prometheus.enabled=true --set values.telemetry.v1.enabled=true --set values.telemetry.v2.enabled=false --set components.citadel.enabled=true --set components.telemetry.enabled=true
+```
+
+##### Istio v1.6.x
+```console
+istioctl install --set values.prometheus.enabled=true --set values.telemetry.v1.enabled=true --set values.telemetry.v2.enabled=false --set components.citadel.enabled=true --set components.telemetry.enabled=true
+```
+
 ## Installation
 
 **Helm 3+**
@@ -22,7 +42,7 @@ helm install wavefront-adapter-for-istio wavefront/wavefront-adapter-for-istio -
 
 ## Configuration
 
-The [values.yaml](./values.yaml) file contains information about all configuration
+The [values.yaml](https://raw.githubusercontent.com/wavefrontHQ/helm/master/wavefront-adapter-for-istio/values.yaml) file contains information about all configuration
 options for this chart.
 
 The options `wavefront.wavefront.url` and `wavefront.wavefront.token` are **required** if the `proxy.enabled` is set to `true` or `adapter.useProxy` is set to `false`.
