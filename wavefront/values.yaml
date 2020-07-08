@@ -168,7 +168,7 @@ proxy:
   enabled: true
   image:
     repository: wavefronthq/proxy
-    tag: 6.1
+    tag: 8.2
     pullPolicy: IfNotPresent
 
   ## Wavefront Collector resource requests and limits
