@@ -1,7 +1,7 @@
 apiVersion: v1
-appVersion: 0.1.3
+appVersion: 0.1.4
 name: wavefront-adapter-for-istio
-version: 0.1.1
+version: 0.1.2
 keywords:
 - metric
 - monitoring
