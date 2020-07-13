@@ -1,7 +1,7 @@
 image:
   repository: vmware/wavefront-adapter-for-istio
   tag: 0.1.4
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
 
 adapter:
   # If set to false, we assume direct ingestion and user needs to provide the
