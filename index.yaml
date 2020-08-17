@@ -435,6 +435,28 @@ entries:
     version: 0.1.0
   wavefront-hpa-adapter:
   - apiVersion: v1
+    appVersion: 0.9.5
+    created: "2020-08-16T21:17:32.65039-07:00"
+    description: Wavefront HPA Adapter for Kubernetes
+    digest: 130975a932ac79b12210100e3d7522c973418bbc6c6c7db83184046f7bab9e44
+    home: https://www.wavefront.com
+    keywords:
+    - metric
+    - monitoring
+    - observability
+    - alerting
+    - adapter
+    - autoscaling
+    maintainers:
+    - email: rvikram@vmware.com
+      name: vikramraman
+    name: wavefront-hpa-adapter
+    sources:
+    - https://github.com/wavefrontHQ/wavefront-kubernetes-adapter
+    urls:
+    - wavefront-hpa-adapter-0.2.1.tgz
+    version: 0.2.1
+  - apiVersion: v1
     appVersion: 0.9.4
     created: "2020-05-08T11:41:24.241194-07:00"
     description: Wavefront HPA Adapter for Kubernetes
@@ -465,4 +487,4 @@ entries:
     urls:
     - wavefront-hpa-adapter-0.1.0.tgz
     version: 0.1.0
-generated: "2020-07-07T22:54:27.395953-07:00"
+generated: "2020-08-16T21:17:32.648901-07:00"
