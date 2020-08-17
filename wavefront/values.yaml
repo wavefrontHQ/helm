@@ -20,7 +20,7 @@ collector:
   enabled: true
   image:
     repository: wavefronthq/wavefront-kubernetes-collector
-    tag: 1.2.0
+    tag: 1.2.1
     pullPolicy: IfNotPresent
 
   ## If set to true, DaemonSet will be used for the collector.
@@ -172,7 +172,7 @@ proxy:
   enabled: true
   image:
     repository: wavefronthq/proxy
-    tag: 8.2
+    tag: 9.1
     pullPolicy: IfNotPresent
 
   ## Wavefront Collector resource requests and limits
