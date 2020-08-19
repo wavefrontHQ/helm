@@ -24,6 +24,11 @@ spec:
     port: {{ .Values.proxy.jaegerPort }}
     protocol: TCP
   {{- end }}
+  {{- if .Values.proxy.traceJaegerHttpListenerPorts }}
+  - name: jaeger-thriftdata
+    port: {{ .Values.proxy.traceJaegerHttpListenerPorts }}
+    protocol: TCP
+  {{- end }}
   {{- if .Values.proxy.zipkinPort }}
   - name: zipkin
     port: {{ .Values.proxy.zipkinPort }}

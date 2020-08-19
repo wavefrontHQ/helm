@@ -209,6 +209,10 @@ proxy:
   ## This is usually 30001
   # jaegerPort: 30001
 
+  ## TCP ports to receive Jaeger Thrift formatted data via HTTP. The data is then sent to Wavefront in Wavefront span format.
+  ## Comma-separated list of available port numbers. Can be a single port.
+  # traceJaegerHttpListenerPorts: 30080
+
   ## The port nubmer the proxy will listen on for tracing spans in Zipkin data format.
   ## This is usually 9411
   # zipkinPort: 9411
