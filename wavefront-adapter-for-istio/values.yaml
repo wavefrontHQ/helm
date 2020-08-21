@@ -1,6 +1,6 @@
 image:
   repository: vmware/wavefront-adapter-for-istio
-  tag: 0.1.4
+  tag: 0.1.5
   pullPolicy: IfNotPresent
 
 adapter:
