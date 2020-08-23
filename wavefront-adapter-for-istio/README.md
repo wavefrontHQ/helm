@@ -11,7 +11,7 @@ This chart will deploy the [Wavefront by VMware Adapter for Istio](https://githu
 
 To deploy this adapter, you will need a cluster with the following setup.
 
-* Kubernetes v1.17.0
+* Kubernetes v1.15+
 * Istio v1.4, v1.5 or v1.6
 * Helm v3.2+
 
