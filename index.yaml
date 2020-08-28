@@ -430,6 +430,34 @@ entries:
     version: 1.1.1
   wavefront-adapter-for-istio:
   - apiVersion: v1
+    appVersion: 0.1.5
+    created: "2020-08-28T10:40:04.976107-07:00"
+    dependencies:
+    - condition: proxy.enabled
+      name: wavefront
+      repository: https://wavefronthq.github.io/helm/
+      version: ^1.2.4
+    description: Wavefront by VMware Adapter for Istio
+    digest: fa1e0378703022ae09a34006b30f2ade9720b5dab3673a1355a137f24d2b0683
+    home: https://www.wavefront.com
+    keywords:
+    - metric
+    - monitoring
+    - observability
+    - alerting
+    - adapter
+    maintainers:
+    - email: veniln@vmware.com
+      name: Venil Noronha
+    - email: skandula@vmware.com
+      name: Srinivas Kandula
+    name: wavefront-adapter-for-istio
+    sources:
+    - https://github.com/vmware/wavefront-adapter-for-istio/
+    urls:
+    - wavefront-adapter-for-istio-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v1
     appVersion: 0.1.4
     created: "2020-07-20T11:49:26.838683122+05:30"
     dependencies:
@@ -539,4 +567,4 @@ entries:
     urls:
     - wavefront-hpa-adapter-0.1.0.tgz
     version: 0.1.0
-generated: "2020-08-21T12:27:33.489074-07:00"
+generated: "2020-08-28T10:40:04.969446-07:00"
