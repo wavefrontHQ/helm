@@ -65,6 +65,7 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `collector.proxyAddress` | Non-default Wavefront Proxy address to use, should only be set when `proxy.enabled` is false | `nil` |
 | `collector.apiServerMetrics` | Collect metrics about Kubernetes API server | `false` |
 | `collector.kubernetesState` | Collect metrics about Kubernetes resource states [see more](https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/blob/master/docs/metrics.md#kubernetes-state-source) | `true` |
+| `collector.filters` | Filters to apply towards all collected metrics | See values.yaml |
 | `collector.tags` | Map of tags (key/value) to add to all metrics collected | `nil` |
 | `collector.discovery.enabled` | Rules based and Prometheus endpoints auto-discovery  | `true` |
 | `collector.discovery.annotationPrefix` | Replaces `prometheus.io` as prefix for annotations of auto-discovered Prometheus endpoints | `prometheus.io` |
