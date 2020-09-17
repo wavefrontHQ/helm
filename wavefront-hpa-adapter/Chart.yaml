@@ -1,8 +1,8 @@
 apiVersion: v1
-appVersion: 0.9.5
+appVersion: 0.9.6
 description: Wavefront HPA Adapter for Kubernetes
 name: wavefront-hpa-adapter
-version: 0.2.1
+version: 0.2.2
 keywords:
 - metric
 - monitoring
