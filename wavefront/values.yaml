@@ -234,6 +234,12 @@ proxy:
   ## spans that are greater than or equal to this value will be sampled.
   # traceSamplingDuration: 500
 
+  ## Custom application name for traces received on Jaeger's traceJaegerListenerPorts or traceJaegerHttpListenerPorts.
+  # traceJaegerApplicationName: MyJaegerDemo
+
+  ## Custom application name for traces received on Zipkin's traceZipkinListenerPorts.
+  # traceZipkinApplicationName: MyZipkinDemo
+
   ## The port number the proxy will listen on for histogram distributions in Wavefront Distribution format.
   ## This is usually 40000
   # histogramPort: 40000
