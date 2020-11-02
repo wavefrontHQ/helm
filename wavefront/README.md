@@ -60,6 +60,7 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `collector.interval` | Default metrics collection interval | `60s` |
 | `collector.flushInterval` | How often to force a metrics flush | `10s` |
 | `collector.sinkDelay` | Timout for exporting data | `10s` |
+| `collector.usePKSPrefix` | (TKGi only) Prefix metrics with 'pks.kubernetes.' | `false` |
 | `collector.useReadOnlyPort` | Use un-authenticated port for kubelet | `false` |
 | `collector.useProxy` | Use a Wavefront Proxy to send metrics through | `true` |
 | `collector.proxyAddress` | Non-default Wavefront Proxy address to use, should only be set when `proxy.enabled` is false | `nil` |
