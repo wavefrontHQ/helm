@@ -55,6 +55,7 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `collector.image.tag` | Wavefront collector image tag | `{TAG_NAME}` |
 | `colletor.image.pullPolicy` | Wavefront collector image pull policy | `IfNotPresent` |
 | `collector.useDaemonset` | Use Wavefront collector in Daemonset mode | `true` |
+| `collector.useSecret` | Keep Wavefront collector configuration in Secret | `true` |
 | `collector.maxProx` | Max number of CPU cores that can be used (< 1 for default) | `0` |
 | `collector.logLevel` | Min logging level (info, debug, trace) | `info` |
 | `collector.interval` | Default metrics collection interval | `60s` |

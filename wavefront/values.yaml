@@ -28,6 +28,11 @@ collector:
   ## Setting this to true is strongly recommended
   useDaemonset: true
 
+  ## If set to true, Secret will be used for the collector configuration file.
+  ## If set to false, ConfigMap will be used for the collector configuration file.
+  ## Setting this to true is strongly recommended
+  useSecret: true
+
   ## If installing into a TKGi/PKS environment, set this to true
   # usePKSPrefix: false
 
