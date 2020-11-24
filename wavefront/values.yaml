@@ -20,7 +20,7 @@ collector:
   enabled: true
   image:
     repository: wavefronthq/wavefront-kubernetes-collector
-    tag: 1.2.5
+    tag: 1.2.6
     pullPolicy: IfNotPresent
 
   ## If set to true, DaemonSet will be used for the collector.

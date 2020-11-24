@@ -100,6 +100,7 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `serviceAccount.name` | Name of Wavefront service account | `nil` |
 | `kubeStateMetrics.enabled` | Setup and enable Kube State Metrics for collection | `false` |
 | `projectPacific.enabled` | Enable and create role binding for Tanzu kubernetes cluster | `false` |
+| `tkgi.psp.enabled` | Enable and create role binding for Tanzu Kubernetes Grid Integrated Edition | `false` |
 
 
 ## Upgrading
