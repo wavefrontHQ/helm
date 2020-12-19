@@ -14,6 +14,10 @@ spec:
     matchLabels:
       app.kubernetes.io/name : {{ template "wavefront.fullname" .}}
       app.kubernetes.io/component: collector
+{{ if .Values.collector.updateStrategy }}
+  updateStrategy:
+{{ toYaml .Values.collector.updateStrategy | indent 4 }}
+{{ end }}
   template:
     metadata:
       labels:
@@ -27,8 +31,8 @@ spec:
       - effect: NoSchedule
         key: node-role.kubernetes.io/master
         operator: Exists
-{{ if .Values.collector.tolerations }} 
-{{- toYaml .Values.collector.tolerations | indent 6 }}  
+{{ if .Values.collector.tolerations }}
+{{- toYaml .Values.collector.tolerations | indent 6 }}
 {{ end }}
       serviceAccountName: {{ template "wavefront.collector.serviceAccountName" . }}
       containers:
@@ -57,7 +61,7 @@ spec:
           valueFrom:
             fieldRef:
               apiVersion: v1
-              fieldPath: metadata.namespace        
+              fieldPath: metadata.namespace
         ports:
         - containerPort: 8088
           protocol: TCP
@@ -66,13 +70,13 @@ spec:
         volumeMounts:
         - name: procfs
           mountPath: /host/proc
-          readOnly: true          
+          readOnly: true
         - name: config
           mountPath: /etc/collector/
           readOnly: true
     {{- if .Values.collector.priorityClassName }}
       priorityClassName: {{ .Values.collector.priorityClassName }}
-    {{- end }}     
+    {{- end }}
       volumes:
       - name: procfs
         hostPath:

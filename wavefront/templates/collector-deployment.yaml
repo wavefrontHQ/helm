@@ -16,6 +16,10 @@ spec:
     matchLabels:
       app.kubernetes.io/name : {{ template "wavefront.fullname" .}}
       app.kubernetes.io/component: collector
+{{ if .Values.collector.updateStrategy }}
+  updateStrategy:
+{{ toYaml .Values.collector.updateStrategy | indent 4 }}
+{{ end }}
   template:
     metadata:
       labels:
@@ -41,7 +45,7 @@ spec:
 {{ toYaml .Values.collector.resources | indent 10 }}
     {{- if .Values.collector.priorityClassName }}
       priorityClassName: {{ .Values.collector.priorityClassName }}
-    {{- end }}   
+    {{- end }}
     {{- if .Values.collector.tolerations }}
       tolerations:
 {{ toYaml .Values.collector.tolerations | indent 6 }}
@@ -49,7 +53,7 @@ spec:
         volumeMounts:
         - name: config
           mountPath: /etc/collector/
-          readOnly: true        
+          readOnly: true
         - name: ssl-certs
           mountPath: /etc/ssl/certs
           readOnly: true

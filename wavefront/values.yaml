@@ -23,6 +23,13 @@ collector:
     tag: 1.2.6
     pullPolicy: IfNotPresent
 
+  ## Set the updateStrategy for the collector deployment or daemonset
+  ## if no updateStrategy is set, it will use the defaults.
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+
   ## If set to true, DaemonSet will be used for the collector.
   ## If set to false, Deployment will be used for the collector.
   ## Setting this to true is strongly recommended
