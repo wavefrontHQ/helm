@@ -16,10 +16,6 @@ spec:
     matchLabels:
       app.kubernetes.io/name : {{ template "wavefront.fullname" .}}
       app.kubernetes.io/component: collector
-{{ if .Values.collector.updateStrategy }}
-  updateStrategy:
-{{ toYaml .Values.collector.updateStrategy | indent 4 }}
-{{ end }}
   template:
     metadata:
       labels:
