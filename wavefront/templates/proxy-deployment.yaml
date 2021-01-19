@@ -49,6 +49,9 @@ spec:
           {{- if .Values.proxy.histogramDayPort }} --histogramDayListenerPorts {{ .Values.proxy.histogramDayPort }}{{- end -}}
           {{- if .Values.proxy.deltaCounterPort }} --deltaCounterPorts {{ .Values.proxy.deltaCounterPort }}{{- end -}}
           {{- if .Values.proxy.preprocessor }} --preprocessorConfigFile /etc/wavefront/wavefront-proxy/preprocessor/rules.yaml{{- end -}}
+          {{- if .Values.proxy.filebeatPort }} --filebeatPort {{ .Values.proxy.filebeatPort }}{{- end -}}
+          {{- if .Values.proxy.rawLogsPort }} --rawLogsPort {{ .Values.proxy.rawLogsPort }}{{- end -}}
+          {{- if .Values.proxy.logsingestion }}  --logsingestionFile /etc/wavefront/wavefront-proxy/logsingestion.yaml{{- end -}}
         {{- if .Values.proxy.heap }}
         - name: JAVA_HEAP_USAGE
           value: {{ .Values.proxy.heap | quote }}
@@ -101,6 +104,11 @@ spec:
         - name: preprocessor
           mountPath: /etc/wavefront/wavefront-proxy/preprocessor
         {{- end }}
+        {{- if .Values.proxy.logsingestion }}
+        - name: logsingestion
+          mountPath: /etc/wavefront/wavefront-proxy/logsingestion.yaml
+          subPath: logsingestion.yaml
+        {{- end }}
     {{- if .Values.proxy.priorityClassName }}
       priorityClassName: {{ .Values.proxy.priorityClassName }}
     {{- end }}
@@ -113,5 +121,10 @@ spec:
       - name: preprocessor
         configMap:
           name: {{ template "wavefront.proxy.fullname" . }}-preprocessor
+      {{- end }}
+      {{- if .Values.proxy.logsingestion }}
+      - name: logsingestion
+        configMap:
+          name: {{ template "wavefront.proxy.fullname" . }}-logsingestion
       {{- end }}
 {{- end }}
