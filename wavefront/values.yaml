@@ -85,7 +85,7 @@ collector:
 
   ## Filters to apply towards all metrics collected by the collector
   filters:
-    # Optimized metrics collection to focus collection on default dashboard support.
+    # Optimized metrics collection to omit peripheral metrics.
     metricDenyList:
     - 'kubernetes.sys_container.*'
     - 'kubernetes.collector.runtime.*'
