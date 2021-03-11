@@ -15,5 +15,7 @@ sources:
 maintainers:
 - name: josephgee
   email: jgee@vmware.com
+- name: JSchuenke
+  email: jschuenke@vmware.com
 - name: mmichael
   email: mamichael@vmware.com
