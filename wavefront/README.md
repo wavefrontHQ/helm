@@ -83,6 +83,7 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `proxy.tracePort` | Port for distributed tracing data (usually 30000) | `nil` |
 | `proxy.jaegerPort` | Port for Jaeger format distributed tracing data (usually 30001) | `nil` |
 | `proxy.traceJaegerHttpListenerPort` | Port for Jaeger Thrift format data (usually 30080) | `nil` |
+| `proxy.traceJaegerGrpcListenerPort` | Port for Jaeger GRPC format data (usually 14250) | `nil` |
 | `proxy.zipkinPort` | Port for Zipkin format distribued tracing data (usually 9411)| `nil` |
 | `proxy.traceSamplingRate` | Distributed tracing data sampling rate (0 to 1) | `nil` |
 | `proxy.traceSamplingDuration` | When set to greater than 0, spans that exceed this duration will force trace to be sampled (ms) | `nil` |
