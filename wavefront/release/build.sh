@@ -14,7 +14,7 @@ GIT_BRANCH="gh-pages-${CURRENT_CHART_VERSION}"
 git fetch
 git checkout -b $GIT_BRANCH origin/gh-pages
 mv ./_build/* .
-git commit -am "build release for ${CURRENT_CHART_VERSION}"
+git add . && git commit -am "build release for ${CURRENT_CHART_VERSION}"
 git push --set-upstream origin $GIT_BRANCH
 
 gh pr create --base gh-pages --fill --head $GIT_BRANCH --web
