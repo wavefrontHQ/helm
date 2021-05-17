@@ -20,7 +20,7 @@ collector:
   enabled: true
   image:
     repository: wavefronthq/wavefront-kubernetes-collector
-    tag: 1.3.5
+    tag: 1.3.6
     pullPolicy: IfNotPresent
 
   ## Set the updateStrategy for the collector deployment or daemonset
