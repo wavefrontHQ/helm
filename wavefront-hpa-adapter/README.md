@@ -49,6 +49,7 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `image.pullPolicy` | Wavefront HPA adapter image pull policy | `IfNotPresent` |
 | `adapter.metricPrefix` | Metrics under this prefix are exposed via the custom metrics API | `kubernetes` |
 | `adapter.metricRelistInterval` | Interval at which to fetch the list of custom metric names from Wavefront | `10m` |
+| `adapter.apiClientTimeout` | API client timeout | `10s` |
 | `adapter.logLevel` | Min logging level (info, debug, trace) | `info` |
 | `adapter.rules` | Static configuration for external metrics [see more](https://github.com/wavefrontHQ/wavefront-kubernetes-adapter/blob/master/docs/introduction.md#static-configuration-file) | `nil` |
 | `resources` | Define node labels for pod assignment | `nil` |
