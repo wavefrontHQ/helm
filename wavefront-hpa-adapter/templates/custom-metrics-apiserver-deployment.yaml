@@ -27,6 +27,7 @@ spec:
         - "--wavefront-token={{ required "You must configure a valid Token" .Values.wavefront.token }}"
         - "--wavefront-metric-prefix={{ .Values.adapter.metricPrefix }}"
         - "--metrics-relist-interval={{ .Values.adapter.metricRelistInterval }}"
+        - "--api-client-timeout={{ .Values.adapter.apiClientTimeout }}"
         - "--cert-dir=/etc/ssl/certs"
         - "--secure-port=6443"
       {{- if .Values.adapter.rules }}

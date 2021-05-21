@@ -1,6 +1,6 @@
 image:
   repository: wavefronthq/wavefront-hpa-adapter
-  tag: 0.9.7
+  tag: 0.9.8
   pullPolicy: IfNotPresent
 
 ## Wavefront URL (cluster) and API Token
@@ -17,6 +17,9 @@ adapter:
 
   # Interval at which to fetch the list of custom metric names from Wavefront
   metricRelistInterval: 10m
+
+  # API client timeout
+  apiClientTimeout: 10s
 
   # one of info, debug, warn or trace
   logLevel: info
