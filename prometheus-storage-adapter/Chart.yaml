@@ -13,9 +13,11 @@ home: https://www.wavefront.com
 sources:
 - https://github.com/wavefrontHQ/prometheus-storage-adapter
 maintainers:
+- name: johncornish
+  email: jcornish@vmware.com
 - name: josephgee
   email: jgee@vmware.com
-- name: JSchuenke
-  email: jschuenke@vmware.com
+- name: mceldeen
+  email: matthewco@vmware.com
 - name: mmichael
   email: mamichael@vmware.com

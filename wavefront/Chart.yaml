@@ -13,9 +13,11 @@ sources:
 - https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes
 - https://github.com/wavefrontHQ/wavefront-proxy
 maintainers:
-- name: josephgee
-  email: jgee@vmware.com
-- name: JSchuenke
-  email: jschuenke@vmware.com
-- name: mmichael
-  email: mamichael@vmware.com
+  - name: johncornish
+    email: jcornish@vmware.com
+  - name: josephgee
+    email: jgee@vmware.com
+  - name: mceldeen
+    email: matthewco@vmware.com
+  - name: mmichael
+    email: mamichael@vmware.com
