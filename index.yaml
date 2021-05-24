@@ -99,8 +99,6 @@ entries:
     maintainers:
     - email: jgee@vmware.com
       name: josephgee
-    - email: jschuenke@vmware.com
-      name: JSchuenke
     - email: mamichael@vmware.com
       name: mmichael
     name: wavefront
@@ -129,8 +127,6 @@ entries:
     maintainers:
     - email: jgee@vmware.com
       name: josephgee
-    - email: jschuenke@vmware.com
-      name: JSchuenke
     - email: mamichael@vmware.com
       name: mmichael
     name: wavefront
@@ -159,8 +155,6 @@ entries:
     maintainers:
     - email: jgee@vmware.com
       name: josephgee
-    - email: jschuenke@vmware.com
-      name: JSchuenke
     - email: mamichael@vmware.com
       name: mmichael
     name: wavefront
@@ -189,8 +183,6 @@ entries:
     maintainers:
     - email: jgee@vmware.com
       name: josephgee
-    - email: jschuenke@vmware.com
-      name: JSchuenke
     - email: mamichael@vmware.com
       name: mmichael
     name: wavefront
@@ -219,8 +211,6 @@ entries:
     maintainers:
     - email: jgee@vmware.com
       name: josephgee
-    - email: jschuenke@vmware.com
-      name: JSchuenke
     - email: mamichael@vmware.com
       name: mmichael
     name: wavefront
@@ -1034,8 +1024,6 @@ entries:
     maintainers:
     - email: jgee@vmware.com
       name: josephgee
-    - email: jschuenke@vmware.com
-      name: JSchuenke
     - email: mamichael@vmware.com
       name: mmichael
     name: wavefront-hpa-adapter
@@ -1060,8 +1048,6 @@ entries:
     maintainers:
     - email: jgee@vmware.com
       name: josephgee
-    - email: jschuenke@vmware.com
-      name: JSchuenke
     - email: mamichael@vmware.com
       name: mmichael
     name: wavefront-hpa-adapter
