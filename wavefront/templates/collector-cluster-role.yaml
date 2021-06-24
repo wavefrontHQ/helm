@@ -19,6 +19,7 @@ rules:
   - events
   - namespaces
   - nodes
+  - nodes/proxy
   - nodes/stats
   - pods
   - replicationcontrollers
