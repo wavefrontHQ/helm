@@ -59,6 +59,16 @@ spec:
     port: {{ .Values.proxy.deltaCounterPort }}
     protocol: TCP
   {{- end }}
+  {{- if .Values.proxy.filebeatPort }}
+  - name: file-beat
+    port: {{ .Values.proxy.filebeatPort }}
+    protocol: TCP
+  {{- end }}
+  {{- if .Values.proxy.rawLogsPort }}
+  - name: raw-log
+    port: {{ .Values.proxy.rawLogsPort }}
+    protocol: TCP
+  {{- end }}
   selector:
     app.kubernetes.io/name : {{ template "wavefront.fullname" .}}
     app.kubernetes.io/component: proxy
