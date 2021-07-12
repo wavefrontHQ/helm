@@ -292,7 +292,7 @@ proxy:
 
   ## The port number the proxy will listen on Graphite data format.
   ## This is usually 2003
-  graphitePort: 2003
+  # graphitePort: 2003
 
   ## Any configuration property can be passed to the proxy via command line args in
   ## in the format: `--<property_name> <value>`. Multiple properties can be specified
