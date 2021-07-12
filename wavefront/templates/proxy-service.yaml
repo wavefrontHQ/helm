@@ -59,6 +59,11 @@ spec:
     port: {{ .Values.proxy.deltaCounterPort }}
     protocol: TCP
   {{- end }}
+  {{- if .Values.proxy.graphitePort }}
+  - name: graphite
+    port: {{ .Values.proxy.graphitePort }}
+    protocol: TCP
+  {{- end }}
   selector:
     app.kubernetes.io/name : {{ template "wavefront.fullname" .}}
     app.kubernetes.io/component: proxy
