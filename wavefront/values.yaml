@@ -346,6 +346,9 @@ kubeStateMetrics:
 vspheretanzu:
   enabled: false
 
+projectPacific: ## Original variable name of vspheretanzu, left in for backward compatibility
+  enabled: false
+
 ## Properties for TKGI environments
 tkgi:
   psp:
