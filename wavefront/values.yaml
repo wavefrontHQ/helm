@@ -341,9 +341,12 @@ serviceAccount:
 kubeStateMetrics:
   enabled: false
 
-## Required for Project Pacific Kubernetes clusters.
+## Required for vSphere with Tanzu Kubernetes clusters.
 ## If enabled, a role binding to handle pod security policy will be installed within the Kubernetes cluster.
-projectPacific:
+vspheretanzu:
+  enabled: false
+
+projectPacific: ## Original variable name of vspheretanzu, left in for backward compatibility
   enabled: false
 
 ## Properties for TKGI environments
