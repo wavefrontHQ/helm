@@ -50,6 +50,7 @@ spec:
           {{- if .Values.proxy.histogramDayPort }} --histogramDayListenerPorts {{ .Values.proxy.histogramDayPort }}{{- end -}}
           {{- if .Values.proxy.deltaCounterPort }} --deltaCounterPorts {{ .Values.proxy.deltaCounterPort }}{{- end -}}
           {{- if .Values.proxy.preprocessor }} --preprocessorConfigFile /etc/wavefront/wavefront-proxy/preprocessor/rules.yaml{{- end -}}
+          {{- if .Values.proxy.graphitePort }} --graphitePorts {{ .Values.proxy.graphitePort }}{{- end -}}
         {{- if .Values.proxy.heap }}
         - name: JAVA_HEAP_USAGE
           value: {{ .Values.proxy.heap | quote }}
@@ -95,6 +96,10 @@ spec:
         {{- end }}
         {{- if .Values.proxy.deltaCounterPort }}
         - containerPort: {{ .Values.proxy.deltaCounterPort }}
+          protocol: TCP
+        {{- end }}
+        {{- if .Values.proxy.graphitePort }}
+        - containerPort: {{ .Values.proxy.graphitePort }}
           protocol: TCP
         {{- end }}
         resources:
