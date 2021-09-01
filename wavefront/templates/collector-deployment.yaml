@@ -21,6 +21,8 @@ spec:
       labels:
         app.kubernetes.io/name : {{ template "wavefront.fullname" .}}
         app.kubernetes.io/component: collector
+      annotations:
+        installation-method: helm
     spec:
       serviceAccountName: {{ template "wavefront.collector.serviceAccountName" . }}
       containers:
@@ -37,6 +39,12 @@ spec:
         {{- if .Values.collector.logLevel }}
         - --log-level={{ .Values.collector.logLevel }}
         {{- end }}
+        env:
+        - name: INSTALLATION_METHOD
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.annotations['installation-method']
         resources:
 {{ toYaml .Values.collector.resources | indent 10 }}
     {{- if .Values.collector.priorityClassName }}
