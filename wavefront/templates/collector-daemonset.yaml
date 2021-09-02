@@ -23,6 +23,8 @@ spec:
       labels:
         app.kubernetes.io/name : {{ template "wavefront.fullname" .}}
         app.kubernetes.io/component: collector
+      annotations:
+        installation-method: helm
     spec:
       tolerations:
       - effect: NoSchedule
@@ -62,6 +64,11 @@ spec:
             fieldRef:
               apiVersion: v1
               fieldPath: metadata.namespace
+        - name: INSTALLATION_METHOD
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.annotations['installation-method']
         ports:
         - containerPort: 8088
           protocol: TCP
