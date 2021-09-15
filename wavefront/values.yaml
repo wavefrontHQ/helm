@@ -108,6 +108,16 @@ collector:
     - 'label?pod?template*'
     - 'annotation_kubectl_kubernetes_io_last_applied_configuration'
 
+  ## cAdvisor gives detailed metrics about container resource usage
+  ## See https://github.com/google/cadvisor/blob/master/docs/storage/prometheus.md for details on available metrics.
+  cadvisor:
+      enabled: false
+      filters:
+        metricAllowList:
+          - "kubernetes.cadvisor.container.cpu.cfs.throttled.seconds.total.counter"
+          - "kubernetes.cadvisor.container.cpu.cfs.throttled.periods.total.counter"
+
+
   ## Events can also be collected and sent to Wavefront.
   ## Requires Wavefront Proxy 6.0 or greater.
   ## Events should be filtered before being enabled, see event filtering documentation for details
