@@ -70,7 +70,7 @@ data:
         prefix: pks.kubernetes.
         {{- else }}
         prefix: kubernetes.
-        {{- end }}
+        {{ end }}
 
       {{- if .Values.collector.kubernetesState }}
       kubernetes_state_source:
@@ -79,10 +79,10 @@ data:
         {{- else }}
         prefix: kubernetes.
         {{- end }}
-      {{- end }}
+      {{ end }}
 
       {{- if .Values.collector.cadvisor.enabled }}
-      kubernetes_cadvsior_source:
+      kubernetes_cadvisor_source:
         {{- if .Values.collector.usePKSPrefix }}
         prefix: pks.kubernetes.
         {{- else }}
@@ -90,9 +90,9 @@ data:
         {{- end }}
         {{- if .Values.collector.cadvisor.filters}}
         filters:
-  {{ tpl (toYaml .Values.collector.cadvisor.filters) . | indent 10 }}
+{{ tpl (toYaml .Values.collector.cadvisor.filters) . | indent 10 }}
         {{- end}}
-      {{- end }}
+      {{ end }}
 
       {{- if .Values.collector.hostOSMetrics }}
       telegraf_sources:
