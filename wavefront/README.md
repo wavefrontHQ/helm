@@ -68,6 +68,7 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `collector.apiServerMetrics` | Collect metrics about Kubernetes API server | `false` |
 | `collector.kubernetesState` | Collect metrics about Kubernetes resource states [see more](https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/blob/master/docs/metrics.md#kubernetes-state-source) | `true` |
 | `collector.cadvisor.enabled` | Enable cAdvisor prometheus endpoint. See the [cAdvisor docs](https://github.com/google/cadvisor/blob/master/docs/storage/prometheus.md) for details on what metrics are available. | `false` |
+| `collector.cadvisor.filters` | When using PKS, change `kubernetes.cadvisor.` to `pks.kubernetes.cadvisor.` | `container.cpu.cfs.throttled.*.total.counter metrics` |
 | `collector.filters` | Filters to apply towards all collected metrics | See values.yaml |
 | `collector.tags` | Map of tags (key/value) to add to all metrics collected | `nil` |
 | `collector.discovery.enabled` | Rules based and Prometheus endpoints auto-discovery  | `true` |

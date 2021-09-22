@@ -84,9 +84,9 @@ data:
       {{- if .Values.collector.cadvisor.enabled }}
       kubernetes_cadvisor_source:
         {{- if .Values.collector.usePKSPrefix }}
-        prefix: pks.kubernetes.
+        prefix: pks.kubernetes.cadvisor.
         {{- else }}
-        prefix: kubernetes.
+        prefix: kubernetes.cadvisor.
         {{- end }}
         {{- if .Values.collector.cadvisor.filters}}
         filters:
