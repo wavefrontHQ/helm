@@ -61,14 +61,12 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `collector.interval` | Default metrics collection interval | `60s` |
 | `collector.flushInterval` | How often to force a metrics flush | `10s` |
 | `collector.sinkDelay` | Timout for exporting data | `10s` |
-| `collector.usePKSPrefix` | (TKGi only) Prefix metrics with 'pks.kubernetes.' | `false` |
 | `collector.useReadOnlyPort` | Use un-authenticated port for kubelet | `false` |
 | `collector.useProxy` | Use a Wavefront Proxy to send metrics through | `true` |
 | `collector.proxyAddress` | Non-default Wavefront Proxy address to use, should only be set when `proxy.enabled` is false | `nil` |
 | `collector.apiServerMetrics` | Collect metrics about Kubernetes API server | `false` |
 | `collector.kubernetesState` | Collect metrics about Kubernetes resource states [see more](https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/blob/master/docs/metrics.md#kubernetes-state-source) | `true` |
 | `collector.cadvisor.enabled` | Enable cAdvisor prometheus endpoint. See the [cAdvisor docs](https://github.com/google/cadvisor/blob/master/docs/storage/prometheus.md) for details on what metrics are available. | `false` |
-| `collector.cadvisor.filters` | When using PKS, change `kubernetes.cadvisor.` to `pks.kubernetes.cadvisor.` | `container.cpu.cfs.throttled.*.total.counter metrics` |
 | `collector.filters` | Filters to apply towards all collected metrics | See values.yaml |
 | `collector.tags` | Map of tags (key/value) to add to all metrics collected | `nil` |
 | `collector.discovery.enabled` | Rules based and Prometheus endpoints auto-discovery  | `true` |
@@ -104,7 +102,6 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `serviceAccount.name` | Name of Wavefront service account | `nil` |
 | `kubeStateMetrics.enabled` | Setup and enable Kube State Metrics for collection | `false` |
 | `vspheretanzu.enabled` | Enable and create role binding for vSphere with Tanzu kubernetes cluster | `false` |
-| `tkgi.psp.enabled` | Enable and create role binding for Tanzu Kubernetes Grid Integrated Edition | `false` |
 
 
 ## Upgrading

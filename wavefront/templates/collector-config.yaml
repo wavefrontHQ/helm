@@ -55,39 +55,23 @@ data:
         useServiceAccount: false
         {{- end }}
         insecure: true
-        {{- if .Values.collector.usePKSPrefix }}
-        prefix: pks.kubernetes.
-        {{- else }}
         prefix: kubernetes.
-        {{- end }}
         filters:
           metricBlacklist:
           - 'kubernetes.sys_container.*'
           - 'kubernetes.node.ephemeral_storage.*'
 
       internal_stats_source:
-        {{- if .Values.collector.usePKSPrefix }}
-        prefix: pks.kubernetes.
-        {{- else }}
         prefix: kubernetes.
-        {{ end }}
 
       {{- if .Values.collector.kubernetesState }}
       kubernetes_state_source:
-        {{- if .Values.collector.usePKSPrefix }}
-        prefix: pks.kubernetes.
-        {{- else }}
         prefix: kubernetes.
-        {{- end }}
       {{ end }}
 
       {{- if .Values.collector.cadvisor.enabled }}
       kubernetes_cadvisor_source:
-        {{- if .Values.collector.usePKSPrefix }}
-        prefix: pks.kubernetes.cadvisor.
-        {{- else }}
         prefix: kubernetes.cadvisor.
-        {{- end }}
         {{- if .Values.collector.cadvisor.filters}}
         filters:
 {{ tpl (toYaml .Values.collector.cadvisor.filters) . | indent 10 }}
