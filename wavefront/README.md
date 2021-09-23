@@ -61,7 +61,6 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `collector.interval` | Default metrics collection interval | `60s` |
 | `collector.flushInterval` | How often to force a metrics flush | `10s` |
 | `collector.sinkDelay` | Timout for exporting data | `10s` |
-| `collector.usePKSPrefix` | (TKGi only) Prefix metrics with 'pks.kubernetes.' | `false` |
 | `collector.useReadOnlyPort` | Use un-authenticated port for kubelet | `false` |
 | `collector.useProxy` | Use a Wavefront Proxy to send metrics through | `true` |
 | `collector.proxyAddress` | Non-default Wavefront Proxy address to use, should only be set when `proxy.enabled` is false | `nil` |
@@ -103,7 +102,6 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `serviceAccount.name` | Name of Wavefront service account | `nil` |
 | `kubeStateMetrics.enabled` | Setup and enable Kube State Metrics for collection | `false` |
 | `vspheretanzu.enabled` | Enable and create role binding for vSphere with Tanzu kubernetes cluster | `false` |
-| `tkgi.psp.enabled` | Enable and create role binding for Tanzu Kubernetes Grid Integrated Edition | `false` |
 
 
 ## Upgrading
