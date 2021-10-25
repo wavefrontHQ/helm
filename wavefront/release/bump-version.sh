@@ -1,4 +1,4 @@
-#!/bin/bash -e
+90#!/bin/bash -e
 
 cd "$(dirname "$0")"
 
