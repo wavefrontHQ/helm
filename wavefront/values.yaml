@@ -20,7 +20,7 @@ collector:
   enabled: true
   image:
     repository: projects.registry.vmware.com/tanzu_observability/kubernetes-collector
-    tag: 1.7.1
+    tag: 1.7.2
     pullPolicy: IfNotPresent
 
   ## Set the updateStrategy for the collector deployment or daemonset
