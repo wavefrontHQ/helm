@@ -25,6 +25,9 @@ spec:
         installation-method: helm
     spec:
       serviceAccountName: {{ template "wavefront.collector.serviceAccountName" . }}
+      {{- if .Values.imagePullSecrets }}
+      imagePullSecrets: {{ toYaml .Values.imagePullSecrets | nindent 8 }}
+      {{- end }}
       containers:
       - name: wavefront-collector
         image: {{ .Values.collector.image.repository }}:{{ .Values.collector.image.tag }}

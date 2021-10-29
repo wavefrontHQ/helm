@@ -341,6 +341,10 @@ serviceAccount:
   ## If not set and create is true, a name is generated using the fullname template
   name:
 
+## Optional array of imagePullSecrets containing private registry credentials
+## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+imagePullSecrets: []
+# - name: secretName
 
 ## kube-state-metrics are used to get metrics about the state of the Kubernetes scheduler
 ## If enabled the kube-state-metrics chart will be installed as a subchart and the collector
