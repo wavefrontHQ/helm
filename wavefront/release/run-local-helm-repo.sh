@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -e
+#!/bin/bash -e
 
 echo $(pwd "$1")
 cd "$(pwd "$1")"
