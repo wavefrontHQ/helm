@@ -1,7 +1,8 @@
-#!/bin/bash -e
+#!/bin/bash -ex
 
 REPO_ROOT=$(git rev-parse --show-toplevel)
 source ${REPO_ROOT}/wavefront/release/k8s-utils.sh
+source ${REPO_ROOT}/wavefront/release/VERSION
 
 function main() {
 
@@ -9,7 +10,7 @@ function main() {
   local WAVEFRONT_TOKEN=
 
   local WF_CLUSTER=nimba
-  local VERSION="$(cat ${REPO_ROOT}/wavefront/release/VERSION)"
+  local VERSION=${CURRENT_VERSION}
   local CONFIG_CLUSTER_NAME=$(whoami)-${VERSION}-release-test
 
   while getopts ":c:t:n:v:" opt; do
@@ -41,13 +42,16 @@ function main() {
 
   helm uninstall wavefront --namespace wavefront &>/dev/null || true
 
-  ${REPO_ROOT}/wavefront/release/run-local-helm-repo.sh
+  nohup ${REPO_ROOT}/wavefront/release/run-local-helm-repo.sh & &>/dev/null || true
+  FOO_PID=$!
+  echo $FOO_PID
 
   helm install wavefront wavefront/wavefront --namespace wavefront \
   --set clusterName=${CONFIG_CLUSTER_NAME} \
   --set wavefront.url=https://${WF_CLUSTER}.wavefront.com \
   --set wavefront.token=${WAVEFRONT_TOKEN} \
   --set collector.cadvisor.enabled=true
+
 }
 
 main $@
