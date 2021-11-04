@@ -2,13 +2,16 @@
 
 echo $(pwd "$1")
 cd "$(pwd "$1")"
-#echo $(pwd)
 
 helm repo add stable https://charts.helm.sh/stable
 
 helm lint wavefront
 
 rm -rf _build
+
+pushd wavefront
+helm dependency update
+popd
 
 ./release.sh wavefront
 
