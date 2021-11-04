@@ -1,4 +1,4 @@
-#!/bin/bash -ex
+#!/bin/bash -e
 
 REPO_ROOT=$(git rev-parse --show-toplevel)
 source ${REPO_ROOT}/wavefront/release/k8s-utils.sh
@@ -34,11 +34,13 @@ function main() {
     print_msg_and_exit "wavefront token required"
   fi
 
+  local CONFIG_CLUSTER_NAME_UPGRADE="${CONFIG_CLUSTER_NAME}-upgrade"
+
   helm uninstall wavefront --namespace wavefront &>/dev/null || true
 
   kubectl create namespace wavefront &>/dev/null || true
 
-  nohup ${REPO_ROOT}/wavefront/release/run-local-helm-repo.sh & &>/dev/null || true
+  nohup ${REPO_ROOT}/wavefront/release/run-local-helm-repo.sh & >/dev/null || true
   LOCAL_STATIC_PID=$!
 
   # Test on Freshly Installed Helm
@@ -63,12 +65,12 @@ function main() {
   --set collector.cadvisor.enabled=true
 
   helm upgrade wavefront wavefront/wavefront --namespace wavefront \
-  --set clusterName=${CONFIG_CLUSTER_NAME} \
+  --set clusterName=${CONFIG_CLUSTER_NAME_UPGRADE} \
   --set wavefront.url=https://${WF_CLUSTER}.wavefront.com \
   --set wavefront.token=${WAVEFRONT_TOKEN} \
   --set collector.cadvisor.enabled=true
 
-  ${REPO_ROOT}/wavefront/release/test-e2e.sh -t ${WAVEFRONT_TOKEN} -n ${CONFIG_CLUSTER_NAME}
+  ${REPO_ROOT}/wavefront/release/test-e2e.sh -t ${WAVEFRONT_TOKEN} -n ${CONFIG_CLUSTER_NAME_UPGRADE}
 
   kill -9 $LOCAL_STATIC_PID
 }
