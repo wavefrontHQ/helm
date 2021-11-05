@@ -40,8 +40,7 @@ function main() {
 
   kubectl create namespace wavefront &>/dev/null || true
 
-  nohup ${REPO_ROOT}/wavefront/release/run-local-helm-repo.sh & >/dev/null || true
-  LOCAL_STATIC_PID=$!
+  ${REPO_ROOT}/wavefront/release/run-local-helm-repo.sh >/dev/null
 
   # Test on Freshly Installed Helm
   helm install wavefront wavefront/wavefront --namespace wavefront \
@@ -72,7 +71,7 @@ function main() {
 
   ${REPO_ROOT}/wavefront/release/test-e2e.sh -t ${WAVEFRONT_TOKEN} -n ${CONFIG_CLUSTER_NAME_UPGRADE}
 
-  kill -9 $LOCAL_STATIC_PID
+  green "Success!"
 }
 
 main $@
