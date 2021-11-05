@@ -2,8 +2,9 @@
 
 cd "$(dirname "$0")"
 
-helm repo add stable
-git pull  # get latest from
+helm repo add stable https://charts.helm.sh/stable
+git checkout master
+git pull
 
 source ./VERSION
 

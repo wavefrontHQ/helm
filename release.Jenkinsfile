@@ -34,7 +34,7 @@ pipeline {
       }
       stage("Release helm chart") {
         steps {
-           sh './release-helm-chart.sh'
+           sh './wavefront/release/release-helm-chart.sh'
         }
       }
 
