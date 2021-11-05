@@ -30,3 +30,11 @@ PR_URL=$(curl \
   jq -r '.url')
 
 echo "PR URL: ${PR_URL}"
+
+# TODO ??? Do we need an approver to approve the PR before merge???
+echo curl \
+  -X PUT \
+  -H "Authorization: token ${TOKEN}" \
+  -H "Accept: application/vnd.github.v3+json" \
+  "${PR_URL}/merge" \
+  -d "{\"commit_title\":\"Build release for ${CURRENT_CHART_VERSION}\"}"
