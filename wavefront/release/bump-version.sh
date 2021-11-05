@@ -28,6 +28,23 @@ sed -i "s/version: ${BUMPED_RELEASED_CHART_VERSION}/version: ${BUMPED_CURRENT_CH
 
 git commit -am "bump helm chart version to $BUMPED_CURRENT_CHART_VERSION"
 
-git push --set-upstream origin $GIT_BRANCH
+# TODO: remove the echo and create PR and Merge it after the service account gets permission
+echo git push --set-upstream origin $GIT_BRANCH
 
-gh pr create --base master --fill --head $GIT_BRANCH --web
+PR_URL=$(echo curl \
+  -X POST \
+  -H "Authorization: token ${TOKEN}" \
+  -d "{\"head\":\"${GIT_BRANCH}\",\"base\":\"master\",\"title\":\"bump helm chart version to ${BUMPED_CURRENT_CHART_VERSION}\"}" \
+  https://api.github.com/repos/wavefrontHQ/helm/pulls |
+  jq -r '.url')
+
+echo "PR URL: ${PR_URL}"
+
+# TODO ??? Do we need an approver to approve the PR before merge???
+echo curl \
+  -X PUT \
+  -H "Authorization: token ${TOKEN}" \
+  -H "Accept: application/vnd.github.v3+json" \
+  "${PR_URL}/merge" \
+  -d "{\"commit_title\":\"bump helm chart version to ${BUMPED_CURRENT_CHART_VERSION}\"}"
+
