@@ -29,9 +29,9 @@ sed -i "s/version: ${BUMPED_RELEASED_CHART_VERSION}/version: ${BUMPED_CURRENT_CH
 git commit -am "bump helm chart version to $BUMPED_CURRENT_CHART_VERSION"
 
 # TODO: remove the echo and create PR and Merge it after the service account gets permission
-echo git push --set-upstream origin $GIT_BRANCH
+git push --set-upstream origin $GIT_BRANCH
 
-PR_URL=$(echo curl \
+PR_URL=$(curl \
   -X POST \
   -H "Authorization: token ${TOKEN}" \
   -d "{\"head\":\"${GIT_BRANCH}\",\"base\":\"master\",\"title\":\"bump helm chart version to ${BUMPED_CURRENT_CHART_VERSION}\"}" \
