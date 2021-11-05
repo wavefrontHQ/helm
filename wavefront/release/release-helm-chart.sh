@@ -22,8 +22,6 @@ mv ./_build/* .
 git add . && git commit -am "Build release for ${CURRENT_CHART_VERSION}"
 git push --set-upstream origin $GIT_BRANCH
 
-gh pr create --base gh-pages --fill --head $GIT_BRANCH --web
-
 PR_URL=$(curl \
   -X POST \
   -H "Authorization: token ${TOKEN}" \
