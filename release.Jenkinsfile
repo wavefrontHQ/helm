@@ -25,9 +25,6 @@ pipeline {
       stage("Bump Github Version") {
         steps {
           withEnv(["PATH+EXTRA=${HOME}/go/bin"]) {
-            // update the VERSION file
-
-            // bump the version (create branch and push and PR)
             sh 'git config --global user.email "svc.wf-jenkins@vmware.com"'
             sh 'git config --global user.name "svc.wf-jenkins"'
             sh 'git remote set-url origin https://${TOKEN}@github.com/wavefronthq/helm.git'
