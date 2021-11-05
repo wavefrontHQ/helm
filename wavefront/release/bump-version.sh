@@ -15,19 +15,21 @@ sed -i "s/CURRENT_VERSION=\"${CURRENT_VERSION}\"/CURRENT_VERSION=\"${BUMPED_CURR
 sed -i "s/RELEASED_CHART_VERSION=\"${RELEASED_CHART_VERSION}\"/RELEASED_CHART_VERSION=\"${BUMPED_RELEASED_CHART_VERSION}\"/g" VERSION
 sed -i "s/CURRENT_CHART_VERSION=\"${CURRENT_CHART_VERSION}\"/CURRENT_CHART_VERSION=\"${BUMPED_CURRENT_CHART_VERSION}\"/g" VERSION
 
-#GIT_BRANCH="wavefront-bump-${CURRENT_CHART_VERSION}"
-#
-#git checkout -b $GIT_BRANCH
-#
-### Bump app version
-#sed -i "" "s/appVersion: ${RELEASED_VERSION}/appVersion: ${CURRENT_VERSION}/g" ../Chart.yaml
-#sed -i "" "s/${RELEASED_VERSION}/${CURRENT_VERSION}/g" ../values.yaml
-#
-### Bump chart version
-#sed -i "" "s/version: ${RELEASED_CHART_VERSION}/version: ${CURRENT_CHART_VERSION}/g" ../Chart.yaml
-#
-#git commit -am "bump helm chart version to $CURRENT_CHART_VERSION"
-#
-#git push --set-upstream origin $GIT_BRANCH
-#
-#gh pr create --base master --fill --head $GIT_BRANCH --web
+cat VERSION
+
+GIT_BRANCH="wavefront-bump-${BUMPED_CURRENT_CHART_VERSION}"
+
+git checkout -b $GIT_BRANCH
+
+## Bump app version
+sed -i "s/appVersion: ${BUMPED_RELEASED_VERSION}/appVersion: ${BUMPED_CURRENT_VERSION}/g" ../Chart.yaml
+sed -i "s/${BUMPED_RELEASED_VERSION}/${BUMPED_CURRENT_VERSION}/g" ../values.yaml
+
+## Bump chart version
+sed -i "" "s/version: ${BUMPED_RELEASED_CHART_VERSION}/version: ${BUMPED_CURRENT_CHART_VERSION}/g" ../Chart.yaml
+
+git commit -am "bump helm chart version to $BUMPED_CURRENT_CHART_VERSION"
+
+git push --set-upstream origin $GIT_BRANCH
+
+gh pr create --base master --fill --head $GIT_BRANCH --web
