@@ -32,6 +32,11 @@ pipeline {
           }
         }
       }
+      stage("Release helm chart") {
+        steps {
+           sh './release-helm-chart.sh'
+        }
+      }
 
 //       stage("Github Release And Slack Notification") {
 //         environment {

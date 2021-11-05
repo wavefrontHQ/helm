@@ -1,6 +1,10 @@
 #!/bin/bash -e
 
 cd "$(dirname "$0")"
+
+helm repo add stable
+git pull  # get latest from
+
 source ./VERSION
 
 cd .. # ./wavefront

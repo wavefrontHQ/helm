@@ -15,3 +15,9 @@ if ! [ -x "$(command -v jq)" ]; then
   sudo mv ./jq /usr/local/bin
 fi
 
+#
+# helm
+#
+curl https://get.helm.sh/helm-v3.6.3-linux-amd64.tar.gz | tar xz --to-stdout linux-amd64/helm | sudo tee /usr/local/bin/helm >/dev/null
+sudo chmod +x /usr/local/bin/helm
+
