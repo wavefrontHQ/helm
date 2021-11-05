@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -e
+#!/bin/bash -e
 
 cd "$(dirname "$0")"
 source ./VERSION
