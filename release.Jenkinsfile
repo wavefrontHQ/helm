@@ -19,7 +19,6 @@ pipeline {
         steps {
           withEnv(["PATH+EXTRA=${HOME}/go/bin"]) {
             sh './wavefront/release/setup-for-release.sh'
-            sh 'semver-cli --help'
           }
         }
       }
