@@ -14,27 +14,22 @@ helm dependency update
 cd .. # ./
 ./release.sh wavefront
 
-GIT_BRANCH="gh-pages-${CURRENT_CHART_VERSION}"
+# TODO: Remove this git status debug
+git status
+
+GIT_BRANCH="gh-pages-${NEW_CHART_VERSION}"
 
 git fetch
 git checkout -b $GIT_BRANCH origin/gh-pages
 mv ./_build/* .
-git add . && git commit -am "Build release for ${CURRENT_CHART_VERSION}"
+git add . && git commit -am "Build release for ${NEW_CHART_VERSION}"
 git push --set-upstream origin $GIT_BRANCH
 
 PR_URL=$(curl \
   -X POST \
   -H "Authorization: token ${TOKEN}" \
-  -d "{\"head\":\"${GIT_BRANCH}\",\"base\":\"gh-pages\",\"title\":\"Build release for ${CURRENT_CHART_VERSION}\"}" \
+  -d "{\"head\":\"${GIT_BRANCH}\",\"base\":\"gh-pages\",\"title\":\"Build release for ${NEW_CHART_VERSION}\"}" \
   https://api.github.com/repos/wavefrontHQ/helm/pulls |
   jq -r '.url')
 
 echo "PR URL: ${PR_URL}"
-
-# TODO ??? Do we need an approver to approve the PR before merge???
-echo curl \
-  -X PUT \
-  -H "Authorization: token ${TOKEN}" \
-  -H "Accept: application/vnd.github.v3+json" \
-  "${PR_URL}/merge" \
-  -d "{\"commit_title\":\"Build release for ${CURRENT_CHART_VERSION}\"}"

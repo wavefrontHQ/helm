@@ -6,8 +6,8 @@ pipeline {
   }
 
   environment {
-      RELEASE_TYPE = "${params.RELEASE_TYPE}"
-      BUMP_COMPONENT = "${params.BUMP_COMPONENT}"
+      NEW_APP_VERSION = "${params.APP_VERSION}"
+      NEW_CHART_VERSION = "${params.CHART_VERSION}"
       GIT_CREDENTIAL_ID = 'wf-jenkins-github'
       TOKEN = credentials('GITHUB_TOKEN')
       GITHUB_CREDS_PSW = credentials("GITHUB_TOKEN")
