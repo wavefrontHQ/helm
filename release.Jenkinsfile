@@ -6,8 +6,8 @@ pipeline {
   }
 
   environment {
-      NEW_APP_VERSION = "${params.APP_VERSION}"
-      NEW_CHART_VERSION = "${params.CHART_VERSION}"
+      NEW_APP_VERSION = "${params.NEW_APP_VERSION}"
+      NEW_CHART_VERSION = "${params.NEW_CHART_VERSION}"
       GIT_CREDENTIAL_ID = 'wf-jenkins-github'
       TOKEN = credentials('GITHUB_TOKEN')
       GITHUB_CREDS_PSW = credentials("GITHUB_TOKEN")
