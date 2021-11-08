@@ -82,14 +82,14 @@ entries:
   wavefront:
   - apiVersion: v1
     appVersion: 1.7.3
-    created: "2021-10-26T13:11:39.609315-07:00"
+    created: "2021-11-08T13:50:46.343528279-08:00"
     dependencies:
     - condition: kubeStateMetrics.enabled
       name: kube-state-metrics
       repository: https://charts.helm.sh/stable
       version: ^2.2.1
     description: Wavefront Collector for Kubernetes
-    digest: 6fbfda5d9f99cd25dafe85eeafeeb68a9dd9f846996f64f53a8a4ee7a1bc8646
+    digest: f107df074a9ec05b08ba06444d36b284c26292c410d3a872bda742e7ddddf21f
     home: https://www.wavefront.com
     keywords:
     - metric
@@ -1451,4 +1451,4 @@ entries:
     urls:
     - wavefront-hpa-adapter-0.1.0.tgz
     version: 0.1.0
-generated: "2021-10-26T13:11:39.606915-07:00"
+generated: "2021-11-08T13:50:46.339733103-08:00"
