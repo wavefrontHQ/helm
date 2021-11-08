@@ -25,6 +25,6 @@ PR_URL=$(curl \
   -H "Authorization: token ${TOKEN}" \
   -d "{\"head\":\"${GIT_BRANCH}\",\"base\":\"gh-pages\",\"title\":\"Build github pages release for ${NEW_CHART_VERSION}\"}" \
   https://api.github.com/repos/wavefrontHQ/helm/pulls |
-  jq -r '.url')
+  jq -r '.html_url')
 
 echo "PR URL: ${PR_URL}"

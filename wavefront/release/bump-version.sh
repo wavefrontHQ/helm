@@ -30,6 +30,6 @@ PR_URL=$(curl \
   -H "Authorization: token ${TOKEN}" \
   -d "{\"head\":\"${GIT_BRANCH}\",\"base\":\"master\",\"title\":\"Bump helm chart version to ${NEW_CHART_VERSION}\"}" \
   https://api.github.com/repos/wavefrontHQ/helm/pulls |
-  jq -r '.url')
+  jq -r '.html_url')
 
 echo "PR URL: ${PR_URL}"
