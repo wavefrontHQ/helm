@@ -39,9 +39,15 @@ fi
 echo "downloading latest index.yaml to ${INDEX_FILE}"
 curl -sL https://raw.githubusercontent.com/wavefrontHQ/helm/gh-pages/index.yaml > ${INDEX_FILE}
 
+# TODO: Remove the debug cat and ls
+cat ${INDEX_FILE} | grep 1.8.1
+ls ${BUILD_DIR}
+
 echo "generating updated index.yaml"
-#TODO: Remove the below echo
-echo helm repo index --merge "${INDEX_FILE}" ${BUILD_DIR}
+helm repo index --merge "${INDEX_FILE}" ${BUILD_DIR}
+
+cat ${INDEX_FILE} | grep 1.8.1
+ls ${BUILD_DIR}
 
 echo "Complete. new index and package files can be found under ${BUILD_DIR}"
 echo "Run: 'git checkout gh-pages && cp ${BUILD_DIR}/* .' and commit to update the helm chart"

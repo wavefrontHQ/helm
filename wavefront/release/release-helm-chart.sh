@@ -2,7 +2,8 @@
 
 cd "$(dirname "$0")"
 
-helm repo add stable https://charts.helm.sh/stable
+# TODO: Figure out a better place for the below line.
+#helm repo add stable https://charts.helm.sh/stable
 
 source ./VERSION
 
