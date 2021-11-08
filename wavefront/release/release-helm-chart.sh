@@ -3,8 +3,6 @@
 cd "$(dirname "$0")"
 
 helm repo add stable https://charts.helm.sh/stable
-git checkout master
-git pull
 
 source ./VERSION
 
