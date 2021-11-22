@@ -10,10 +10,10 @@ function main() {
   local WAVEFRONT_TOKEN=
 
   local WF_CLUSTER=nimba
-  local VERSION=${CURRENT_CHART_VERSION}
+  local VERSION=${CHART_VERSION}
   local CONFIG_CLUSTER_NAME=$(whoami)-${VERSION}-release-test
 
-  while getopts ":c:t:n:" opt; do
+  while getopts ":c:t:n:p:" opt; do
     case $opt in
     c)
       WF_CLUSTER="$OPTARG"
@@ -23,6 +23,9 @@ function main() {
       ;;
     n)
       CONFIG_CLUSTER_NAME="$OPTARG"
+      ;;
+    p)
+      PREVIOUSLY_RELEASED_CHART_VERSION="$OPTARG"
       ;;
     \?)
       print_usage_and_exit "Invalid option: -$OPTARG"
@@ -34,7 +37,9 @@ function main() {
     print_msg_and_exit "wavefront token required"
   fi
 
-  local CONFIG_CLUSTER_NAME_UPGRADE="${CONFIG_CLUSTER_NAME}-upgrade"
+  if [[ -z ${PREVIOUSLY_RELEASED_CHART_VERSION} ]]; then
+    print_msg_and_exit "previously released chart version required"
+  fi
 
   helm uninstall wavefront --namespace wavefront &>/dev/null || true
 
@@ -54,22 +59,22 @@ function main() {
   # Test on Upgraded Helm
   helm uninstall wavefront --namespace wavefront &>/dev/null || true
 
-  local RELEASED_VERSION=${RELEASED_CHART_VERSION}
-  local CONFIG_CLUSTER_NAME_RELEASED_VERSION=$(whoami)-${RELEASED_VERSION}-release-test
+  local CONFIG_CLUSTER_NAME_PREVIOUS_VERSION=$(whoami)-${PREVIOUSLY_RELEASED_CHART_VERSION}-release-test-upgrade
 
   helm install wavefront wavefront/wavefront --namespace wavefront \
-  --set clusterName=${CONFIG_CLUSTER_NAME_RELEASED_VERSION} \
+  --version ${PREVIOUSLY_RELEASED_CHART_VERSION} \
+  --set clusterName=${CONFIG_CLUSTER_NAME_PREVIOUS_VERSION} \
   --set wavefront.url=https://${WF_CLUSTER}.wavefront.com \
   --set wavefront.token=${WAVEFRONT_TOKEN} \
   --set collector.cadvisor.enabled=true
 
   helm upgrade wavefront wavefront/wavefront --namespace wavefront \
-  --set clusterName=${CONFIG_CLUSTER_NAME_UPGRADE} \
+  --set clusterName=${CONFIG_CLUSTER_NAME_PREVIOUS_VERSION} \
   --set wavefront.url=https://${WF_CLUSTER}.wavefront.com \
   --set wavefront.token=${WAVEFRONT_TOKEN} \
   --set collector.cadvisor.enabled=true
 
-  ${REPO_ROOT}/wavefront/release/test-e2e.sh -t ${WAVEFRONT_TOKEN} -n ${CONFIG_CLUSTER_NAME_UPGRADE}
+  ${REPO_ROOT}/wavefront/release/test-e2e.sh -t ${WAVEFRONT_TOKEN} -n ${CONFIG_CLUSTER_NAME_PREVIOUS_VERSION}
 
   green "Success!"
 }
