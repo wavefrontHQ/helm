@@ -47,8 +47,8 @@ function main() {
 
   ${REPO_ROOT}/wavefront/release/run-local-helm-repo.sh >/dev/null
 
-  # Test on Freshly Installed Helm
-  helm install wavefront wavefront/wavefront --namespace wavefront \
+  # Test on Freshly Installed Helm.
+  helm install wavefront ${REPO_ROOT}/wavefront --namespace wavefront \
   --set clusterName=${CONFIG_CLUSTER_NAME} \
   --set wavefront.url=https://${WF_CLUSTER}.wavefront.com \
   --set wavefront.token=${WAVEFRONT_TOKEN} \
@@ -56,7 +56,9 @@ function main() {
 
   ${REPO_ROOT}/wavefront/release/test-e2e.sh -t ${WAVEFRONT_TOKEN} -n ${CONFIG_CLUSTER_NAME}
 
-  # Test on Upgraded Helm
+  # Test on Upgraded Helm.
+  # First, install from latest pushed chart,
+  # then install our local changes to make sure upgrade succeeds.
   helm uninstall wavefront --namespace wavefront &>/dev/null || true
 
   local CONFIG_CLUSTER_NAME_PREVIOUS_VERSION=$(whoami)-${PREVIOUSLY_RELEASED_CHART_VERSION}-release-test-upgrade
@@ -68,7 +70,7 @@ function main() {
   --set wavefront.token=${WAVEFRONT_TOKEN} \
   --set collector.cadvisor.enabled=true
 
-  helm upgrade wavefront wavefront/wavefront --namespace wavefront \
+  helm upgrade wavefront ${REPO_ROOT}/wavefront --namespace wavefront \
   --set clusterName=${CONFIG_CLUSTER_NAME_PREVIOUS_VERSION} \
   --set wavefront.url=https://${WF_CLUSTER}.wavefront.com \
   --set wavefront.token=${WAVEFRONT_TOKEN} \
