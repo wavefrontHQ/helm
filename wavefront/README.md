@@ -74,6 +74,7 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `collector.discovery.enableRuntimeConfigs` | Enable runtime discovery rules [see more](https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/blob/master/docs/discovery.md#runtime-configurations) | `true` |
 | `collector.discovery.config` | Configuration for rules based auto-discovery [see more](https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/blob/master/docs/discovery.md) | `nil` |
 | `collector.resources` | CPU/Memory resource requests/limits | CPU: `200m`/`200m`, Memory: `10Mi`/`256Mi` |
+| `imagePullSecrets` | Enable Wavefront proxy and collector to pull from private image repositories. **Note:** secret must exist in namespace that will be used for the installation. | `nil` |
 | `proxy.enabled` | Setup and enable Wavefront proxy to send metrics through | `true` |
 | `proxy.image.repository` | Wavefront proxy image registry and name | `projects.registry.vmware.com/tanzu_observability/proxy` |
 | `proxy.image.tag` | Wavefront proxy image tag | `{TAG_NAME}` |

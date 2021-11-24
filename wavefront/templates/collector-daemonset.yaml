@@ -37,7 +37,7 @@ spec:
 {{- toYaml .Values.collector.tolerations | indent 6 }}
 {{ end }}
       {{- if .Values.imagePullSecrets }}
-      imagePullSecrets: {{ toYaml .Values.imagePullSecrets | nindent 8 }}
+      imagePullSecrets: {{ toYaml .Values.imagePullSecrets | nindent 6 }}
       {{- end }}
       serviceAccountName: {{ template "wavefront.collector.serviceAccountName" . }}
       containers:
