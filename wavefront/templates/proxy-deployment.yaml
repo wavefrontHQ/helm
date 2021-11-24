@@ -21,6 +21,9 @@ spec:
         app.kubernetes.io/name : {{ template "wavefront.fullname" .}}
         app.kubernetes.io/component: proxy
     spec:
+      {{- if .Values.imagePullSecrets }}
+      imagePullSecrets: {{ toYaml .Values.imagePullSecrets | nindent 8 }}
+      {{- end }}
       containers:
       - name: wavefront-proxy
         image: {{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.tag }}
