@@ -1,0 +1,6 @@
+{{- if .Values.collector.useDaemonset }}
+apiVersion: v1
+kind:
+metadata:
+spec:
+{{- end }}
