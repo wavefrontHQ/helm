@@ -41,9 +41,14 @@ function main() {
     print_msg_and_exit "previously released chart version required"
   fi
 
+  echo "Running helm chart test"
   helm uninstall wavefront --namespace wavefront &>/dev/null || true
 
   kubectl create namespace wavefront &>/dev/null || true
+
+  ${REPO_ROOT}/wavefront/release/test-helm-chart.sh
+
+  helm uninstall wavefront --namespace wavefront &>/dev/null || true
 
   ${REPO_ROOT}/wavefront/release/run-local-helm-repo.sh > /dev/null
 
