@@ -27,4 +27,5 @@ function wait_for_cluster_ready() {
     echo "Waiting for all Pods to be 'Ready'"
     sleep 5
   done
+  echo "All Pods are Ready"
 }

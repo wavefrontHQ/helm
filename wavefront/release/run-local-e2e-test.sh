@@ -41,14 +41,9 @@ function main() {
     print_msg_and_exit "previously released chart version required"
   fi
 
-  echo "Running helm chart test"
   helm uninstall wavefront --namespace wavefront &>/dev/null || true
 
   kubectl create namespace wavefront &>/dev/null || true
-
-  ${REPO_ROOT}/wavefront/release/test-helm-chart.sh
-
-  helm uninstall wavefront --namespace wavefront &>/dev/null || true
 
   ${REPO_ROOT}/wavefront/release/run-local-helm-repo.sh > /dev/null
 
@@ -59,6 +54,10 @@ function main() {
   --set wavefront.url=https://${WF_CLUSTER}.wavefront.com \
   --set wavefront.token=${WAVEFRONT_TOKEN} \
   --set collector.cadvisor.enabled=true > /dev/null
+
+  helm test wavefront -n wavefront --timeout 60s --logs
+
+  echo "Running test-e2e"
 
   ${REPO_ROOT}/wavefront/release/test-e2e.sh -t ${WAVEFRONT_TOKEN} -n ${FRESH_INSTALL_CLUSTER_NAME}
 
