@@ -246,6 +246,9 @@ proxy:
   ## This is usually 2878
   port: 2878
 
+  ## Additional java arguments to be set using the JAVA_ARGS env variable
+  javaArgs: '-Dlog4j2.formatMsgNoLookups=true'
+
   ## The port nubmer the proxy will listen on for tracing spans in Wavefront trace data format.
   ## This is usually 30000
   # tracePort: 30000

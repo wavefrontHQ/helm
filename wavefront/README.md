@@ -81,6 +81,7 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `proxy.image.pullPolicy` | Wavefront proxy image pull policy | `IfNotPresent` |
 | `proxy.replicas` | Replicas to deploy for Wavefront proxy (usually 1) | `1` |
 | `proxy.port` | Primary port for Wavefront data format metrics | `2878` |
+| `proxy.javaArgs` | Wavefront proxy Java arguments | `-Dlog4j2.formatMsgNoLookups=true` |
 | `proxy.tracePort` | Port for distributed tracing data (usually 30000) | `nil` |
 | `proxy.jaegerPort` | Port for Jaeger format distributed tracing data (usually 30001) | `nil` |
 | `proxy.traceJaegerHttpListenerPort` | Port for Jaeger Thrift format data (usually 30080) | `nil` |

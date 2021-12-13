@@ -36,6 +36,8 @@ spec:
             secretKeyRef:
               name: {{ template "wavefront.fullname" . }}
               key: api-token
+        - name: JAVA_ARGS
+          value: {{ .Values.proxy.javaArgs | quote }}
         - name: WAVEFRONT_PROXY_ARGS
           value: {{ .Values.proxy.args }}
           {{- if .Values.proxy.tracePort }} --traceListenerPorts {{ .Values.proxy.tracePort }}{{- end -}}
