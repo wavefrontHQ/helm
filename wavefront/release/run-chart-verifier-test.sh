@@ -8,6 +8,12 @@ cd "$REPO_ROOT"
 
 yellow "NOTE: Ensure that your current kube config is targeting a clean environment with an IP accessible from the docker container"
 
+pushd "$REPO_ROOT/wavefront"
+  helm dependency update
+popd
+
+${REPO_ROOT}/release.sh wavefront
+
 VERIFY_JSON=$(docker run --rm \
   -v "$REPO_ROOT":/charts \
   -v ~/.kube/config:/etc/kubernetes/config -e KUBECONFIG=/etc/kubernetes/config \
@@ -15,8 +21,6 @@ VERIFY_JSON=$(docker run --rm \
     --openshift-version 4.9 \
     --output json \
     /charts/wavefront 2>&1 )
-#    --disable has-kubeversion,images-are-certified,required-annotations-present,contains-test \
-
 
 REPORTER_QUERY=$(cat <<-'EOF'
   .results[] |
