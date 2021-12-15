@@ -12,8 +12,9 @@ function main() {
   local WF_CLUSTER=nimba
   local VERSION=${CHART_VERSION}
   local CONFIG_CLUSTER_NAME=$(whoami)-${VERSION}-release-test
+  local LOCATION_OF_CHART_TO_TEST=${REPO_ROOT}
 
-  while getopts ":c:t:n:p:" opt; do
+  while getopts ":c:t:n:p:l:" opt; do
     case $opt in
     c)
       WF_CLUSTER="$OPTARG"
@@ -27,18 +28,32 @@ function main() {
     p)
       PREVIOUSLY_RELEASED_CHART_VERSION="$OPTARG"
       ;;
+    l)
+      LOCATION_OF_CHART_TO_TEST="$OPTARG"
+      ;;
     \?)
       print_usage_and_exit "Invalid option: -$OPTARG"
       ;;
     esac
   done
 
+  function print_usage_and_exit() {
+    echo "Failure: $1"
+    echo "Usage: $0 [flags] [options]"
+    echo -e "\t-c wavefront instance name (default: 'nimba')"
+    echo -e "\t-t wavefront token (required)"
+    echo -e "\t-n config cluster name for metric grouping (default: \$(whoami)-<default version from file>-release-test)"
+    echo -e "\t-p previously released chart version to test upgrading and downgrading with"
+    echo -e "\t-l location of chart to be tested. Use 'wavefront' for a released version (default: loads from \$(REPO_ROOT))"
+    exit 1
+  }
+
   if [[ -z ${WAVEFRONT_TOKEN} ]]; then
-    print_msg_and_exit "wavefront token required"
+    print_usage_and_exit "wavefront token required"
   fi
 
   if [[ -z ${PREVIOUSLY_RELEASED_CHART_VERSION} ]]; then
-    print_msg_and_exit "previously released chart version required"
+    print_usage_and_exit "previously released chart version required"
   fi
 
   helm uninstall wavefront --namespace wavefront &>/dev/null || true
@@ -49,7 +64,7 @@ function main() {
 
   echo "Testing fresh install of v${VERSION}"
   local FRESH_INSTALL_CLUSTER_NAME="${CONFIG_CLUSTER_NAME}-$(date +%Y%m%d%H%M%S)"
-  helm install wavefront ${REPO_ROOT}/wavefront --namespace wavefront \
+  helm install wavefront ${LOCATION_OF_CHART_TO_TEST}/wavefront --namespace wavefront \
   --set clusterName=${FRESH_INSTALL_CLUSTER_NAME} \
   --set wavefront.url=https://${WF_CLUSTER}.wavefront.com \
   --set wavefront.token=${WAVEFRONT_TOKEN} \
@@ -69,7 +84,7 @@ function main() {
   --set wavefront.token=${WAVEFRONT_TOKEN} \
   --set collector.cadvisor.enabled=true > /dev/null
 
-  helm upgrade wavefront ${REPO_ROOT}/wavefront --namespace wavefront \
+  helm upgrade wavefront ${LOCATION_OF_CHART_TO_TEST}/wavefront --namespace wavefront \
   --set clusterName=${UPGRADE_CLUSTER_NAME} \
   --set wavefront.url=https://${WF_CLUSTER}.wavefront.com \
   --set wavefront.token=${WAVEFRONT_TOKEN} \
@@ -88,7 +103,7 @@ function main() {
     --set collector.cadvisor.enabled=true > /dev/null
 
   local DOWNGRADE_COLLECTOR_VERSION=$(helm show chart wavefront/wavefront --version ${PREVIOUSLY_RELEASED_CHART_VERSION} | grep appVersion | cut -d' ' -f2)
-  ${REPO_ROOT}/wavefront/release/test-e2e.sh -t ${WAVEFRONT_TOKEN} -n ${UPGRADE_CLUSTER_NAME} -v ${DOWNGRADE_COLLECTOR_VERSION}
+  ${REPO_ROOT}/wavefront/release/test-e2e.sh -t ${WAVEFRONT_TOKEN} -n ${DOWNGRADE_CLUSTER_NAME} -v ${DOWNGRADE_COLLECTOR_VERSION}
 
   green "Success!"
 }
