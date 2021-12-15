@@ -48,7 +48,7 @@ spec:
         - /bin/bash
         - -ec
         - |
-          kubectl --namespace {{ .Release.Namespace }} get daemonsets wavefront-collector
+          kubectl --namespace {{ .Release.Namespace }} get daemonsets --selector="app.kubernetes.io/component=collector"
 
   restartPolicy: Never
 {{- end }}
