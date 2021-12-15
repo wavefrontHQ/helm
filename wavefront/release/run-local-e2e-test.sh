@@ -55,6 +55,10 @@ function main() {
   --set wavefront.token=${WAVEFRONT_TOKEN} \
   --set collector.cadvisor.enabled=true > /dev/null
 
+  helm test wavefront -n wavefront --timeout 60s --logs
+
+  echo "Running test-e2e"
+
   ${REPO_ROOT}/wavefront/release/test-e2e.sh -t ${WAVEFRONT_TOKEN} -n ${FRESH_INSTALL_CLUSTER_NAME}
 
   echo "Testing upgrading from v${PREVIOUSLY_RELEASED_CHART_VERSION} to v${VERSION}"
