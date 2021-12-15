@@ -19,7 +19,7 @@ wavefront:
 collector:
   enabled: true
   image:
-    repository: projects.registry.vmware.com/tanzu_observability/kubernetes-collector
+    repository: registry.connect.redhat.com/wavefronthq/wavefront-kubernetes-collector
     tag: 1.7.5
     pullPolicy: IfNotPresent
 
@@ -216,7 +216,7 @@ collector:
 proxy:
   enabled: true
   image:
-    repository: projects.registry.vmware.com/tanzu_observability/proxy
+    repository: registry.connect.redhat.com/wavefronthq/proxy
     tag: 10.12
     pullPolicy: IfNotPresent
 
