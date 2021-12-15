@@ -33,12 +33,22 @@ function main() {
     esac
   done
 
+  function print_usage_and_exit() {
+    echo "Failure: $1"
+    echo "Usage: $0 [flags] [options]"
+    echo -e "\t-c wavefront instance name (default: 'nimba')"
+    echo -e "\t-t wavefront token (required)"
+    echo -e "\t-n config cluster name for metric grouping (default: \$(whoami)-<default version from file>-release-test)"
+    echo -e "\t-p previously released chart version to test upgrading and downgrading with (required)"
+    exit 1
+  }
+
   if [[ -z ${WAVEFRONT_TOKEN} ]]; then
-    print_msg_and_exit "wavefront token required"
+    print_usage_and_exit "wavefront token required"
   fi
 
   if [[ -z ${PREVIOUSLY_RELEASED_CHART_VERSION} ]]; then
-    print_msg_and_exit "previously released chart version required"
+    print_usage_and_exit "previously released chart version required"
   fi
 
   helm uninstall wavefront --namespace wavefront &>/dev/null || true
@@ -92,7 +102,7 @@ function main() {
     --set collector.cadvisor.enabled=true > /dev/null
 
   local DOWNGRADE_COLLECTOR_VERSION=$(helm show chart wavefront/wavefront --version ${PREVIOUSLY_RELEASED_CHART_VERSION} | grep appVersion | cut -d' ' -f2)
-  ${REPO_ROOT}/wavefront/release/test-e2e.sh -t ${WAVEFRONT_TOKEN} -n ${UPGRADE_CLUSTER_NAME} -v ${DOWNGRADE_COLLECTOR_VERSION}
+  ${REPO_ROOT}/wavefront/release/test-e2e.sh -t ${WAVEFRONT_TOKEN} -n ${DOWNGRADE_CLUSTER_NAME} -v ${DOWNGRADE_COLLECTOR_VERSION}
 
   green "Success!"
 }
