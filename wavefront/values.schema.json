@@ -77,7 +77,7 @@
         "enabled": true,
         "image": {
           "repository": "projects.registry.vmware.com/tanzu_observability/proxy",
-          "tag": 10.9,
+          "tag": 10.11,
           "pullPolicy": "IfNotPresent"
         },
         "resources": {
@@ -733,7 +733,7 @@
           "enabled": true,
           "image": {
             "repository": "projects.registry.vmware.com/tanzu_observability/proxy",
-            "tag": 10.9,
+            "tag": 10.11,
             "pullPolicy": "IfNotPresent"
           },
           "resources": {
@@ -777,7 +777,7 @@
           "examples": [
             {
               "repository": "projects.registry.vmware.com/tanzu_observability/proxy",
-              "tag": 10.9,
+              "tag": 10.11,
               "pullPolicy": "IfNotPresent"
             }
           ],
@@ -804,7 +804,7 @@
               "description": "An explanation about the purpose of this instance.",
               "default": 0.0,
               "examples": [
-                10.9
+                10.11
               ]
             },
             "pullPolicy": {

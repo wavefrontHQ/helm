@@ -20,7 +20,7 @@ collector:
   enabled: true
   image:
     repository: projects.registry.vmware.com/tanzu_observability/kubernetes-collector
-    tag: 1.7.4
+    tag: 1.7.5
     pullPolicy: IfNotPresent
 
   ## Set the updateStrategy for the collector deployment or daemonset
@@ -217,7 +217,7 @@ proxy:
   enabled: true
   image:
     repository: projects.registry.vmware.com/tanzu_observability/proxy
-    tag: 10.9
+    tag: 10.11
     pullPolicy: IfNotPresent
 
   ## Wavefront Collector resource requests and limits
