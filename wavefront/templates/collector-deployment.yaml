@@ -22,7 +22,7 @@ spec:
         app.kubernetes.io/name : {{ template "wavefront.fullname" .}}
         app.kubernetes.io/component: collector
       annotations:
-        installation-method: helm
+        installation-method: openshift-helm
     spec:
       serviceAccountName: {{ template "wavefront.collector.serviceAccountName" . }}
       {{- if .Values.imagePullSecrets }}
