@@ -12,9 +12,8 @@ function main() {
   local WF_CLUSTER=nimba
   local VERSION=${CHART_VERSION}
   local CONFIG_CLUSTER_NAME=$(whoami)-${VERSION}-release-test
-  local LOCATION_OF_CHART_TO_TEST=${REPO_ROOT}
 
-  while getopts ":c:t:n:p:l:" opt; do
+  while getopts ":c:t:n:p:" opt; do
     case $opt in
     c)
       WF_CLUSTER="$OPTARG"
@@ -28,9 +27,6 @@ function main() {
     p)
       PREVIOUSLY_RELEASED_CHART_VERSION="$OPTARG"
       ;;
-    l)
-      LOCATION_OF_CHART_TO_TEST="$OPTARG"
-      ;;
     \?)
       print_usage_and_exit "Invalid option: -$OPTARG"
       ;;
@@ -43,8 +39,7 @@ function main() {
     echo -e "\t-c wavefront instance name (default: 'nimba')"
     echo -e "\t-t wavefront token (required)"
     echo -e "\t-n config cluster name for metric grouping (default: \$(whoami)-<default version from file>-release-test)"
-    echo -e "\t-p previously released chart version to test upgrading and downgrading with"
-    echo -e "\t-l location of chart to be tested. Use 'wavefront' for a released version (default: loads from \$(REPO_ROOT))"
+    echo -e "\t-p previously released chart version to test upgrading and downgrading with (required)"
     exit 1
   }
 
@@ -64,7 +59,7 @@ function main() {
 
   echo "Testing fresh install of v${VERSION}"
   local FRESH_INSTALL_CLUSTER_NAME="${CONFIG_CLUSTER_NAME}-$(date +%Y%m%d%H%M%S)"
-  helm install wavefront ${LOCATION_OF_CHART_TO_TEST}/wavefront --namespace wavefront \
+  helm install wavefront ${REPO_ROOT}/wavefront --namespace wavefront \
   --set clusterName=${FRESH_INSTALL_CLUSTER_NAME} \
   --set wavefront.url=https://${WF_CLUSTER}.wavefront.com \
   --set wavefront.token=${WAVEFRONT_TOKEN} \
@@ -84,7 +79,7 @@ function main() {
   --set wavefront.token=${WAVEFRONT_TOKEN} \
   --set collector.cadvisor.enabled=true > /dev/null
 
-  helm upgrade wavefront ${LOCATION_OF_CHART_TO_TEST}/wavefront --namespace wavefront \
+  helm upgrade wavefront ${REPO_ROOT}/wavefront --namespace wavefront \
   --set clusterName=${UPGRADE_CLUSTER_NAME} \
   --set wavefront.url=https://${WF_CLUSTER}.wavefront.com \
   --set wavefront.token=${WAVEFRONT_TOKEN} \
