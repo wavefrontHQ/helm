@@ -42,7 +42,7 @@ spec:
   serviceAccountName: test-collector
   containers:
     - name: test-collector
-      image: bitnami/kubectl:latest
+      image: registry.connect.redhat.com/seldonio/kubectl
       imagePullPolicy: IfNotPresent
       command:
         - /bin/bash
