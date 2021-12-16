@@ -14,6 +14,14 @@ metadata:
   name: {{ template "wavefront.collector.fullname" . }}
 rules:
 - apiGroups:
+    - security.openshift.io
+  resourceNames:
+    - scc-wavefront
+  resources:
+    - securitycontextconstraints
+  verbs:
+    - use
+- apiGroups:
   - ""
   resources:
   - events
