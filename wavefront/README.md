@@ -53,7 +53,7 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `collector.enabled` | Setup and enable the Wavefront collector to gather metrics | `true` |
 | `collector.image.repository` | Wavefront collector image registry and name | `projects.registry.vmware.com/tanzu_observability/kubernetes-collector` |
 | `collector.image.tag` | Wavefront collector image tag | `{TAG_NAME}` |
-| `colletor.image.pullPolicy` | Wavefront collector image pull policy | `IfNotPresent` |
+| `colletor.image.pullPolicy` | Wavefront collector image pull policy | `Always` |
 | `colletor.image.updateStrategy` | Wavefront collector updateStrategy | `nil` |
 | `collector.useDaemonset` | Use Wavefront collector in Daemonset mode | `true` |
 | `collector.maxProx` | Max number of CPU cores that can be used (< 1 for default) | `0` |
@@ -78,7 +78,7 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `proxy.enabled` | Setup and enable Wavefront proxy to send metrics through | `true` |
 | `proxy.image.repository` | Wavefront proxy image registry and name | `projects.registry.vmware.com/tanzu_observability/proxy` |
 | `proxy.image.tag` | Wavefront proxy image tag | `{TAG_NAME}` |
-| `proxy.image.pullPolicy` | Wavefront proxy image pull policy | `IfNotPresent` |
+| `proxy.image.pullPolicy` | Wavefront proxy image pull policy | `Always` |
 | `proxy.replicas` | Replicas to deploy for Wavefront proxy (usually 1) | `1` |
 | `proxy.port` | Primary port for Wavefront data format metrics | `2878` |
 | `proxy.tracePort` | Port for distributed tracing data (usually 30000) | `nil` |
@@ -106,6 +106,19 @@ The following tables lists the configurable parameters of the Wavefront chart an
 
 
 ## Upgrading
+### Upgrading to The Latest Patched Versions
+In Openshift we are using image tags to release the latest patched versions. To update your cluster to the latest patched 
+version (to get bug fixes and CVEs), please use the following commands:
+
+```bash
+kubectl --namespace wavefront rollout restart daemonset wavefront-collector
+kubectl --namespace wavefront rollout restart deployment wavefront-proxy
+```
+
+### Upgrading Minor and Major Versions
+
+Use [`helm upgrade`](https://helm.sh/docs/helm/helm_upgrade/).
+
 ### Upgrading from 1.0
 Openshift support has been removed from the helm chart.  Use the Wavefront Openshift operator available [here](https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/tree/master/deploy/openshift) instead.
 

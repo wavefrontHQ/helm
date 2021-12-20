@@ -3,7 +3,7 @@ name: wavefront
 annotations:
   charts.openshift.io/name: wavefront
 description: Wavefront Collector for Kubernetes
-appVersion: 1.7.5
+appVersion: 1.7
 version: 1.7.10
 kubeVersion: ">= 1.19"
 keywords:

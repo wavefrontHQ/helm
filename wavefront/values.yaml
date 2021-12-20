@@ -20,8 +20,8 @@ collector:
   enabled: true
   image:
     repository: registry.connect.redhat.com/wavefronthq/wavefront-kubernetes-collector
-    tag: 1.7.5.1
-    pullPolicy: IfNotPresent
+    tag: "1.7"
+    pullPolicy: Always
 
   ## Set the updateStrategy for the collector deployment or daemonset
   ## if no updateStrategy is set, it will use the defaults.
@@ -217,8 +217,8 @@ proxy:
   enabled: true
   image:
     repository: registry.connect.redhat.com/wavefronthq/proxy
-    tag: 10.12
-    pullPolicy: IfNotPresent
+    tag: 10
+    pullPolicy: Always
 
   ## Wavefront Collector resource requests and limits
   ## Ref: http://kubernetes.io/docs/user-guide/compute-resources/
