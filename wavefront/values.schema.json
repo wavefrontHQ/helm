@@ -15,9 +15,9 @@
       "collector": {
         "enabled": true,
         "image": {
-          "repository": "registry.connect.redhat.com/wavefronthq/wavefront-kubernetes-collector",
-          "tag": "1.7",
-          "pullPolicy": "Always"
+          "repository": "projects.registry.vmware.com/tanzu_observability/kubernetes-collector",
+          "tag": "1.7.4",
+          "pullPolicy": "IfNotPresent"
         },
         "useDaemonset": true,
         "useProxy": true,
@@ -76,9 +76,9 @@
       "proxy": {
         "enabled": true,
         "image": {
-          "repository": "registry.connect.redhat.com/wavefronthq/proxy",
-          "tag": "10",
-          "pullPolicy": "Always"
+          "repository": "projects.registry.vmware.com/tanzu_observability/proxy",
+          "tag": 10.12,
+          "pullPolicy": "IfNotPresent"
         },
         "resources": {
           "requests": {
@@ -185,9 +185,9 @@
         {
           "enabled": true,
           "image": {
-            "repository": "registry.connect.redhat.com/wavefronthq/wavefront-kubernetes-collector",
-            "tag": "1.7",
-            "pullPolicy": "Always"
+            "repository": "projects.registry.vmware.com/tanzu_observability/kubernetes-collector",
+            "tag": "1.7.4",
+            "pullPolicy": "IfNotPresent"
           },
           "useDaemonset": true,
           "useProxy": true,
@@ -276,9 +276,9 @@
           "default": {},
           "examples": [
             {
-              "repository": "registry.connect.redhat.com/wavefronthq/wavefront-kubernetes-collector",
-              "tag": "1.7",
-              "pullPolicy": "Always"
+              "repository": "projects.registry.vmware.com/tanzu_observability/kubernetes-collector",
+              "tag": "1.7.4",
+              "pullPolicy": "IfNotPresent"
             }
           ],
           "required": [
@@ -294,7 +294,7 @@
               "description": "An explanation about the purpose of this instance.",
               "default": "",
               "examples": [
-                "registry.connect.redhat.com/wavefronthq/wavefront-kubernetes-collector"
+                "projects.registry.vmware.com/tanzu_observability/kubernetes-collector"
               ]
             },
             "tag": {
@@ -304,7 +304,7 @@
               "description": "An explanation about the purpose of this instance.",
               "default": "",
               "examples": [
-                "1.7"
+                "1.7.4"
               ]
             },
             "pullPolicy": {
@@ -314,7 +314,7 @@
               "description": "An explanation about the purpose of this instance.",
               "default": "",
               "examples": [
-                "Always"
+                "IfNotPresent"
               ]
             }
           },
@@ -732,9 +732,9 @@
         {
           "enabled": true,
           "image": {
-            "repository": "registry.connect.redhat.com/wavefronthq/proxy",
-            "tag": "10",
-            "pullPolicy": "Always"
+            "repository": "projects.registry.vmware.com/tanzu_observability/proxy",
+            "tag": 10.12,
+            "pullPolicy": "IfNotPresent"
           },
           "resources": {
             "requests": {
@@ -776,9 +776,9 @@
           "default": {},
           "examples": [
             {
-              "repository": "registry.connect.redhat.com/wavefronthq/proxy",
-              "tag": "10",
-              "pullPolicy": "Always"
+              "repository": "projects.registry.vmware.com/tanzu_observability/proxy",
+              "tag": 10.12,
+              "pullPolicy": "IfNotPresent"
             }
           ],
           "required": [
@@ -794,7 +794,7 @@
               "description": "An explanation about the purpose of this instance.",
               "default": "",
               "examples": [
-                "registry.connect.redhat.com/wavefronthq/proxy"
+                "projects.registry.vmware.com/tanzu_observability/proxy"
               ]
             },
             "tag": {
@@ -804,7 +804,7 @@
               "description": "An explanation about the purpose of this instance.",
               "default": 0.0,
               "examples": [
-                10
+                10.12
               ]
             },
             "pullPolicy": {
@@ -814,7 +814,7 @@
               "description": "An explanation about the purpose of this instance.",
               "default": "",
               "examples": [
-                "Always"
+                "IfNotPresent"
               ]
             }
           },

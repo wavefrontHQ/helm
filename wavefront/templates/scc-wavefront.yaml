@@ -9,11 +9,6 @@ allowHostPID: false
 allowHostPorts: false
 allowPrivilegedContainer: false
 readOnlyRootFilesystem: false
-allowedCapabilities:
-defaultAddCapabilities:
-priority:
-requiredDropCapabilities:
-volumes:
 runAsUser:
   type: RunAsAny
 seLinuxContext:
