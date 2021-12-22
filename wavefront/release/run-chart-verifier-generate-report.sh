@@ -24,6 +24,6 @@ VERIFY_YAML=$(docker run --rm \
     --openshift-version 4.9 \
     --output yaml \
     --chart-set clusterName=test,wavefront.url=test,wavefront.token=test \
-  "/charts/_build/wavefront-1.7.10.tgz" 2>&1)
+  "/charts/_build/wavefront-1.7.11.tgz" 2>&1)
 
 echo "${VERIFY_YAML}" >"${REPO_ROOT}/_build/report.yaml"
