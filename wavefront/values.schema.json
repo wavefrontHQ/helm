@@ -15,7 +15,7 @@
       "collector": {
         "enabled": true,
         "image": {
-          "repository": "registry.connect.redhat.com/wavefronthq/wavefront-kubernetes-collector",
+          "repository": "projects.registry.vmware.com/tanzu_observability/kubernetes-collector",
           "tag": "1.7.4",
           "pullPolicy": "IfNotPresent"
         },
@@ -76,7 +76,7 @@
       "proxy": {
         "enabled": true,
         "image": {
-          "repository": "registry.connect.redhat.com/wavefronthq/proxy",
+          "repository": "projects.registry.vmware.com/tanzu_observability/proxy",
           "tag": 10.12,
           "pullPolicy": "IfNotPresent"
         },
@@ -184,7 +184,7 @@
         {
           "enabled": true,
           "image": {
-            "repository": "registry.connect.redhat.com/wavefronthq/wavefront-kubernetes-collector",
+            "repository": "projects.registry.vmware.com/tanzu_observability/kubernetes-collector",
             "tag": "1.7.4",
             "pullPolicy": "IfNotPresent"
           },
@@ -275,7 +275,7 @@
           "default": {},
           "examples": [
             {
-              "repository": "registry.connect.redhat.com/wavefronthq/wavefront-kubernetes-collector",
+              "repository": "projects.registry.vmware.com/tanzu_observability/kubernetes-collector",
               "tag": "1.7.4",
               "pullPolicy": "IfNotPresent"
             }
@@ -293,7 +293,7 @@
               "description": "An explanation about the purpose of this instance.",
               "default": "",
               "examples": [
-                "registry.connect.redhat.com/wavefronthq/wavefront-kubernetes-collector"
+                "projects.registry.vmware.com/tanzu_observability/kubernetes-collector"
               ]
             },
             "tag": {
@@ -731,7 +731,7 @@
         {
           "enabled": true,
           "image": {
-            "repository": "registry.connect.redhat.com/wavefronthq/proxy",
+            "repository": "projects.registry.vmware.com/tanzu_observability/proxy",
             "tag": 10.12,
             "pullPolicy": "IfNotPresent"
           },
@@ -775,7 +775,7 @@
           "default": {},
           "examples": [
             {
-              "repository": "registry.connect.redhat.com/wavefronthq/proxy",
+              "repository": "projects.registry.vmware.com/tanzu_observability/proxy",
               "tag": 10.12,
               "pullPolicy": "IfNotPresent"
             }
@@ -793,7 +793,7 @@
               "description": "An explanation about the purpose of this instance.",
               "default": "",
               "examples": [
-                "registry.connect.redhat.com/wavefronthq/proxy"
+                "projects.registry.vmware.com/tanzu_observability/proxy"
               ]
             },
             "tag": {
