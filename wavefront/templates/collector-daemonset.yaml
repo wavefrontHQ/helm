@@ -24,7 +24,7 @@ spec:
         app.kubernetes.io/name : {{ template "wavefront.fullname" .}}
         app.kubernetes.io/component: collector
       annotations:
-        installation-method: openshift-helm
+        installation-method: {{ .Values.installationMethod }}
     spec:
       tolerations:
       - effect: NoSchedule

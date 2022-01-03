@@ -42,7 +42,7 @@ spec:
   serviceAccountName: test-collector
   containers:
     - name: test-collector
-      image: registry.connect.redhat.com/seldonio/kubectl
+      image: {{ .Values.testCollectorImage }}
       imagePullPolicy: IfNotPresent
       command:
         - /bin/bash

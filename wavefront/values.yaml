@@ -6,6 +6,8 @@
 clusterName: KUBERNETES_CLUSTER_NAME
 
 
+installationMethod: helm
+
 ## Wavefront URL (cluster) and API Token
 ## Required
 wavefront:
@@ -19,8 +21,8 @@ wavefront:
 collector:
   enabled: true
   image:
-    repository: registry.connect.redhat.com/wavefronthq/wavefront-kubernetes-collector
-    tag: 1.7.5.1
+    repository: projects.registry.vmware.com/tanzu_observability/kubernetes-collector
+    tag: 1.7.5
     pullPolicy: IfNotPresent
 
   ## Set the updateStrategy for the collector deployment or daemonset
@@ -216,7 +218,7 @@ collector:
 proxy:
   enabled: true
   image:
-    repository: registry.connect.redhat.com/wavefronthq/proxy
+    repository: projects.registry.vmware.com/tanzu_observability/proxy
     tag: 10.12
     pullPolicy: IfNotPresent
 
@@ -359,3 +361,8 @@ vspheretanzu:
 
 projectPacific: ## Original variable name of vspheretanzu, left in for backward compatibility
   enabled: false
+
+openshift:
+  enabled: false
+
+testCollectorImage: bitnami/kubectl:latest

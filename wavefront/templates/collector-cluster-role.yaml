@@ -13,6 +13,7 @@ metadata:
     rbac.authorization.kubernetes.io/autoupdate: "true"
   name: {{ template "wavefront.collector.fullname" . }}
 rules:
+{{- if .Values.openshift.enabled }}
 - apiGroups:
     - security.openshift.io
   resourceNames:
@@ -21,6 +22,7 @@ rules:
     - securitycontextconstraints
   verbs:
     - use
+{{- end }}
 - apiGroups:
   - ""
   resources:

@@ -1,0 +1,20 @@
+installationMethod: openshift-helm
+
+collector:
+  enabled: true
+  image:
+    repository: registry.connect.redhat.com/wavefronthq/wavefront-kubernetes-collector
+    tag: 1.7.5.1
+    pullPolicy: IfNotPresent
+
+proxy:
+  enabled: true
+  image:
+    repository: registry.connect.redhat.com/wavefronthq/proxy
+    tag: 10.12
+    pullPolicy: IfNotPresent
+
+openshift:
+  enabled: true
+
+testCollectorImage: registry.connect.redhat.com/seldonio/kubectl
