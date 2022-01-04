@@ -6,6 +6,8 @@
 clusterName: KUBERNETES_CLUSTER_NAME
 
 
+installationMethod: helm
+
 ## Wavefront URL (cluster) and API Token
 ## Required
 wavefront:
@@ -359,3 +361,8 @@ vspheretanzu:
 
 projectPacific: ## Original variable name of vspheretanzu, left in for backward compatibility
   enabled: false
+
+openshift:
+  enabled: false
+
+testCollectorImage: bitnami/kubectl:latest

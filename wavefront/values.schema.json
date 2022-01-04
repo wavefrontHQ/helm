@@ -119,7 +119,6 @@
     "proxy",
     "rbac",
     "serviceAccount",
-    "imagePullSecrets",
     "kubeStateMetrics",
     "vspheretanzu",
     "projectPacific"

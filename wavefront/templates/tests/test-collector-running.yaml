@@ -42,7 +42,7 @@ spec:
   serviceAccountName: test-collector
   containers:
     - name: test-collector
-      image: bitnami/kubectl:latest
+      image: {{ .Values.testCollectorImage }}
       imagePullPolicy: IfNotPresent
       command:
         - /bin/bash
