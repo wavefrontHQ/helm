@@ -6,31 +6,29 @@ three dimensional microservices observability with metrics, histograms and OpenT
 ## Introduction
 
 This chart will deploy the Wavefront Collector for Kubernetes and Wavefront Proxy to your
-Kubernetes cluster.  You can use this chart to install multiple Wavefront Proxy releases,
-though only one Wavefront Collector for Kubernetes per cluster should be used.
+OpenShift cluster.  You can use this chart to install multiple Wavefront Proxy releases,
+though only one Wavefront Collector for OpenShift per cluster should be used.
 
-You can learn more about the Wavefront and Kubernetes integration [here](https://docs.wavefront.com/wavefront_kubernetes.html)
+You can learn more about the Wavefront and OpenShift integration [here](https://docs.wavefront.com/wavefront_kubernetes.html)
 
 ## Installation
 
-**Helm 2**
 ```
-helm install wavefront/wavefront --name wavefront --namespace wavefront \
-    --set clusterName=<K8s-CLUSTER-NAME> \
-    --set wavefront.url=https://<YOUR_CLUSTER>.wavefront.com \
-    --set wavefront.token=<YOUR_API_TOKEN>
-```
+# Add openshift helm chart repo, it may already be installed
+helm repo add openshift-helm-charts https://charts.openshift.io/
 
-**Helm 3+**
+#update helm repo to make sure wavefront is downloaded
+helm repo update
 
-_If not already done, create a namespace to install this chart_
-```
-kubectl create namespace wavefront
+# create wavefront project 
+oc new-project wavefront
 
-helm install wavefront wavefront/wavefront --namespace wavefront \
-    --set clusterName=<K8s-CLUSTER-NAME> \
-    --set wavefront.url=https://<YOUR_CLUSTER>.wavefront.com \
-    --set wavefront.token=<YOUR_API_TOKEN>
+# install openshift certified helm chart
+helm install wavefront openshift-helm-charts/wavefronthq-wavefront \
+    --set wavefront.url=https://YOUR_CLUSTER.wavefront.com \
+    --set wavefront.token=YOUR_API_TOKEN \
+    --set clusterName=<YOUR_CLUSTER_NAME> \
+    --namespace wavefront
 ```
 
 ## Configuration
@@ -47,7 +45,7 @@ The following tables lists the configurable parameters of the Wavefront chart an
 
 | Parameter | Description | Default |
 | --- | --- | --- |
-| `clusterName` | Unique name for the Kubernetes cluster | `KUBERNETES_CLUSTER_NAME` |
+| `clusterName` | Unique name for the OpenShift cluster | `KUBERNETES_CLUSTER_NAME` |
 | `wavefront.url` | Wavefront URL for your cluster | `https://YOUR_CLUSTER.wavefront.com` |
 | `wavefront.token` | Wavefront API Token | `YOUR_API_TOKEN` |
 | `collector.enabled` | Setup and enable the Wavefront collector to gather metrics | `true` |
@@ -64,8 +62,8 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `collector.useReadOnlyPort` | Use un-authenticated port for kubelet | `false` |
 | `collector.useProxy` | Use a Wavefront Proxy to send metrics through | `true` |
 | `collector.proxyAddress` | Non-default Wavefront Proxy address to use, should only be set when `proxy.enabled` is false | `nil` |
-| `collector.apiServerMetrics` | Collect metrics about Kubernetes API server | `false` |
-| `collector.kubernetesState` | Collect metrics about Kubernetes resource states [see more](https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/blob/master/docs/metrics.md#kubernetes-state-source) | `true` |
+| `collector.apiServerMetrics` | Collect metrics about OpenShift API server | `false` |
+| `collector.kubernetesState` | Collect metrics about OpenShift resource states [see more](https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/blob/master/docs/metrics.md#kubernetes-state-source) | `true` |
 | `collector.cadvisor.enabled` | Enable cAdvisor prometheus endpoint. See the [cAdvisor docs](https://github.com/google/cadvisor/blob/master/docs/storage/prometheus.md) for details on what metrics are available. | `false` |
 | `collector.filters` | Filters to apply towards all collected metrics | See values.yaml |
 | `collector.tags` | Map of tags (key/value) to add to all metrics collected | `nil` |
@@ -103,10 +101,3 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `serviceAccount.name` | Name of Wavefront service account | `nil` |
 | `kubeStateMetrics.enabled` | Setup and enable Kube State Metrics for collection | `false` |
 | `vspheretanzu.enabled` | Enable and create role binding for vSphere with Tanzu kubernetes cluster | `false` |
-
-
-## Upgrading
-### Upgrading from 1.0
-Openshift support has been removed from the helm chart.  Use the Wavefront Openshift operator available [here](https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/tree/master/deploy/openshift) instead.
-
-The `collector.kubernetesSource` parameter has been replaced with the `collector.useReadOnlyPort` option.
