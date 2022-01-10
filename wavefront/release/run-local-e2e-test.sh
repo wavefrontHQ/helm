@@ -65,7 +65,7 @@ function main() {
   --set wavefront.token=${WAVEFRONT_TOKEN} \
   --set collector.cadvisor.enabled=true > /dev/null
 
-  helm test wavefront -n wavefront --timeout 60s --logs
+  helm test wavefront -n wavefront --timeout 60s
 
   echo "Running test-e2e"
 
