@@ -49,7 +49,7 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `wavefront.url` | Wavefront URL for your cluster | `https://YOUR_CLUSTER.wavefront.com` |
 | `wavefront.token` | Wavefront API Token | `YOUR_API_TOKEN` |
 | `collector.enabled` | Setup and enable the Wavefront collector to gather metrics | `true` |
-| `collector.image.repository` | Wavefront collector image registry and name | `projects.registry.vmware.com/tanzu_observability/kubernetes-collector` |
+| `collector.image.repository` | Wavefront collector image registry and name | `registry.connect.redhat.com/wavefronthq/wavefront-kubernetes-collector` |
 | `collector.image.tag` | Wavefront collector image tag | `{TAG_NAME}` |
 | `colletor.image.pullPolicy` | Wavefront collector image pull policy | `IfNotPresent` |
 | `colletor.image.updateStrategy` | Wavefront collector updateStrategy | `nil` |
@@ -74,7 +74,7 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `collector.resources` | CPU/Memory resource requests/limits | CPU: `200m`/`200m`, Memory: `10Mi`/`256Mi` |
 | `imagePullSecrets` | Enable Wavefront proxy and collector to pull from private image repositories. **Note:** secret must exist in namespace that will be used for the installation. | `nil` |
 | `proxy.enabled` | Setup and enable Wavefront proxy to send metrics through | `true` |
-| `proxy.image.repository` | Wavefront proxy image registry and name | `projects.registry.vmware.com/tanzu_observability/proxy` |
+| `proxy.image.repository` | Wavefront proxy image registry and name | `registry.connect.redhat.com/wavefronthq/proxy` |
 | `proxy.image.tag` | Wavefront proxy image tag | `{TAG_NAME}` |
 | `proxy.image.pullPolicy` | Wavefront proxy image pull policy | `IfNotPresent` |
 | `proxy.replicas` | Replicas to deploy for Wavefront proxy (usually 1) | `1` |
@@ -100,4 +100,3 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `serviceAccount.create` | Create Wavefront service account  | `true` |
 | `serviceAccount.name` | Name of Wavefront service account | `nil` |
 | `kubeStateMetrics.enabled` | Setup and enable Kube State Metrics for collection | `false` |
-| `vspheretanzu.enabled` | Enable and create role binding for vSphere with Tanzu kubernetes cluster | `false` |
