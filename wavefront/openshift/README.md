@@ -14,16 +14,18 @@ You can learn more about the Wavefront and OpenShift integration [here](https://
 ## Installation
 
 ```
-# Add openshift helm chart repo, it may already be installed
 helm repo add openshift-helm-charts https://charts.openshift.io/
+```
 
-#update helm repo to make sure wavefront is downloaded
+```
 helm repo update
+```
 
-# create wavefront project 
+```
 oc new-project wavefront
+```
 
-# install openshift certified helm chart
+```
 helm install wavefront openshift-helm-charts/wavefronthq-wavefront \
     --set wavefront.url=https://YOUR_CLUSTER.wavefront.com \
     --set wavefront.token=YOUR_API_TOKEN \
