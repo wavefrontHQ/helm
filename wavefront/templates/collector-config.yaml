@@ -118,12 +118,12 @@ data:
       enable_runtime_plugins: {{ .Values.collector.discovery.enableRuntimeConfigs }}
       {{end }}
 
-  {{- if .Values.collector.discovery.annotationExcludes }}
+      {{- if .Values.collector.discovery.annotationExcludes }}
       annotation_excludes:
-  {{ tpl (toYaml .Values.collector.discovery.annotationExcludes) . | indent 4 }}
-  {{end}}
-      plugins:
+{{ tpl (toYaml .Values.collector.discovery.annotationExcludes) . | indent 8 }}
+      {{end}}
 
+      plugins:
       # auto-discover kube DNS
       - name: kube-dns-discovery
         type: prometheus

@@ -72,6 +72,7 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `collector.discovery.enabled` | Rules based and Prometheus endpoints auto-discovery  | `true` |
 | `collector.discovery.annotationPrefix` | Replaces `prometheus.io` as prefix for annotations of auto-discovered Prometheus endpoints | `prometheus.io` |
 | `collector.discovery.enableRuntimeConfigs` | Enable runtime discovery rules [see more](https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/blob/master/docs/discovery.md#runtime-configurations) | `true` |
+| `collector.discovery.annotationExcludes` | Exclude resources from annotation based auto-discovery [see more](https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/blob/master/docs/discovery.md) | `nil` |
 | `collector.discovery.config` | Configuration for rules based auto-discovery [see more](https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/blob/master/docs/discovery.md) | `nil` |
 | `collector.resources` | CPU/Memory resource requests/limits | CPU: `200m`/`200m`, Memory: `10Mi`/`256Mi` |
 | `imagePullSecrets` | Enable Wavefront proxy and collector to pull from private image repositories. **Note:** secret must exist in namespace that will be used for the installation. | `nil` |
