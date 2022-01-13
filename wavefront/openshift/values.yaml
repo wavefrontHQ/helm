@@ -4,14 +4,20 @@ collector:
   enabled: true
   image:
     repository: registry.connect.redhat.com/wavefronthq/wavefront-kubernetes-collector
-    tag: 1.7.5.1
+    tag: 1.8.0
     pullPolicy: IfNotPresent
-
+  discovery:
+    # Exclude resources from annotation-based discovery
+    annotationExcludes:
+    - resourceType: "service"
+      # namespaces to filter resources by. Provided as a list of glob pattern strings.
+      namespaces:
+      - "openshift-*"
 proxy:
   enabled: true
   image:
     repository: registry.connect.redhat.com/wavefronthq/proxy
-    tag: 10.12
+    tag: 10.13
     pullPolicy: IfNotPresent
 
 openshift:
