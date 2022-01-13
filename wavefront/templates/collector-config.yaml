@@ -113,11 +113,15 @@ data:
     discovery:
       {{- if .Values.collector.discovery.annotationPrefix }}
       annotation_prefix: {{ .Values.collector.discovery.annotationPrefix | quote }}
-      {{- end }}
+      {{end }}
       {{- if .Values.collector.discovery.enableRuntimeConfigs }}
       enable_runtime_plugins: {{ .Values.collector.discovery.enableRuntimeConfigs }}
-      {{- end }}
+      {{end }}
 
+  {{- if .Values.collector.discovery.annotationExcludes }}
+      annotation_excludes:
+  {{ tpl (toYaml .Values.collector.discovery.annotationExcludes) . | indent 4 }}
+  {{end}}
       plugins:
 
       # auto-discover kube DNS
