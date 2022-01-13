@@ -120,7 +120,7 @@ data:
 
       {{- if .Values.collector.discovery.annotationExcludes }}
       annotation_excludes:
-{{ tpl (toYaml .Values.collector.discovery.annotationExcludes) . | indent 8 }}
+{{ tpl (toYaml .Values.collector.discovery.annotationExcludes) . | indent 6 }}
       {{end}}
 
       plugins:
