@@ -129,6 +129,7 @@ function main() {
 
   local VERSION_IN_DECIMAL="${EXPECTED_VERSION%.*}"
   local VERSION_IN_DECIMAL+="$(echo "${EXPECTED_VERSION}" | cut -d '.' -f3)"
+  local VERSION_IN_DECIMAL="$(echo "${VERSION_IN_DECIMAL}" | sed 's/0$//')"
 
   wait_for_cluster_ready
 
