@@ -43,4 +43,8 @@ TOTAL=$(echo "$VERIFY_JSON" | jq -r '.results | length')
 
 echo "$PASSED / $TOTAL passed"
 
+kubectl delete serviceaccount test-collector -n wavefront &>/dev/null || true
+kubectl delete rolebinding test-collector -n wavefront &>/dev/null || true
+kubectl delete role test-collector -n wavefront &>/dev/null || true
+
 [ "$PASSED" -eq "$TOTAL" ] || (exit 1)
