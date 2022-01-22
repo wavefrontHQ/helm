@@ -6,31 +6,31 @@ three dimensional microservices observability with metrics, histograms and OpenT
 ## Introduction
 
 This chart will deploy the Wavefront Collector for Kubernetes and Wavefront Proxy to your
-Kubernetes cluster.  You can use this chart to install multiple Wavefront Proxy releases,
-though only one Wavefront Collector for Kubernetes per cluster should be used.
+OpenShift cluster.  You can use this chart to install multiple Wavefront Proxy releases,
+though only one Wavefront Collector for OpenShift per cluster should be used.
 
-You can learn more about the Wavefront and Kubernetes integration [here](https://docs.wavefront.com/wavefront_kubernetes.html)
+You can learn more about the Wavefront and OpenShift integration [here](https://docs.wavefront.com/wavefront_kubernetes.html)
 
 ## Installation
 
-**Helm 2**
 ```
-helm install wavefront/wavefront --name wavefront --namespace wavefront \
-    --set clusterName=<K8s-CLUSTER-NAME> \
-    --set wavefront.url=https://<YOUR_CLUSTER>.wavefront.com \
-    --set wavefront.token=<YOUR_API_TOKEN>
+helm repo add openshift-helm-charts https://charts.openshift.io/
 ```
 
-**Helm 3+**
-
-_If not already done, create a namespace to install this chart_
 ```
-kubectl create namespace wavefront
+helm repo update
+```
 
-helm install wavefront wavefront/wavefront --namespace wavefront \
-    --set clusterName=<K8s-CLUSTER-NAME> \
-    --set wavefront.url=https://<YOUR_CLUSTER>.wavefront.com \
-    --set wavefront.token=<YOUR_API_TOKEN>
+```
+oc new-project wavefront
+```
+
+```
+helm install wavefront openshift-helm-charts/wavefronthq-wavefront \
+    --set wavefront.url=https://YOUR_CLUSTER.wavefront.com \
+    --set wavefront.token=YOUR_API_TOKEN \
+    --set clusterName=<YOUR_CLUSTER_NAME> \
+    --namespace wavefront
 ```
 
 ## Configuration
@@ -47,11 +47,11 @@ The following tables lists the configurable parameters of the Wavefront chart an
 
 | Parameter | Description | Default |
 | --- | --- | --- |
-| `clusterName` | Unique name for the Kubernetes cluster | `KUBERNETES_CLUSTER_NAME` |
+| `clusterName` | Unique name for the OpenShift cluster | `KUBERNETES_CLUSTER_NAME` |
 | `wavefront.url` | Wavefront URL for your cluster | `https://YOUR_CLUSTER.wavefront.com` |
 | `wavefront.token` | Wavefront API Token | `YOUR_API_TOKEN` |
 | `collector.enabled` | Setup and enable the Wavefront collector to gather metrics | `true` |
-| `collector.image.repository` | Wavefront collector image registry and name | `projects.registry.vmware.com/tanzu_observability/kubernetes-collector` |
+| `collector.image.repository` | Wavefront collector image registry and name | `registry.connect.redhat.com/wavefronthq/wavefront-kubernetes-collector` |
 | `collector.image.tag` | Wavefront collector image tag | `{TAG_NAME}` |
 | `colletor.image.pullPolicy` | Wavefront collector image pull policy | `IfNotPresent` |
 | `colletor.image.updateStrategy` | Wavefront collector updateStrategy | `nil` |
@@ -64,20 +64,19 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `collector.useReadOnlyPort` | Use un-authenticated port for kubelet | `false` |
 | `collector.useProxy` | Use a Wavefront Proxy to send metrics through | `true` |
 | `collector.proxyAddress` | Non-default Wavefront Proxy address to use, should only be set when `proxy.enabled` is false | `nil` |
-| `collector.apiServerMetrics` | Collect metrics about Kubernetes API server | `false` |
-| `collector.kubernetesState` | Collect metrics about Kubernetes resource states [see more](https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/blob/master/docs/metrics.md#kubernetes-state-source) | `true` |
+| `collector.apiServerMetrics` | Collect metrics about OpenShift API server | `false` |
+| `collector.kubernetesState` | Collect metrics about OpenShift resource states [see more](https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/blob/master/docs/metrics.md#kubernetes-state-source) | `true` |
 | `collector.cadvisor.enabled` | Enable cAdvisor prometheus endpoint. See the [cAdvisor docs](https://github.com/google/cadvisor/blob/master/docs/storage/prometheus.md) for details on what metrics are available. | `false` |
 | `collector.filters` | Filters to apply towards all collected metrics | See values.yaml |
 | `collector.tags` | Map of tags (key/value) to add to all metrics collected | `nil` |
 | `collector.discovery.enabled` | Rules based and Prometheus endpoints auto-discovery  | `true` |
 | `collector.discovery.annotationPrefix` | Replaces `prometheus.io` as prefix for annotations of auto-discovered Prometheus endpoints | `prometheus.io` |
 | `collector.discovery.enableRuntimeConfigs` | Enable runtime discovery rules [see more](https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/blob/master/docs/discovery.md#runtime-configurations) | `true` |
-| `collector.discovery.annotationExcludes` | Exclude resources from annotation based auto-discovery [see more](https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/blob/master/docs/discovery.md) | `nil` |
 | `collector.discovery.config` | Configuration for rules based auto-discovery [see more](https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/blob/master/docs/discovery.md) | `nil` |
 | `collector.resources` | CPU/Memory resource requests/limits | CPU: `200m`/`200m`, Memory: `10Mi`/`256Mi` |
 | `imagePullSecrets` | Enable Wavefront proxy and collector to pull from private image repositories. **Note:** secret must exist in namespace that will be used for the installation. | `nil` |
 | `proxy.enabled` | Setup and enable Wavefront proxy to send metrics through | `true` |
-| `proxy.image.repository` | Wavefront proxy image registry and name | `projects.registry.vmware.com/tanzu_observability/proxy` |
+| `proxy.image.repository` | Wavefront proxy image registry and name | `registry.connect.redhat.com/wavefronthq/proxy` |
 | `proxy.image.tag` | Wavefront proxy image tag | `{TAG_NAME}` |
 | `proxy.image.pullPolicy` | Wavefront proxy image pull policy | `IfNotPresent` |
 | `proxy.replicas` | Replicas to deploy for Wavefront proxy (usually 1) | `1` |
@@ -103,4 +102,3 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `serviceAccount.create` | Create Wavefront service account  | `true` |
 | `serviceAccount.name` | Name of Wavefront service account | `nil` |
 | `kubeStateMetrics.enabled` | Setup and enable Kube State Metrics for collection | `false` |
-| `vspheretanzu.enabled` | Enable and create role binding for vSphere with Tanzu kubernetes cluster | `false` |

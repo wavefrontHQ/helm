@@ -1,0 +1,1118 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "title": "The root schema",
+  "description": "The root schema comprises the entire JSON document.",
+  "default": {},
+  "examples": [
+    {
+      "clusterName": "KUBERNETES_CLUSTER_NAME",
+      "wavefront": {
+        "url": "https://YOUR_CLUSTER.wavefront.com",
+        "token": "YOUR_API_TOKEN"
+      },
+      "collector": {
+        "enabled": true,
+        "image": {
+          "repository": "projects.registry.vmware.com/tanzu_observability/kubernetes-collector",
+          "tag": "1.7.4",
+          "pullPolicy": "IfNotPresent"
+        },
+        "useDaemonset": true,
+        "useProxy": true,
+        "kubernetesState": true,
+        "hostOSMetrics": false,
+        "filters": {
+          "metricDenyList": [
+            "kubernetes.sys_container.*",
+            "kubernetes.collector.runtime.*",
+            "kubernetes.*.network.rx_rate",
+            "kubernetes.*.network.rx_errors_rate",
+            "kubernetes.*.network.tx_rate",
+            "kubernetes.*.network.tx_errors_rate",
+            "kubernetes.*.memory.page_faults",
+            "kubernetes.*.memory.page_faults_rate",
+            "kubernetes.*.memory.major_page_faults",
+            "kubernetes.*.memory.major_page_faults_rate",
+            "kubernetes.*.filesystem.inodes",
+            "kubernetes.*.filesystem.inodes_free",
+            "kubernetes.*.ephemeral_storage.request",
+            "kubernetes.*.ephemeral_storage.limit"
+          ],
+          "tagExclude": [
+            "label?controller?revision*",
+            "label?pod?template*",
+            "annotation_kubectl_kubernetes_io_last_applied_configuration"
+          ]
+        },
+        "cadvisor": {
+          "enabled": false,
+          "filters": {
+            "metricAllowList": [
+              "kubernetes.cadvisor.container.cpu.cfs.throttled.seconds.total.counter",
+              "kubernetes.cadvisor.container.cpu.cfs.throttled.periods.total.counter"
+            ]
+          }
+        },
+        "events": {
+          "enabled": false
+        },
+        "discovery": {
+          "enabled": true,
+          "enableRuntimeConfigs": true
+        },
+        "resources": {
+          "requests": {
+            "cpu": "200m",
+            "memory": "10Mi"
+          },
+          "limits": {
+            "cpu": "200m",
+            "memory": "256Mi"
+          }
+        }
+      },
+      "proxy": {
+        "enabled": true,
+        "image": {
+          "repository": "projects.registry.vmware.com/tanzu_observability/proxy",
+          "tag": 10.13,
+          "pullPolicy": "IfNotPresent"
+        },
+        "resources": {
+          "requests": {
+            "cpu": "100m",
+            "memory": "1Gi"
+          },
+          "limits": {
+            "cpu": "1000m",
+            "memory": "4Gi"
+          }
+        },
+        "replicas": 1,
+        "port": 2878
+      },
+      "rbac": {
+        "create": true
+      },
+      "serviceAccount": {
+        "create": true,
+        "name": null
+      },
+      "imagePullSecrets": [],
+      "kubeStateMetrics": {
+        "enabled": false
+      },
+      "vspheretanzu": {
+        "enabled": false
+      },
+      "projectPacific": {
+        "enabled": false
+      }
+    }
+  ],
+  "required": [
+    "clusterName",
+    "wavefront",
+    "collector",
+    "proxy",
+    "rbac",
+    "serviceAccount",
+    "kubeStateMetrics",
+    "vspheretanzu",
+    "projectPacific"
+  ],
+  "properties": {
+    "clusterName": {
+      "$id": "#/properties/clusterName",
+      "type": "string",
+      "title": "The clusterName schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "KUBERNETES_CLUSTER_NAME"
+      ]
+    },
+    "wavefront": {
+      "$id": "#/properties/wavefront",
+      "type": "object",
+      "title": "The wavefront schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "url": "https://YOUR_CLUSTER.wavefront.com",
+          "token": "YOUR_API_TOKEN"
+        }
+      ],
+      "required": [
+        "url",
+        "token"
+      ],
+      "properties": {
+        "url": {
+          "$id": "#/properties/wavefront/properties/url",
+          "type": "string",
+          "title": "The url schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "https://YOUR_CLUSTER.wavefront.com"
+          ]
+        },
+        "token": {
+          "$id": "#/properties/wavefront/properties/token",
+          "type": "string",
+          "title": "The token schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "YOUR_API_TOKEN"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "collector": {
+      "$id": "#/properties/collector",
+      "type": "object",
+      "title": "The collector schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "enabled": true,
+          "image": {
+            "repository": "projects.registry.vmware.com/tanzu_observability/kubernetes-collector",
+            "tag": "1.7.4",
+            "pullPolicy": "IfNotPresent"
+          },
+          "useDaemonset": true,
+          "useProxy": true,
+          "kubernetesState": true,
+          "hostOSMetrics": false,
+          "filters": {
+            "metricDenyList": [
+              "kubernetes.sys_container.*",
+              "kubernetes.collector.runtime.*",
+              "kubernetes.*.network.rx_rate",
+              "kubernetes.*.network.rx_errors_rate",
+              "kubernetes.*.network.tx_rate",
+              "kubernetes.*.network.tx_errors_rate",
+              "kubernetes.*.memory.page_faults",
+              "kubernetes.*.memory.page_faults_rate",
+              "kubernetes.*.memory.major_page_faults",
+              "kubernetes.*.memory.major_page_faults_rate",
+              "kubernetes.*.filesystem.inodes",
+              "kubernetes.*.filesystem.inodes_free",
+              "kubernetes.*.ephemeral_storage.request",
+              "kubernetes.*.ephemeral_storage.limit"
+            ],
+            "tagExclude": [
+              "label?controller?revision*",
+              "label?pod?template*",
+              "annotation_kubectl_kubernetes_io_last_applied_configuration"
+            ]
+          },
+          "cadvisor": {
+            "enabled": false,
+            "filters": {
+              "metricAllowList": [
+                "kubernetes.cadvisor.container.cpu.cfs.throttled.seconds.total.counter",
+                "kubernetes.cadvisor.container.cpu.cfs.throttled.periods.total.counter"
+              ]
+            }
+          },
+          "events": {
+            "enabled": false
+          },
+          "discovery": {
+            "enabled": true,
+            "enableRuntimeConfigs": true
+          },
+          "resources": {
+            "requests": {
+              "cpu": "200m",
+              "memory": "10Mi"
+            },
+            "limits": {
+              "cpu": "200m",
+              "memory": "256Mi"
+            }
+          }
+        }
+      ],
+      "required": [
+        "enabled",
+        "image",
+        "useDaemonset",
+        "useProxy",
+        "kubernetesState",
+        "hostOSMetrics",
+        "filters",
+        "cadvisor",
+        "events",
+        "discovery",
+        "resources"
+      ],
+      "properties": {
+        "enabled": {
+          "$id": "#/properties/collector/properties/enabled",
+          "type": "boolean",
+          "title": "The enabled schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": false,
+          "examples": [
+            true
+          ]
+        },
+        "image": {
+          "$id": "#/properties/collector/properties/image",
+          "type": "object",
+          "title": "The image schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": {},
+          "examples": [
+            {
+              "repository": "projects.registry.vmware.com/tanzu_observability/kubernetes-collector",
+              "tag": "1.7.4",
+              "pullPolicy": "IfNotPresent"
+            }
+          ],
+          "required": [
+            "repository",
+            "tag",
+            "pullPolicy"
+          ],
+          "properties": {
+            "repository": {
+              "$id": "#/properties/collector/properties/image/properties/repository",
+              "type": "string",
+              "title": "The repository schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": "",
+              "examples": [
+                "projects.registry.vmware.com/tanzu_observability/kubernetes-collector"
+              ]
+            },
+            "tag": {
+              "$id": "#/properties/collector/properties/image/properties/tag",
+              "type": "string",
+              "title": "The tag schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": "",
+              "examples": [
+                "1.7.4"
+              ]
+            },
+            "pullPolicy": {
+              "$id": "#/properties/collector/properties/image/properties/pullPolicy",
+              "type": "string",
+              "title": "The pullPolicy schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": "",
+              "examples": [
+                "IfNotPresent"
+              ]
+            }
+          },
+          "additionalProperties": true
+        },
+        "useDaemonset": {
+          "$id": "#/properties/collector/properties/useDaemonset",
+          "type": "boolean",
+          "title": "The useDaemonset schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": false,
+          "examples": [
+            true
+          ]
+        },
+        "useProxy": {
+          "$id": "#/properties/collector/properties/useProxy",
+          "type": "boolean",
+          "title": "The useProxy schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": false,
+          "examples": [
+            true
+          ]
+        },
+        "kubernetesState": {
+          "$id": "#/properties/collector/properties/kubernetesState",
+          "type": "boolean",
+          "title": "The kubernetesState schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": false,
+          "examples": [
+            true
+          ]
+        },
+        "hostOSMetrics": {
+          "$id": "#/properties/collector/properties/hostOSMetrics",
+          "type": "boolean",
+          "title": "The hostOSMetrics schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": false,
+          "examples": [
+            false
+          ]
+        },
+        "filters": {
+          "$id": "#/properties/collector/properties/filters",
+          "type": "object",
+          "title": "The filters schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": {},
+          "examples": [
+            {
+              "metricDenyList": [
+                "kubernetes.sys_container.*",
+                "kubernetes.collector.runtime.*",
+                "kubernetes.*.network.rx_rate",
+                "kubernetes.*.network.rx_errors_rate",
+                "kubernetes.*.network.tx_rate",
+                "kubernetes.*.network.tx_errors_rate",
+                "kubernetes.*.memory.page_faults",
+                "kubernetes.*.memory.page_faults_rate",
+                "kubernetes.*.memory.major_page_faults",
+                "kubernetes.*.memory.major_page_faults_rate",
+                "kubernetes.*.filesystem.inodes",
+                "kubernetes.*.filesystem.inodes_free",
+                "kubernetes.*.ephemeral_storage.request",
+                "kubernetes.*.ephemeral_storage.limit"
+              ],
+              "tagExclude": [
+                "label?controller?revision*",
+                "label?pod?template*",
+                "annotation_kubectl_kubernetes_io_last_applied_configuration"
+              ]
+            }
+          ],
+          "required": [
+            "metricDenyList",
+            "tagExclude"
+          ],
+          "properties": {
+            "metricDenyList": {
+              "$id": "#/properties/collector/properties/filters/properties/metricDenyList",
+              "type": "array",
+              "title": "The metricDenyList schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": [],
+              "examples": [
+                [
+                  "kubernetes.sys_container.*",
+                  "kubernetes.collector.runtime.*"
+                ]
+              ],
+              "additionalItems": true,
+              "items": {
+                "$id": "#/properties/collector/properties/filters/properties/metricDenyList/items",
+                "anyOf": [
+                  {
+                    "$id": "#/properties/collector/properties/filters/properties/metricDenyList/items/anyOf/0",
+                    "type": "string",
+                    "title": "The first anyOf schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                      "kubernetes.sys_container.*",
+                      "kubernetes.collector.runtime.*"
+                    ]
+                  }
+                ]
+              }
+            },
+            "tagExclude": {
+              "$id": "#/properties/collector/properties/filters/properties/tagExclude",
+              "type": "array",
+              "title": "The tagExclude schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": [],
+              "examples": [
+                [
+                  "label?controller?revision*",
+                  "label?pod?template*"
+                ]
+              ],
+              "additionalItems": true,
+              "items": {
+                "$id": "#/properties/collector/properties/filters/properties/tagExclude/items",
+                "anyOf": [
+                  {
+                    "$id": "#/properties/collector/properties/filters/properties/tagExclude/items/anyOf/0",
+                    "type": "string",
+                    "title": "The first anyOf schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                      "label?controller?revision*",
+                      "label?pod?template*"
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "additionalProperties": true
+        },
+        "cadvisor": {
+          "$id": "#/properties/collector/properties/cadvisor",
+          "type": "object",
+          "title": "The cadvisor schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": {},
+          "examples": [
+            {
+              "enabled": false,
+              "filters": {
+                "metricAllowList": [
+                  "kubernetes.cadvisor.container.cpu.cfs.throttled.seconds.total.counter",
+                  "kubernetes.cadvisor.container.cpu.cfs.throttled.periods.total.counter"
+                ]
+              }
+            }
+          ],
+          "required": [
+            "enabled",
+            "filters"
+          ],
+          "properties": {
+            "enabled": {
+              "$id": "#/properties/collector/properties/cadvisor/properties/enabled",
+              "type": "boolean",
+              "title": "The enabled schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": false,
+              "examples": [
+                false
+              ]
+            },
+            "filters": {
+              "$id": "#/properties/collector/properties/cadvisor/properties/filters",
+              "type": "object",
+              "title": "The filters schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": {},
+              "examples": [
+                {
+                  "metricAllowList": [
+                    "kubernetes.cadvisor.container.cpu.cfs.throttled.seconds.total.counter",
+                    "kubernetes.cadvisor.container.cpu.cfs.throttled.periods.total.counter"
+                  ]
+                }
+              ],
+              "required": [
+                "metricAllowList"
+              ],
+              "properties": {
+                "metricAllowList": {
+                  "$id": "#/properties/collector/properties/cadvisor/properties/filters/properties/metricAllowList",
+                  "type": "array",
+                  "title": "The metricAllowList schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": [],
+                  "examples": [
+                    [
+                      "kubernetes.cadvisor.container.cpu.cfs.throttled.seconds.total.counter",
+                      "kubernetes.cadvisor.container.cpu.cfs.throttled.periods.total.counter"
+                    ]
+                  ],
+                  "additionalItems": true,
+                  "items": {
+                    "$id": "#/properties/collector/properties/cadvisor/properties/filters/properties/metricAllowList/items",
+                    "anyOf": [
+                      {
+                        "$id": "#/properties/collector/properties/cadvisor/properties/filters/properties/metricAllowList/items/anyOf/0",
+                        "type": "string",
+                        "title": "The first anyOf schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                          "kubernetes.cadvisor.container.cpu.cfs.throttled.seconds.total.counter",
+                          "kubernetes.cadvisor.container.cpu.cfs.throttled.periods.total.counter"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              "additionalProperties": true
+            }
+          },
+          "additionalProperties": true
+        },
+        "events": {
+          "$id": "#/properties/collector/properties/events",
+          "type": "object",
+          "title": "The events schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": {},
+          "examples": [
+            {
+              "enabled": false
+            }
+          ],
+          "required": [
+            "enabled"
+          ],
+          "properties": {
+            "enabled": {
+              "$id": "#/properties/collector/properties/events/properties/enabled",
+              "type": "boolean",
+              "title": "The enabled schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": false,
+              "examples": [
+                false
+              ]
+            }
+          },
+          "additionalProperties": true
+        },
+        "discovery": {
+          "$id": "#/properties/collector/properties/discovery",
+          "type": "object",
+          "title": "The discovery schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": {},
+          "examples": [
+            {
+              "enabled": true,
+              "enableRuntimeConfigs": true
+            }
+          ],
+          "required": [
+            "enabled",
+            "enableRuntimeConfigs"
+          ],
+          "properties": {
+            "enabled": {
+              "$id": "#/properties/collector/properties/discovery/properties/enabled",
+              "type": "boolean",
+              "title": "The enabled schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": false,
+              "examples": [
+                true
+              ]
+            },
+            "enableRuntimeConfigs": {
+              "$id": "#/properties/collector/properties/discovery/properties/enableRuntimeConfigs",
+              "type": "boolean",
+              "title": "The enableRuntimeConfigs schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": false,
+              "examples": [
+                true
+              ]
+            }
+          },
+          "additionalProperties": true
+        },
+        "resources": {
+          "$id": "#/properties/collector/properties/resources",
+          "type": "object",
+          "title": "The resources schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": {},
+          "examples": [
+            {
+              "requests": {
+                "cpu": "200m",
+                "memory": "10Mi"
+              },
+              "limits": {
+                "cpu": "200m",
+                "memory": "256Mi"
+              }
+            }
+          ],
+          "required": [
+            "requests",
+            "limits"
+          ],
+          "properties": {
+            "requests": {
+              "$id": "#/properties/collector/properties/resources/properties/requests",
+              "type": "object",
+              "title": "The requests schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": {},
+              "examples": [
+                {
+                  "cpu": "200m",
+                  "memory": "10Mi"
+                }
+              ],
+              "required": [
+                "cpu",
+                "memory"
+              ],
+              "properties": {
+                "cpu": {
+                  "$id": "#/properties/collector/properties/resources/properties/requests/properties/cpu",
+                  "type": "string",
+                  "title": "The cpu schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": "",
+                  "examples": [
+                    "200m"
+                  ]
+                },
+                "memory": {
+                  "$id": "#/properties/collector/properties/resources/properties/requests/properties/memory",
+                  "type": "string",
+                  "title": "The memory schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": "",
+                  "examples": [
+                    "10Mi"
+                  ]
+                }
+              },
+              "additionalProperties": true
+            },
+            "limits": {
+              "$id": "#/properties/collector/properties/resources/properties/limits",
+              "type": "object",
+              "title": "The limits schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": {},
+              "examples": [
+                {
+                  "cpu": "200m",
+                  "memory": "256Mi"
+                }
+              ],
+              "required": [
+                "cpu",
+                "memory"
+              ],
+              "properties": {
+                "cpu": {
+                  "$id": "#/properties/collector/properties/resources/properties/limits/properties/cpu",
+                  "type": "string",
+                  "title": "The cpu schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": "",
+                  "examples": [
+                    "200m"
+                  ]
+                },
+                "memory": {
+                  "$id": "#/properties/collector/properties/resources/properties/limits/properties/memory",
+                  "type": "string",
+                  "title": "The memory schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": "",
+                  "examples": [
+                    "256Mi"
+                  ]
+                }
+              },
+              "additionalProperties": true
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "proxy": {
+      "$id": "#/properties/proxy",
+      "type": "object",
+      "title": "The proxy schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "enabled": true,
+          "image": {
+            "repository": "projects.registry.vmware.com/tanzu_observability/proxy",
+            "tag": 10.13,
+            "pullPolicy": "IfNotPresent"
+          },
+          "resources": {
+            "requests": {
+              "cpu": "100m",
+              "memory": "1Gi"
+            },
+            "limits": {
+              "cpu": "1000m",
+              "memory": "4Gi"
+            }
+          },
+          "replicas": 1,
+          "port": 2878
+        }
+      ],
+      "required": [
+        "enabled",
+        "image",
+        "resources",
+        "replicas",
+        "port"
+      ],
+      "properties": {
+        "enabled": {
+          "$id": "#/properties/proxy/properties/enabled",
+          "type": "boolean",
+          "title": "The enabled schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": false,
+          "examples": [
+            true
+          ]
+        },
+        "image": {
+          "$id": "#/properties/proxy/properties/image",
+          "type": "object",
+          "title": "The image schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": {},
+          "examples": [
+            {
+              "repository": "projects.registry.vmware.com/tanzu_observability/proxy",
+              "tag": 10.13,
+              "pullPolicy": "IfNotPresent"
+            }
+          ],
+          "required": [
+            "repository",
+            "tag",
+            "pullPolicy"
+          ],
+          "properties": {
+            "repository": {
+              "$id": "#/properties/proxy/properties/image/properties/repository",
+              "type": "string",
+              "title": "The repository schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": "",
+              "examples": [
+                "projects.registry.vmware.com/tanzu_observability/proxy"
+              ]
+            },
+            "tag": {
+              "$id": "#/properties/proxy/properties/image/properties/tag",
+              "type": "number",
+              "title": "The tag schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": 0.0,
+              "examples": [
+                10.13
+              ]
+            },
+            "pullPolicy": {
+              "$id": "#/properties/proxy/properties/image/properties/pullPolicy",
+              "type": "string",
+              "title": "The pullPolicy schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": "",
+              "examples": [
+                "IfNotPresent"
+              ]
+            }
+          },
+          "additionalProperties": true
+        },
+        "resources": {
+          "$id": "#/properties/proxy/properties/resources",
+          "type": "object",
+          "title": "The resources schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": {},
+          "examples": [
+            {
+              "requests": {
+                "cpu": "100m",
+                "memory": "1Gi"
+              },
+              "limits": {
+                "cpu": "1000m",
+                "memory": "4Gi"
+              }
+            }
+          ],
+          "required": [
+            "requests",
+            "limits"
+          ],
+          "properties": {
+            "requests": {
+              "$id": "#/properties/proxy/properties/resources/properties/requests",
+              "type": "object",
+              "title": "The requests schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": {},
+              "examples": [
+                {
+                  "cpu": "100m",
+                  "memory": "1Gi"
+                }
+              ],
+              "required": [
+                "cpu",
+                "memory"
+              ],
+              "properties": {
+                "cpu": {
+                  "$id": "#/properties/proxy/properties/resources/properties/requests/properties/cpu",
+                  "type": "string",
+                  "title": "The cpu schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": "",
+                  "examples": [
+                    "100m"
+                  ]
+                },
+                "memory": {
+                  "$id": "#/properties/proxy/properties/resources/properties/requests/properties/memory",
+                  "type": "string",
+                  "title": "The memory schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": "",
+                  "examples": [
+                    "1Gi"
+                  ]
+                }
+              },
+              "additionalProperties": true
+            },
+            "limits": {
+              "$id": "#/properties/proxy/properties/resources/properties/limits",
+              "type": "object",
+              "title": "The limits schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": {},
+              "examples": [
+                {
+                  "cpu": "1000m",
+                  "memory": "4Gi"
+                }
+              ],
+              "required": [
+                "cpu",
+                "memory"
+              ],
+              "properties": {
+                "cpu": {
+                  "$id": "#/properties/proxy/properties/resources/properties/limits/properties/cpu",
+                  "type": "string",
+                  "title": "The cpu schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": "",
+                  "examples": [
+                    "1000m"
+                  ]
+                },
+                "memory": {
+                  "$id": "#/properties/proxy/properties/resources/properties/limits/properties/memory",
+                  "type": "string",
+                  "title": "The memory schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": "",
+                  "examples": [
+                    "4Gi"
+                  ]
+                }
+              },
+              "additionalProperties": true
+            }
+          },
+          "additionalProperties": true
+        },
+        "replicas": {
+          "$id": "#/properties/proxy/properties/replicas",
+          "type": "integer",
+          "title": "The replicas schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": 0,
+          "examples": [
+            1
+          ]
+        },
+        "port": {
+          "$id": "#/properties/proxy/properties/port",
+          "type": "integer",
+          "title": "The port schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": 0,
+          "examples": [
+            2878
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "rbac": {
+      "$id": "#/properties/rbac",
+      "type": "object",
+      "title": "The rbac schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "create": true
+        }
+      ],
+      "required": [
+        "create"
+      ],
+      "properties": {
+        "create": {
+          "$id": "#/properties/rbac/properties/create",
+          "type": "boolean",
+          "title": "The create schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": false,
+          "examples": [
+            true
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "serviceAccount": {
+      "$id": "#/properties/serviceAccount",
+      "type": "object",
+      "title": "The serviceAccount schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "create": true,
+          "name": null
+        }
+      ],
+      "required": [
+        "create"
+      ],
+      "properties": {
+        "create": {
+          "$id": "#/properties/serviceAccount/properties/create",
+          "type": "boolean",
+          "title": "The create schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": false,
+          "examples": [
+            true
+          ]
+        },
+        "name": {
+          "$id": "#/properties/serviceAccount/properties/name",
+          "type": "null",
+          "title": "The name schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": null,
+          "examples": [
+            null
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "imagePullSecrets": {
+      "$id": "#/properties/imagePullSecrets",
+      "type": "array",
+      "title": "The imagePullSecrets schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": [],
+      "examples": [
+        []
+      ],
+      "additionalItems": true,
+      "items": {
+        "$id": "#/properties/imagePullSecrets/items"
+      }
+    },
+    "kubeStateMetrics": {
+      "$id": "#/properties/kubeStateMetrics",
+      "type": "object",
+      "title": "The kubeStateMetrics schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "enabled": false
+        }
+      ],
+      "required": [
+        "enabled"
+      ],
+      "properties": {
+        "enabled": {
+          "$id": "#/properties/kubeStateMetrics/properties/enabled",
+          "type": "boolean",
+          "title": "The enabled schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": false,
+          "examples": [
+            false
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "vspheretanzu": {
+      "$id": "#/properties/vspheretanzu",
+      "type": "object",
+      "title": "The vspheretanzu schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "enabled": false
+        }
+      ],
+      "required": [
+        "enabled"
+      ],
+      "properties": {
+        "enabled": {
+          "$id": "#/properties/vspheretanzu/properties/enabled",
+          "type": "boolean",
+          "title": "The enabled schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": false,
+          "examples": [
+            false
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "projectPacific": {
+      "$id": "#/properties/projectPacific",
+      "type": "object",
+      "title": "The projectPacific schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "enabled": false
+        }
+      ],
+      "required": [
+        "enabled"
+      ],
+      "properties": {
+        "enabled": {
+          "$id": "#/properties/projectPacific/properties/enabled",
+          "type": "boolean",
+          "title": "The enabled schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": false,
+          "examples": [
+            false
+          ]
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

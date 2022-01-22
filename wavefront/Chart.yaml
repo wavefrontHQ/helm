@@ -1,8 +1,8 @@
-apiVersion: v1
+apiVersion: v2
 name: wavefront
 description: Wavefront Collector for Kubernetes
-appVersion: 1.7.4
-version: 1.7.6
+appVersion: 1.8.0
+version: 1.8.0
 keywords:
 - metric
 - monitoring
@@ -13,11 +13,22 @@ sources:
 - https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes
 - https://github.com/wavefrontHQ/wavefront-proxy
 maintainers:
+  - name: akodali18
+    email: akodali@vmware.com
   - name: johncornish
     email: jcornish@vmware.com
   - name: josephgee
     email: jgee@vmware.com
+  - name: helen-shao
+    email: shaoh@vmware.com
   - name: mceldeen
     email: matthewco@vmware.com
   - name: mmichael
     email: mamichael@vmware.com
+  - name: priyaselvaganesan
+    email: pselvaganesa@vmware.com
+dependencies:
+  - name: kube-state-metrics
+    version: ^2.2.1
+    repository: https://charts.helm.sh/stable
+    condition: kubeStateMetrics.enabled

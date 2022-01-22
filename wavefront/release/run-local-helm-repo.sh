@@ -28,3 +28,5 @@ pushd _build
     nohup static -p 8000 -H '{"Access-Control-Allow-Origin": "*"}' &
   fi
 popd
+
+helm repo update

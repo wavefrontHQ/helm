@@ -6,6 +6,8 @@
 clusterName: KUBERNETES_CLUSTER_NAME
 
 
+installationMethod: helm
+
 ## Wavefront URL (cluster) and API Token
 ## Required
 wavefront:
@@ -20,7 +22,7 @@ collector:
   enabled: true
   image:
     repository: projects.registry.vmware.com/tanzu_observability/kubernetes-collector
-    tag: 1.7.4
+    tag: 1.8.0
     pullPolicy: IfNotPresent
 
   ## Set the updateStrategy for the collector deployment or daemonset
@@ -146,6 +148,21 @@ collector:
   ## Ref: https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/blob/master/docs/discovery.md#runtime-configurations
     enableRuntimeConfigs: true
 
+  ## Exclude resources from annotation-based discovery
+  #  annotationExcludes:
+  #  - resourceType: "pod"
+  #      images: ["redis:*","*redis*"]
+  #
+  #      # map of labels to select resources by. Label values are provided as a list of glob pattern strings.
+  #      labels:
+  #        k8s-app:
+  #        - "redis"
+  #        - "*cache*"
+  #
+  #      # namespaces to filter resources by. Provided as a list of glob pattern strings.
+  #      namespaces:
+  #      - "default"
+
   ## Can be used to add additional discovery rules
   #   config:
   ## auto-discover a sample prometheus application
@@ -217,7 +234,7 @@ proxy:
   enabled: true
   image:
     repository: projects.registry.vmware.com/tanzu_observability/proxy
-    tag: 10.9
+    tag: 10.13
     pullPolicy: IfNotPresent
 
   ## Wavefront Collector resource requests and limits
@@ -359,3 +376,8 @@ vspheretanzu:
 
 projectPacific: ## Original variable name of vspheretanzu, left in for backward compatibility
   enabled: false
+
+openshift:
+  enabled: false
+
+testCollectorImage: bitnami/kubectl:latest

@@ -1,0 +1,22 @@
+{{- if .Values.openshift.enabled }}
+kind: SecurityContextConstraints
+apiVersion: security.openshift.io/v1
+metadata:
+  name: scc-wavefront
+allowHostDirVolumePlugin: true
+allowHostIPC: false
+allowHostNetwork: false
+allowHostPID: false
+allowHostPorts: false
+allowPrivilegedContainer: false
+readOnlyRootFilesystem: false
+allowedCapabilities:
+defaultAddCapabilities:
+priority:
+requiredDropCapabilities:
+volumes:
+runAsUser:
+  type: RunAsAny
+seLinuxContext:
+  type: RunAsAny
+{{- end }}
