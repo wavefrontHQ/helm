@@ -18,7 +18,7 @@ pipeline {
     }
     stage("Run Tests") {
       steps {
-        sh './wavefront/release/run-local-e2e-test.sh -p ${PREV_VERSION}'
+        sh './wavefront/release/run-local-e2e-test.sh -t ${WAVEFRONT_TOKEN} -p ${PREV_VERSION}'
       }
     }
   }
