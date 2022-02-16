@@ -344,6 +344,33 @@ proxy:
   #       search  : "[&\\$!@]"
   #       replace : "_"
 
+  ## The port number the proxy will listen on for logs Ingestion(filebeat).
+  ## This is usually 5044
+  # filebeatPort: 5044
+
+  ## The port number the proxy will listen on for logs Ingestion.
+  ## This is usually 5045
+  # rawLogsPort: 5045
+
+  ## logs ingestion is way to parse logs and convert to metrics
+  ## Ref: https://docs.wavefront.com/integrations_log_data.html
+  # logsingestion:
+  #   logsingestion.yaml: |
+  #     aggregationIntervalSeconds: 5
+  #     counters:
+  #       - pattern: ‘cpu:%{NUMBER:cpu}\tmem:%{NUMBER:mem}\tdisk:${NUMBER:disk}’
+  #         metricName: ‘log.test.lines’
+  #     gauges:
+  #       - pattern: ‘cpu:%{NUMBER:cpu}\tmem:%{NUMBER:mem}\tdisk:${NUMBER:disk}’
+  #         metricName: ‘log.test.cpu’
+  #         valueLabel: ‘cpu’
+  #       - pattern: ‘cpu:%{NUMBER:cpu}\tmem:%{NUMBER:mem}\tdisk:${NUMBER:disk}’
+  #         metricName: ‘log.test.mem’
+  #         valueLabel: ‘mem’
+  #      - pattern: ‘cpu:%{NUMBER:cpu}\tmem:%{NUMBER:mem}\tdisk:${NUMBER:disk}’
+  #         metricName: ‘log.test.disk’
+  #         valueLabel: ‘disk’
+
 
 ## Specifies whether RBAC resources should be created
 rbac:

@@ -99,6 +99,9 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `proxy.args` | Additional Wavefront proxy properties to be passed as command line arguments in the `--<property_name> <value>` format.  Multiple properties can be specified.  [See more](https://docs.wavefront.com/proxies_configuring.html) | `nil` |
 | `proxy.heap` | Wavefront proxy Java heap maximum usage (java -Xmx command line option) | `nil` |
 | `proxy.preprocessor.rules.yaml` | YAML configuraiton for Wavefront proxy preprocessor rules. [See more](https://docs.wavefront.com/proxies_preprocessor_rules.html) | `nil` |
+| `proxy.filebeatPort` | The port number the proxy will listen on for logs Ingestion for filebeat (usually 5044) | `nil` |
+| `proxy.rawLogsPort` | The port number the proxy will listen on for logs Ingestion (usually 5045) | `nil` |
+| `proxy.logsingestion.logsingetsion.yaml` | YAML configuraiton for Wavefront logs ingestion rules. [See more](https://docs.wavefront.com/integrations_log_data.html) | `nil` |
 | `rbac.create` | Create RBAC resources | `true` |
 | `serviceAccount.create` | Create Wavefront service account  | `true` |
 | `serviceAccount.name` | Name of Wavefront service account | `nil` |
