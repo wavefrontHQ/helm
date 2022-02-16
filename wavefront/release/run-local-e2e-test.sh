@@ -13,13 +13,16 @@ function main() {
   local VERSION=${CHART_VERSION}
   local CONFIG_CLUSTER_NAME=$(whoami)-${VERSION}-release-test
 
-  while getopts ":c:t:n:p:" opt; do
+  while getopts ":c:t:v:n:p:" opt; do
     case $opt in
     c)
       WF_CLUSTER="$OPTARG"
       ;;
     t)
       WAVEFRONT_TOKEN="$OPTARG"
+      ;;
+    v)
+      VERSION="$OPTARG"
       ;;
     n)
       CONFIG_CLUSTER_NAME="$OPTARG"
@@ -38,6 +41,7 @@ function main() {
     echo "Usage: $0 [flags] [options]"
     echo -e "\t-c wavefront instance name (default: 'nimba')"
     echo -e "\t-t wavefront token (required)"
+    echo -e "\t-v latest chart version (default: CHART_VERSION in ./wavefront/release/VERSION)"
     echo -e "\t-n config cluster name for metric grouping (default: \$(whoami)-<default version from file>-release-test)"
     echo -e "\t-p previously released chart version to test upgrading and downgrading with (required)"
     exit 1
