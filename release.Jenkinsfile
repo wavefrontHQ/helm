@@ -24,19 +24,19 @@ pipeline {
         sh './wavefront/release/run-local-e2e-test.sh'
       }
     }
-    stage("Bump Github Version") {
-      steps {
-        sh 'git config --global user.email "svc.wf-jenkins@vmware.com"'
-        sh 'git config --global user.name "svc.wf-jenkins"'
-        sh 'git remote set-url origin https://${TOKEN}@github.com/wavefronthq/helm.git'
-        sh './wavefront/release/bump-version.sh'
-      }
-    }
-    stage("Release helm chart") {
-      steps {
-        sh './wavefront/release/release-helm-chart.sh'
-      }
-    }
+//     stage("Bump Github Version") {
+//       steps {
+//         sh 'git config --global user.email "svc.wf-jenkins@vmware.com"'
+//         sh 'git config --global user.name "svc.wf-jenkins"'
+//         sh 'git remote set-url origin https://${TOKEN}@github.com/wavefronthq/helm.git'
+//         sh './wavefront/release/bump-version.sh'
+//       }
+//     }
+//     stage("Release helm chart") {
+//       steps {
+//         sh './wavefront/release/release-helm-chart.sh'
+//       }
+//     }
   }
 
   post {
