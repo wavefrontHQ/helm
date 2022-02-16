@@ -2,38 +2,39 @@ pipeline {
   agent any
 
   tools {
-      go 'Go 1.15'
+    go 'Go 1.15'
   }
 
   environment {
-      NEW_APP_VERSION = "${params.NEW_APP_VERSION}"
-      NEW_CHART_VERSION = "${params.NEW_CHART_VERSION}"
-      GIT_CREDENTIAL_ID = 'wf-jenkins-github'
-      TOKEN = credentials('GITHUB_TOKEN')
-      GITHUB_CREDS_PSW = credentials("GITHUB_TOKEN")
+    NEW_APP_VERSION = "${params.NEW_APP_VERSION}"
+    NEW_CHART_VERSION = "${params.NEW_CHART_VERSION}"
+    GIT_CREDENTIAL_ID = 'wf-jenkins-github'
+    TOKEN = credentials('GITHUB_TOKEN')
+    GITHUB_CREDS_PSW = credentials("GITHUB_TOKEN")
   }
 
   stages {
     stage("Setup Tools") {
       steps {
-        withEnv(["PATH+EXTRA=${HOME}/go/bin"]) {
-          sh './wavefront/release/setup-for-release.sh'
-        }
+        sh './wavefront/release/setup-for-release.sh'
+      }
+    }
+    stage("Run Tests") {
+      steps {
+        sh './wavefront/release/run-local-e2e-test.sh'
       }
     }
     stage("Bump Github Version") {
       steps {
-        withEnv(["PATH+EXTRA=${HOME}/go/bin"]) {
-          sh 'git config --global user.email "svc.wf-jenkins@vmware.com"'
-          sh 'git config --global user.name "svc.wf-jenkins"'
-          sh 'git remote set-url origin https://${TOKEN}@github.com/wavefronthq/helm.git'
-          sh './wavefront/release/bump-version.sh'
-        }
+        sh 'git config --global user.email "svc.wf-jenkins@vmware.com"'
+        sh 'git config --global user.name "svc.wf-jenkins"'
+        sh 'git remote set-url origin https://${TOKEN}@github.com/wavefronthq/helm.git'
+        sh './wavefront/release/bump-version.sh'
       }
     }
     stage("Release helm chart") {
       steps {
-         sh './wavefront/release/release-helm-chart.sh'
+        sh './wavefront/release/release-helm-chart.sh'
       }
     }
   }
