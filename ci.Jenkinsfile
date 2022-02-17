@@ -13,6 +13,7 @@ pipeline {
   stages {
     stage("Setup Tools") {
       steps {
+        sh './wavefront/release/setup-for-testing.sh'
         sh './wavefront/release/setup-for-release.sh'
       }
     }
