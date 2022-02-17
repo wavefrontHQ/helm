@@ -41,6 +41,15 @@ options for this chart.
 The **requried** options are `clusterName`, `wavefront.url` and `wavefront.token`.
 You will need to provide values for those options for a successful installation of the chart.
 
+#### Note:
+
+To enable the HTTP proxy with CA cert, you will need to create a Kubernetes secret with your CA cert file:
+
+```kubectl create secret generic http-proxy-secret -n wavefront --from-file=tls-root-ca-bundle=<YOUR_CA_CERT_FILE>```
+
+You would also need to configure `proxy.httpProxyHost` and `proxy.httpProxyPort` to use your HTTP proxy host and port,
+and set `proxy.useHttpProxyCAcert` to `true`.
+
 ## Parameters
 
 The following tables lists the configurable parameters of the Wavefront chart and their default values.
@@ -82,6 +91,11 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `proxy.image.pullPolicy` | Wavefront proxy image pull policy | `IfNotPresent` |
 | `proxy.replicas` | Replicas to deploy for Wavefront proxy (usually 1) | `1` |
 | `proxy.port` | Primary port for Wavefront data format metrics | `2878` |
+| `proxy.httpProxyHost` | HTTP proxy host to be used in configurations when direct HTTP connections to Wavefront servers are not possible. Must be used with httpProxyPort. | `nil` |
+| `proxy.httpProxyPort` | HTTP proxy port to be used in configurations when direct HTTP connections to Wavefront servers are not possible. Must be used with httpProxyHost.	 | `nil` |
+| `proxy.useHttpProxyCAcert` | Enable HTTP proxy with CA cert. Must be used with httpProxyHost and httpProxyPort if set to true [see more](#note).	 | `false` |
+| `proxy.httpProxyUser` | When used with httpProxyPassword, sets credentials to use with the HTTP proxy if the proxy requires authentication.	 | `nil` |
+| `proxy.httpProxyPassword` | When used with httpProxyUser, sets credentials to use with the HTTP proxy if the proxy requires authentication.	 | `nil` |
 | `proxy.tracePort` | Port for distributed tracing data (usually 30000) | `nil` |
 | `proxy.jaegerPort` | Port for Jaeger format distributed tracing data (usually 30001) | `nil` |
 | `proxy.traceJaegerHttpListenerPort` | Port for Jaeger Thrift format data (usually 30080) | `nil` |
