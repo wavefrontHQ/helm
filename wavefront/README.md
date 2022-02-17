@@ -41,7 +41,7 @@ options for this chart.
 The **requried** options are `clusterName`, `wavefront.url` and `wavefront.token`.
 You will need to provide values for those options for a successful installation of the chart.
 
-####Note:
+#### Note:
 
 To enable the HTTP proxy with CA cert, you will need to create a Kubernetes secret with your CA cert file:
 
