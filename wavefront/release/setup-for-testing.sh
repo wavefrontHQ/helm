@@ -9,5 +9,4 @@ export PATH=$PATH:${PWD}/node-v16.14.0-linux-x64/bin
 
 ls -lAhtr /usr/local/bin
 echo $PATH
-/usr/local/bin/npm version
 npm version
