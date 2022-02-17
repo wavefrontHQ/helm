@@ -263,6 +263,15 @@ proxy:
   ## This is usually 2878
   port: 2878
 
+  ## HTTP proxy configurations when direct HTTP connections to Wavefront servers are not possible.
+  ## httpProxyHost and httpProxyPort must be used together.
+  # httpProxyHost: 10.202.210.216
+  # httpProxyPort: 8080
+  # httpProxyUser: validUser
+  # httpProxyPassword: validPassword123
+  ## Use in conjunction with CA cert secret and http proxy
+  useHttpProxyCAcert: false
+
   ## The port nubmer the proxy will listen on for tracing spans in Wavefront trace data format.
   ## This is usually 30000
   # tracePort: 30000
