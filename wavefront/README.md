@@ -45,7 +45,7 @@ You will need to provide values for those options for a successful installation 
 
 To enable the HTTP proxy with CA cert, you will need to create a Kubernetes secret with your CA cert file:
 
-```k create secret generic http-proxy-secret -n wavefront --from-file=tls-root-ca-bundle=<YOUR_CA_CERT_FILE>```
+```kubectl create secret generic http-proxy-secret -n wavefront --from-file=tls-root-ca-bundle=<YOUR_CA_CERT_FILE>```
 
 You would also need to configure `proxy.httpProxyHost` and `proxy.httpProxyPort` to use your HTTP proxy host and port,
 and set `proxy.useHttpProxyCAcert` to `true`.
