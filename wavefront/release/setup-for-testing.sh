@@ -8,4 +8,5 @@ sudo mv node-v16.14.0-linux-arm64/bin/npm /usr/local/bin/npm
 
 ls -lAhtr /usr/local/bin
 echo $PATH
+/usr/local/bin/npm version
 npm version
