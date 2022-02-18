@@ -10,6 +10,7 @@ pipeline {
     GCP_PROJECT = "wavefront-gcp-dev"
     GKE_CLUSTER_NAME = "k8po-jenkins-pr-testing"
     WAVEFRONT_TOKEN = credentials('WAVEFRONT_TOKEN_NIMBA')
+    APP_VERSION =
   }
 
   stages {
@@ -27,8 +28,9 @@ pipeline {
           sh 'gcloud container clusters get-credentials ${GKE_CLUSTER_NAME} --zone us-central1-c --project ${GCP_PROJECT}'
           script {
             env.PREV_VERSION = sh(returnStdout: true, script: "curl -s -X 'GET' 'https://artifacthub.io/api/v1/packages/helm/wavefront/wavefront' -H 'accept: application/json' | jq -r '.available_versions[1].version'").trim()
+            env.PREV_APP_VERSION = sh(returnStdout: true, script: "curl -s -X 'GET' 'https://artifacthub.io/api/v1/packages/helm/wavefront/wavefront/${PREV_VERSION}' -H 'accept: application/json' | jq -r .app_version").trim()
           }
-          sh './wavefront/release/run-local-e2e-test.sh -t ${WAVEFRONT_TOKEN} -p ${PREV_VERSION}'
+          sh 'PREV_APP_VERSION=${PREV_APP_VERSION} ./wavefront/release/run-local-e2e-test.sh -t ${WAVEFRONT_TOKEN} -p ${PREV_VERSION}'
         }
       }
     }
