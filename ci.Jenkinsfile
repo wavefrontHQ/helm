@@ -6,6 +6,7 @@ pipeline {
   }
 
   environment {
+    PATH = sh(returnStdout: true, script: 'echo $PATH')
     WAVEFRONT_TOKEN = credentials('WAVEFRONT_TOKEN_NIMBA')
     PREV_VERSION = sh(returnStdout: true, script: "curl -s -X 'GET' 'https://artifacthub.io/api/v1/packages/helm/wavefront/wavefront' -H 'accept: application/json' | jq -r .version").trim()
   }
