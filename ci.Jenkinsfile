@@ -15,7 +15,9 @@ pipeline {
     stage("Setup Tools") {
       steps {
         sh './wavefront/release/setup-for-testing.sh'
-        sh './wavefront/release/setup-for-integration-test.sh'
+        withEnv(["PATH+GCLOUD=${HOME}/google-cloud-sdk/bin"]) {
+          sh './wavefront/release/setup-for-integration-test.sh'
+        }
       }
     }
     stage("Run Tests") {
