@@ -60,7 +60,7 @@ function main() {
 
   kubectl create namespace wavefront &>/dev/null || true
 
-  ${REPO_ROOT}/wavefront/release/run-local-helm-repo.sh > /dev/null
+  ${REPO_ROOT}/wavefront/release/run-local-helm-repo.sh #> /dev/null
 
   echo "Testing fresh install of v${VERSION}"
   local FRESH_INSTALL_CLUSTER_NAME="${CONFIG_CLUSTER_NAME}-$(date +%Y%m%d%H%M%S)"
