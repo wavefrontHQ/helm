@@ -10,7 +10,6 @@ pipeline {
     GCP_PROJECT = "wavefront-gcp-dev"
     GKE_CLUSTER_NAME = "k8po-jenkins-pr-testing"
     WAVEFRONT_TOKEN = credentials('WAVEFRONT_TOKEN_NIMBA')
-    APP_VERSION =
   }
 
   stages {
