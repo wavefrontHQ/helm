@@ -85,26 +85,24 @@ function main() {
   --set clusterName=${UPGRADE_CLUSTER_NAME} \
   --set wavefront.url=https://${WF_CLUSTER}.wavefront.com \
   --set wavefront.token=${WAVEFRONT_TOKEN} \
-  --set collector.cadvisor.enabled=true #> /dev/null
+  --set collector.cadvisor.enabled=true > /dev/null
 
   helm upgrade wavefront ${REPO_ROOT}/wavefront --namespace wavefront \
   --set clusterName=${UPGRADE_CLUSTER_NAME} \
   --set wavefront.url=https://${WF_CLUSTER}.wavefront.com \
   --set wavefront.token=${WAVEFRONT_TOKEN} \
-  --set collector.cadvisor.enabled=true #> /dev/null
+  --set collector.cadvisor.enabled=true > /dev/null
 
   ${REPO_ROOT}/wavefront/release/test-e2e.sh -t ${WAVEFRONT_TOKEN} -n ${UPGRADE_CLUSTER_NAME}
 
   echo "Testing downgrading from v${VERSION} to v${PREVIOUSLY_RELEASED_CHART_VERSION}"
   local DOWNGRADE_CLUSTER_NAME=$(whoami)-${PREVIOUSLY_RELEASED_CHART_VERSION}-release-test-downgrade-$(date +%Y%m%d%H%M%S)
 
-  helm repo update
-  helm upgrade wavefront wavefront/wavefront --namespace wavefront \
-    --version ${PREVIOUSLY_RELEASED_CHART_VERSION} \
+  helm upgrade wavefront https://wavefronthq.github.io/helm/wavefront-${PREVIOUSLY_RELEASED_CHART_VERSION}.tgz --namespace wavefront \
     --set clusterName=${DOWNGRADE_CLUSTER_NAME} \
     --set wavefront.url=https://${WF_CLUSTER}.wavefront.com \
     --set wavefront.token=${WAVEFRONT_TOKEN} \
-    --set collector.cadvisor.enabled=true #> /dev/null
+    --set collector.cadvisor.enabled=true > /dev/null
 
   local DOWNGRADE_COLLECTOR_VERSION=$(helm show chart wavefront/wavefront --version ${PREVIOUSLY_RELEASED_CHART_VERSION} | grep appVersion | cut -d' ' -f2)
   ${REPO_ROOT}/wavefront/release/test-e2e.sh -t ${WAVEFRONT_TOKEN} -n ${DOWNGRADE_CLUSTER_NAME} -v ${DOWNGRADE_COLLECTOR_VERSION}
