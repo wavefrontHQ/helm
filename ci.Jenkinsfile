@@ -6,9 +6,7 @@ pipeline {
   }
 
   environment {
-    PATH = sh(returnStdout: true, script: 'echo $PATH')
     WAVEFRONT_TOKEN = credentials('WAVEFRONT_TOKEN_NIMBA')
-    PREV_VERSION = sh(returnStdout: true, script: "curl -s -X 'GET' 'https://artifacthub.io/api/v1/packages/helm/wavefront/wavefront' -H 'accept: application/json' | jq -r .version").trim()
   }
 
   stages {
@@ -22,6 +20,9 @@ pipeline {
       steps {
         withEnv(["PATH+EXTRA=${PWD}/node-v16.14.0-linux-x64/bin"]) {
           sh 'make gke-connect-to-cluster'
+          script {
+            PREV_VERSION = sh(returnStdout: true, script: "curl -s -X 'GET' 'https://artifacthub.io/api/v1/packages/helm/wavefront/wavefront' -H 'accept: application/json' | jq -r .version").trim()
+          }
           sh './wavefront/release/run-local-e2e-test.sh -t ${WAVEFRONT_TOKEN} -p ${PREV_VERSION}'
         }
       }
