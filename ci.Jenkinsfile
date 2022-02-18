@@ -7,6 +7,7 @@ pipeline {
 
   environment {
     GCP_CREDS = credentials("GCP_CREDS")
+    GCP_PROJECT = "wavefront-gcp-dev"
     GKE_CLUSTER_NAME = "k8po-jenkins-pr-testing"
     WAVEFRONT_TOKEN = credentials('WAVEFRONT_TOKEN_NIMBA')
   }
@@ -23,7 +24,7 @@ pipeline {
     stage("Run Tests") {
       steps {
         withEnv(["PATH+EXTRA=${PWD}/node-v16.14.0-linux-x64/bin", "PATH+GCLOUD=${HOME}/google-cloud-sdk/bin"]) {
-          sh 'make gke-connect-to-cluster'
+          sh 'gcloud container clusters get-credentials ${GKE_CLUSTER_NAME} --zone us-central1-c --project ${GCP_PROJECT}'
           script {
             PREV_VERSION = sh(returnStdout: true, script: "curl -s -X 'GET' 'https://artifacthub.io/api/v1/packages/helm/wavefront/wavefront' -H 'accept: application/json' | jq -r .version").trim()
           }
