@@ -81,9 +81,7 @@ function main() {
 
   local UPGRADE_CLUSTER_NAME=$(whoami)-${PREVIOUSLY_RELEASED_CHART_VERSION}-release-test-upgrade-$(date +%Y%m%d%H%M%S)
 
-  helm repo update
-  helm install wavefront wavefront/wavefront --namespace wavefront \
-  --version ${PREVIOUSLY_RELEASED_CHART_VERSION} \
+  helm install wavefront https://wavefronthq.github.io/helm/wavefront-${PREVIOUSLY_RELEASED_CHART_VERSION}.tgz --namespace wavefront \
   --set clusterName=${UPGRADE_CLUSTER_NAME} \
   --set wavefront.url=https://${WF_CLUSTER}.wavefront.com \
   --set wavefront.token=${WAVEFRONT_TOKEN} \
