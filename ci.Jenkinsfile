@@ -20,6 +20,7 @@ pipeline {
     stage("Run Tests") {
       steps {
         withEnv(["PATH+EXTRA=${PWD}/node-v16.14.0-linux-x64/bin"]) {
+          sh 'make gke-connect-to-cluster'
           sh './wavefront/release/run-local-e2e-test.sh -t ${WAVEFRONT_TOKEN} -p ${PREV_VERSION}'
         }
       }
