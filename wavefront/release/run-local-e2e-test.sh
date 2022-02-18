@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -ex
 
 REPO_ROOT=$(git rev-parse --show-toplevel)
 source ${REPO_ROOT}/wavefront/release/k8s-utils.sh
@@ -60,7 +60,7 @@ function main() {
 
   kubectl create namespace wavefront &>/dev/null || true
 
-  ${REPO_ROOT}/wavefront/release/run-local-helm-repo.sh #> /dev/null
+  ${REPO_ROOT}/wavefront/release/run-local-helm-repo.sh > /dev/null
 
   echo "Testing fresh install of v${VERSION}"
   local FRESH_INSTALL_CLUSTER_NAME="${CONFIG_CLUSTER_NAME}-$(date +%Y%m%d%H%M%S)"
@@ -85,13 +85,13 @@ function main() {
   --set clusterName=${UPGRADE_CLUSTER_NAME} \
   --set wavefront.url=https://${WF_CLUSTER}.wavefront.com \
   --set wavefront.token=${WAVEFRONT_TOKEN} \
-  --set collector.cadvisor.enabled=true > /dev/null
+  --set collector.cadvisor.enabled=true #> /dev/null
 
   helm upgrade wavefront ${REPO_ROOT}/wavefront --namespace wavefront \
   --set clusterName=${UPGRADE_CLUSTER_NAME} \
   --set wavefront.url=https://${WF_CLUSTER}.wavefront.com \
   --set wavefront.token=${WAVEFRONT_TOKEN} \
-  --set collector.cadvisor.enabled=true > /dev/null
+  --set collector.cadvisor.enabled=true #> /dev/null
 
   ${REPO_ROOT}/wavefront/release/test-e2e.sh -t ${WAVEFRONT_TOKEN} -n ${UPGRADE_CLUSTER_NAME}
 
@@ -104,7 +104,7 @@ function main() {
     --set clusterName=${DOWNGRADE_CLUSTER_NAME} \
     --set wavefront.url=https://${WF_CLUSTER}.wavefront.com \
     --set wavefront.token=${WAVEFRONT_TOKEN} \
-    --set collector.cadvisor.enabled=true > /dev/null
+    --set collector.cadvisor.enabled=true #> /dev/null
 
   local DOWNGRADE_COLLECTOR_VERSION=$(helm show chart wavefront/wavefront --version ${PREVIOUSLY_RELEASED_CHART_VERSION} | grep appVersion | cut -d' ' -f2)
   ${REPO_ROOT}/wavefront/release/test-e2e.sh -t ${WAVEFRONT_TOKEN} -n ${DOWNGRADE_CLUSTER_NAME} -v ${DOWNGRADE_COLLECTOR_VERSION}
