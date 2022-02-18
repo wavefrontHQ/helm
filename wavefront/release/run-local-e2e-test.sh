@@ -81,6 +81,7 @@ function main() {
 
   local UPGRADE_CLUSTER_NAME=$(whoami)-${PREVIOUSLY_RELEASED_CHART_VERSION}-release-test-upgrade-$(date +%Y%m%d%H%M%S)
 
+  helm repo update
   helm install wavefront wavefront/wavefront --namespace wavefront \
   --version ${PREVIOUSLY_RELEASED_CHART_VERSION} \
   --set clusterName=${UPGRADE_CLUSTER_NAME} \
@@ -99,6 +100,7 @@ function main() {
   echo "Testing downgrading from v${VERSION} to v${PREVIOUSLY_RELEASED_CHART_VERSION}"
   local DOWNGRADE_CLUSTER_NAME=$(whoami)-${PREVIOUSLY_RELEASED_CHART_VERSION}-release-test-downgrade-$(date +%Y%m%d%H%M%S)
 
+  helm repo update
   helm upgrade wavefront wavefront/wavefront --namespace wavefront \
     --version ${PREVIOUSLY_RELEASED_CHART_VERSION} \
     --set clusterName=${DOWNGRADE_CLUSTER_NAME} \
