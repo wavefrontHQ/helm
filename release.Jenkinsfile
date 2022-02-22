@@ -20,7 +20,7 @@ pipeline {
         sh './wavefront/release/setup-for-release.sh'
       }
     }
-    stage("Bump Github Version") {
+    stage("Create Bump Version PR") {
       steps {
         sh 'git config --global user.email "svc.wf-jenkins@vmware.com"'
         sh 'git config --global user.name "svc.wf-jenkins"'
@@ -28,7 +28,7 @@ pipeline {
         sh './wavefront/release/bump-version.sh'
       }
     }
-    stage("Release helm chart") {
+    stage("Create GitHub Pages PR") {
       steps {
         sh './wavefront/release/create-release-pr.sh'
       }

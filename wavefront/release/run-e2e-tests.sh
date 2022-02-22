@@ -112,9 +112,8 @@ function main() {
     --set wavefront.token=${WAVEFRONT_TOKEN} \
     --set collector.cadvisor.enabled=true > /dev/null
 
-  # We have to refactor PREV_APP_VERSION, DOWNGRADE_COLLECTOR_VERSION to make it applicable for both jenkins and local environment
   local DOWNGRADE_COLLECTOR_VERSION=$(helm show chart wavefront/wavefront --version ${PREVIOUSLY_RELEASED_CHART_VERSION} | grep appVersion | cut -d' ' -f2)
-  ${REPO_ROOT}/wavefront/release/test-wavefront-metrics.sh -t ${WAVEFRONT_TOKEN} -n ${DOWNGRADE_CLUSTER_NAME} -v ${PREV_APP_VERSION}
+  ${REPO_ROOT}/wavefront/release/test-wavefront-metrics.sh -t ${WAVEFRONT_TOKEN} -n ${DOWNGRADE_CLUSTER_NAME} -v ${DOWNGRADE_COLLECTOR_VERSION}
 
   green "Success!"
 }
