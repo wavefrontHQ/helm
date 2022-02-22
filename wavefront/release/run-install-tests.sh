@@ -72,9 +72,9 @@ function main() {
 
   helm test wavefront -n wavefront --timeout 60s
 
-  echo "Running test-e2e"
+  echo "Running test-wavefront-metrics"
 
-  ${REPO_ROOT}/wavefront/release/test-e2e.sh -t ${WAVEFRONT_TOKEN} -n ${FRESH_INSTALL_CLUSTER_NAME}
+  ${REPO_ROOT}/wavefront/release/test-wavefront-metrics.sh -t ${WAVEFRONT_TOKEN} -n ${FRESH_INSTALL_CLUSTER_NAME}
 
   echo "Testing upgrading from v${PREVIOUSLY_RELEASED_CHART_VERSION} to v${VERSION}"
   helm uninstall wavefront --namespace wavefront > /dev/null
@@ -93,7 +93,7 @@ function main() {
   --set wavefront.token=${WAVEFRONT_TOKEN} \
   --set collector.cadvisor.enabled=true > /dev/null
 
-  ${REPO_ROOT}/wavefront/release/test-e2e.sh -t ${WAVEFRONT_TOKEN} -n ${UPGRADE_CLUSTER_NAME}
+  ${REPO_ROOT}/wavefront/release/test-wavefront-metrics.sh -t ${WAVEFRONT_TOKEN} -n ${UPGRADE_CLUSTER_NAME}
 
   echo "Testing downgrading from v${VERSION} to v${PREVIOUSLY_RELEASED_CHART_VERSION}"
   local DOWNGRADE_CLUSTER_NAME=$(whoami)-${PREVIOUSLY_RELEASED_CHART_VERSION}-release-test-downgrade-$(date +%Y%m%d%H%M%S)
@@ -106,7 +106,7 @@ function main() {
 
   # We have to refactor PREV_APP_VERSION, DOWNGRADE_COLLECTOR_VERSION to make it applicable for both jenkins and local environment
   local DOWNGRADE_COLLECTOR_VERSION=$(helm show chart wavefront/wavefront --version ${PREVIOUSLY_RELEASED_CHART_VERSION} | grep appVersion | cut -d' ' -f2)
-  ${REPO_ROOT}/wavefront/release/test-e2e.sh -t ${WAVEFRONT_TOKEN} -n ${DOWNGRADE_CLUSTER_NAME} -v ${PREV_APP_VERSION}
+  ${REPO_ROOT}/wavefront/release/test-wavefront-metrics.sh -t ${WAVEFRONT_TOKEN} -n ${DOWNGRADE_CLUSTER_NAME} -v ${PREV_APP_VERSION}
 
   green "Success!"
 }
