@@ -112,7 +112,7 @@ function main() {
     --set wavefront.token=${WAVEFRONT_TOKEN} \
     --set collector.cadvisor.enabled=true > /dev/null
 
-  local DOWNGRADE_COLLECTOR_VERSION=$(curl -s -X 'GET' 'https://artifacthub.io/api/v1/packages/helm/wavefront/wavefront/${PREVIOUSLY_RELEASED_CHART_VERSION}' -H 'accept: application/json' | jq -r '.app_version')
+  local DOWNGRADE_COLLECTOR_VERSION=$(curl -s -X 'GET' "https://artifacthub.io/api/v1/packages/helm/wavefront/wavefront/${PREVIOUSLY_RELEASED_CHART_VERSION}" -H 'accept: application/json' | jq -r '.app_version')
   ${REPO_ROOT}/wavefront/release/test-wavefront-metrics.sh -t ${WAVEFRONT_TOKEN} -n ${DOWNGRADE_CLUSTER_NAME} -v ${DOWNGRADE_COLLECTOR_VERSION}
 
   green "Success!"
