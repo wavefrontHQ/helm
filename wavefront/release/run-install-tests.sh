@@ -3,7 +3,6 @@
 REPO_ROOT=$(git rev-parse --show-toplevel)
 source ${REPO_ROOT}/wavefront/release/k8s-utils.sh
 source ${REPO_ROOT}/wavefront/release/VERSION
-source ${REPO_ROOT}/wavefront/release/npm-env.sh
 
 function main() {
 
@@ -13,8 +12,9 @@ function main() {
   local WF_CLUSTER=nimba
   local VERSION=${CHART_VERSION}
   local CONFIG_CLUSTER_NAME=$(whoami)-${VERSION}-release-test
+  local IS_JENKINS=false
 
-  while getopts ":c:t:v:n:p:" opt; do
+  while getopts ":c:t:v:n:p:j" opt; do
     case $opt in
     c)
       WF_CLUSTER="$OPTARG"
@@ -31,6 +31,9 @@ function main() {
     p)
       PREVIOUSLY_RELEASED_CHART_VERSION="$OPTARG"
       ;;
+    j)
+      IS_JENKINS=true
+      ;;
     \?)
       print_usage_and_exit "Invalid option: -$OPTARG"
       ;;
@@ -45,8 +48,13 @@ function main() {
     echo -e "\t-v latest chart version (default: CHART_VERSION in ./wavefront/release/VERSION)"
     echo -e "\t-n config cluster name for metric grouping (default: \$(whoami)-<default version from file>-release-test)"
     echo -e "\t-p previously released chart version to test upgrading and downgrading with (required)"
+    echo -e "\t-j include to enable running in CI (Jenkins)"
     exit 1
   }
+
+  if $IS_JENKINS ; then
+    source ${REPO_ROOT}/wavefront/release/npm-env.sh
+  fi
 
   if [[ -z ${WAVEFRONT_TOKEN} ]]; then
     print_usage_and_exit "wavefront token required"
