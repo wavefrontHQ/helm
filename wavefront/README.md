@@ -74,6 +74,7 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | `collector.useProxy` | Use a Wavefront Proxy to send metrics through | `true` |
 | `collector.proxyAddress` | Non-default Wavefront Proxy address to use, should only be set when `proxy.enabled` is false | `nil` |
 | `collector.apiServerMetrics` | Collect metrics about Kubernetes API server | `false` |
+| `collector.controlplane.enabled` | Enable control plane metrics | `false` |
 | `collector.kubernetesState` | Collect metrics about Kubernetes resource states [see more](https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/blob/master/docs/metrics.md#kubernetes-state-source) | `true` |
 | `collector.cadvisor.enabled` | Enable cAdvisor prometheus endpoint. See the [cAdvisor docs](https://github.com/google/cadvisor/blob/master/docs/storage/prometheus.md) for details on what metrics are available. | `false` |
 | `collector.filters` | Filters to apply towards all collected metrics | See values.yaml |
