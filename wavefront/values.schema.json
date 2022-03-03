@@ -786,7 +786,8 @@
         "image",
         "resources",
         "replicas",
-        "port"
+        "port",
+        "useHttpProxyCAcert"
       ],
       "properties": {
         "enabled": {
@@ -975,6 +976,16 @@
           "default": 0,
           "examples": [
             2878
+          ]
+        },
+        "useHttpProxyCAcert": {
+          "$id": "#/properties/proxy/properties/useHttpProxyCAcert",
+          "type": "boolean",
+          "title": "The useHttpProxyCAcert schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": false,
+          "examples": [
+            true
           ]
         }
       },
