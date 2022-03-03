@@ -190,6 +190,9 @@
           },
           "useDaemonset": true,
           "useProxy": true,
+          "controlplane": {
+            "enabled": false
+          },
           "kubernetesState": true,
           "hostOSMetrics": false,
           "filters": {
@@ -248,6 +251,7 @@
         "image",
         "useDaemonset",
         "useProxy",
+        "controlplane",
         "kubernetesState",
         "hostOSMetrics",
         "filters",
@@ -338,6 +342,34 @@
           "examples": [
             true
           ]
+        },
+        "controlplane": {
+          "$id": "#/properties/collector/properties/controlplane",
+          "type": "object",
+          "title": "The controlplane schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": {},
+          "examples": [
+            {
+              "enabled": false
+            }
+          ],
+          "required": [
+            "enabled"
+          ],
+          "properties": {
+            "enabled": {
+              "$id": "#/properties/collector/properties/controlplane/properties/enabled",
+              "type": "boolean",
+              "title": "The enabled schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": false,
+              "examples": [
+                false
+              ]
+            }
+          },
+          "additionalProperties": true
         },
         "kubernetesState": {
           "$id": "#/properties/collector/properties/kubernetesState",
@@ -1112,6 +1144,54 @@
         }
       },
       "additionalProperties": true
+    },
+    "openshift": {
+      "$id": "#/properties/openshift",
+      "type": "object",
+      "title": "The openshift schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "enabled": false
+        }
+      ],
+      "required": [
+        "enabled"
+      ],
+      "properties": {
+        "enabled": {
+          "$id": "#/properties/openshift/properties/enabled",
+          "type": "boolean",
+          "title": "The enabled schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": false,
+          "examples": [
+            false
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "installationMethod": {
+      "$id": "#/properties/installationMethod",
+      "type": "string",
+      "title": "The installationMethod schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "openshift-helm",
+      "examples": [
+        "openshift-helm"
+      ]
+    },
+    "testCollectorImage": {
+      "$id": "#/properties/testCollectorImage",
+      "type": "string",
+      "title": "The testCollectorImage schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "registry.connect.redhat.com/seldonio/kubectl",
+      "examples": [
+        "registry.connect.redhat.com/seldonio/kubectl"
+      ]
     }
   },
   "additionalProperties": true
