@@ -637,7 +637,6 @@
           "required": [
             "enabled",
             "enableRuntimeConfigs",
-            "annotationExcludes"
           ],
           "properties": {
             "enabled": {
