@@ -640,6 +640,31 @@
               "examples": [
                 true
               ]
+            },
+            "annotationExcludes": {
+              "$id": "#/properties/collector/properties/discovery/properties/annotationExcludes",
+              "type": "object",
+              "title": "The resources schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": {},
+              "examples": [
+                {
+                  "resourceType": "pod",
+                  "images": [
+                    "redis:*",
+                    "*redis*"
+                  ],
+                  "labels": {
+                    "k8s-app": [
+                      "redis",
+                      "*cache*"
+                    ],
+                    "namespaces": [
+                      "default"
+                    ]
+                  }
+                }
+              ]
             }
           },
           "additionalProperties": true
