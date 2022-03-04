@@ -60,7 +60,13 @@
         },
         "discovery": {
           "enabled": true,
-          "enableRuntimeConfigs": true
+          "enableRuntimeConfigs": true,
+          "annotationExcludes": {
+            "resourceType": "service",
+            "namespaces": [
+              "openshift-*"
+            ]
+          }
         },
         "resources": {
           "requests": {
@@ -232,7 +238,13 @@
           },
           "discovery": {
             "enabled": true,
-            "enableRuntimeConfigs": true
+            "enableRuntimeConfigs": true,
+            "annotationExcludes": {
+              "resourceType": "service",
+              "namespaces": [
+                "openshift-*"
+              ]
+            }
           },
           "resources": {
             "requests": {
@@ -613,7 +625,13 @@
           "examples": [
             {
               "enabled": true,
-              "enableRuntimeConfigs": true
+              "enableRuntimeConfigs": true,
+              "annotationExcludes": {
+                "resourceType": "service",
+                "namespaces": [
+                  "openshift-*"
+                ]
+              }
             }
           ],
           "required": [
@@ -639,6 +657,21 @@
               "default": false,
               "examples": [
                 true
+              ]
+            },
+            "annotationExcludes": {
+              "$id": "#/properties/collector/properties/discovery/properties/annotationExcludes",
+              "type": "object",
+              "title": "The annotationExcludes schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": {},
+              "examples": [
+                {
+                  "resourceType": "service",
+                  "namespaces": [
+                    "openshift-*"
+                  ]
+                }
               ]
             }
           },
