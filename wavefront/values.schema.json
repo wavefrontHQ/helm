@@ -649,20 +649,10 @@
               "default": {},
               "examples": [
                 {
-                  "resourceType": "pod",
-                  "images": [
-                    "redis:*",
-                    "*redis*"
-                  ],
-                  "labels": {
-                    "k8s-app": [
-                      "redis",
-                      "*cache*"
-                    ],
-                    "namespaces": [
-                      "default"
-                    ]
-                  }
+                  "resourceType": "service",
+                  "namespaces": [
+                    "openshift-*"
+                  ]
                 }
               ]
             }
