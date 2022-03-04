@@ -644,7 +644,7 @@
             "annotationExcludes": {
               "$id": "#/properties/collector/properties/discovery/properties/annotationExcludes",
               "type": "object",
-              "title": "The resources schema",
+              "title": "The annotationExcludes schema",
               "description": "An explanation about the purpose of this instance.",
               "default": {},
               "examples": [
