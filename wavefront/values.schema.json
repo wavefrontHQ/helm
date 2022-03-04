@@ -60,7 +60,13 @@
         },
         "discovery": {
           "enabled": true,
-          "enableRuntimeConfigs": true
+          "enableRuntimeConfigs": true,
+          "annotationExcludes": {
+            "resourceType": "service",
+            "namespaces": [
+              "openshift-*"
+            ]
+          }
         },
         "resources": {
           "requests": {
@@ -232,7 +238,13 @@
           },
           "discovery": {
             "enabled": true,
-            "enableRuntimeConfigs": true
+            "enableRuntimeConfigs": true,
+            "annotationExcludes": {
+              "resourceType": "service",
+              "namespaces": [
+                "openshift-*"
+              ]
+            }
           },
           "resources": {
             "requests": {
@@ -613,12 +625,19 @@
           "examples": [
             {
               "enabled": true,
-              "enableRuntimeConfigs": true
+              "enableRuntimeConfigs": true,
+              "annotationExcludes": {
+                "resourceType": "service",
+                "namespaces": [
+                  "openshift-*"
+                ]
+              }
             }
           ],
           "required": [
             "enabled",
-            "enableRuntimeConfigs"
+            "enableRuntimeConfigs",
+            "annotationExcludes"
           ],
           "properties": {
             "enabled": {
