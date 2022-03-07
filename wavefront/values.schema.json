@@ -61,12 +61,14 @@
         "discovery": {
           "enabled": true,
           "enableRuntimeConfigs": true,
-          "annotationExcludes": {
-            "resourceType": "service",
-            "namespaces": [
-              "openshift-*"
-            ]
-          }
+          "annotationExcludes": [
+            {
+              "resourceType": "service",
+              "namespaces": [
+                "openshift-*"
+              ]
+            }
+          ]
         },
         "resources": {
           "requests": {
@@ -239,12 +241,14 @@
           "discovery": {
             "enabled": true,
             "enableRuntimeConfigs": true,
-            "annotationExcludes": {
-              "resourceType": "service",
-              "namespaces": [
-                "openshift-*"
-              ]
-            }
+            "annotationExcludes": [
+              {
+                "resourceType": "service",
+                "namespaces": [
+                  "openshift-*"
+                ]
+              }
+            ]
           },
           "resources": {
             "requests": {
@@ -626,12 +630,14 @@
             {
               "enabled": true,
               "enableRuntimeConfigs": true,
-              "annotationExcludes": {
-                "resourceType": "service",
-                "namespaces": [
-                  "openshift-*"
-                ]
-              }
+              "annotationExcludes": [
+                {
+                  "resourceType": "service",
+                  "namespaces": [
+                    "openshift-*"
+                  ]
+                }
+              ]
             }
           ],
           "required": [
@@ -661,18 +667,86 @@
             },
             "annotationExcludes": {
               "$id": "#/properties/collector/properties/discovery/properties/annotationExcludes",
-              "type": "object",
+              "type": "array",
               "title": "The annotationExcludes schema",
               "description": "An explanation about the purpose of this instance.",
-              "default": {},
+              "default": [],
               "examples": [
-                {
-                  "resourceType": "service",
-                  "namespaces": [
-                    "openshift-*"
-                  ]
-                }
-              ]
+                [
+                  {
+                    "resourceType": "service",
+                    "namespaces": [
+                      "openshift-*"
+                    ]
+                  }
+                ]
+              ],
+              "additionalItems": true,
+              "items": {
+                "$id": "#/properties/collector/properties/discovery/properties/annotationExcludes/items",
+                "anyOf": [
+                  {
+                    "$id": "#/properties/collector/properties/discovery/properties/annotationExcludes/items/anyOf/0",
+                    "type": "object",
+                    "title": "The first anyOf schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                      {
+                        "resourceType": "service",
+                        "namespaces": [
+                          "openshift-*"
+                        ]
+                      }
+                    ],
+                    "required": [
+                      "resourceType",
+                      "namespaces"
+                    ],
+                    "properties": {
+                      "resourceType": {
+                        "$id": "#/properties/collector/properties/discovery/properties/annotationExcludes/items/anyOf/0/properties/resourceType",
+                        "type": "string",
+                        "title": "The resourceType schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                          "service"
+                        ]
+                      },
+                      "namespaces": {
+                        "$id": "#/properties/collector/properties/discovery/properties/annotationExcludes/items/anyOf/0/properties/namespaces",
+                        "type": "array",
+                        "title": "The namespaces schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": [],
+                        "examples": [
+                          [
+                            "openshift-*"
+                          ]
+                        ],
+                        "additionalItems": true,
+                        "items": {
+                          "$id": "#/properties/collector/properties/discovery/properties/annotationExcludes/items/anyOf/0/properties/namespaces/items",
+                          "anyOf": [
+                            {
+                              "$id": "#/properties/collector/properties/discovery/properties/annotationExcludes/items/anyOf/0/properties/namespaces/items/anyOf/0",
+                              "type": "string",
+                              "title": "The first anyOf schema",
+                              "description": "An explanation about the purpose of this instance.",
+                              "default": "",
+                              "examples": [
+                                "openshift-*"
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "additionalProperties": true
+                  }
+                ]
+              }
             }
           },
           "additionalProperties": true
@@ -1216,16 +1290,6 @@
         }
       },
       "additionalProperties": true
-    },
-    "installationMethod": {
-      "$id": "#/properties/installationMethod",
-      "type": "string",
-      "title": "The installationMethod schema",
-      "description": "An explanation about the purpose of this instance.",
-      "default": "openshift-helm",
-      "examples": [
-        "openshift-helm"
-      ]
     },
     "testCollectorImage": {
       "$id": "#/properties/testCollectorImage",
