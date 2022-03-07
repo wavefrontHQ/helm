@@ -4,6 +4,17 @@ REPO_ROOT=$(git rev-parse --show-toplevel)
 source ${REPO_ROOT}/wavefront/release/k8s-utils.sh
 source ${REPO_ROOT}/wavefront/release/VERSION
 
+function print_usage_and_exit() {
+  echo "Failure: $1"
+  echo "Usage: $0 [flags] [options]"
+  echo -e "\t-c wavefront instance name (default: 'nimba')"
+  echo -e "\t-t wavefront token (required)"
+  echo -e "\t-v latest chart version (default: CHART_VERSION in ./wavefront/release/VERSION)"
+  echo -e "\t-n config cluster name for metric grouping (default: \$(whoami)-<default version from file>-release-test)"
+  echo -e "\t-p previously released chart version to test upgrading and downgrading with (required)"
+  exit 1
+}
+
 function main() {
 
   # REQUIRED
@@ -12,9 +23,8 @@ function main() {
   local WF_CLUSTER=nimba
   local VERSION=${CHART_VERSION}
   local CONFIG_CLUSTER_NAME=$(whoami)-${VERSION}-release-test
-  local IS_JENKINS=false
 
-  while getopts ":c:t:v:n:p:j" opt; do
+  while getopts ":c:t:v:n:p:" opt; do
     case $opt in
     c)
       WF_CLUSTER="$OPTARG"
@@ -31,30 +41,11 @@ function main() {
     p)
       PREVIOUSLY_RELEASED_CHART_VERSION="$OPTARG"
       ;;
-    j)
-      IS_JENKINS=true
-      ;;
     \?)
       print_usage_and_exit "Invalid option: -$OPTARG"
       ;;
     esac
   done
-
-  function print_usage_and_exit() {
-    echo "Failure: $1"
-    echo "Usage: $0 [flags] [options]"
-    echo -e "\t-c wavefront instance name (default: 'nimba')"
-    echo -e "\t-t wavefront token (required)"
-    echo -e "\t-v latest chart version (default: CHART_VERSION in ./wavefront/release/VERSION)"
-    echo -e "\t-n config cluster name for metric grouping (default: \$(whoami)-<default version from file>-release-test)"
-    echo -e "\t-p previously released chart version to test upgrading and downgrading with (required)"
-    echo -e "\t-j include to enable running in CI (Jenkins)"
-    exit 1
-  }
-
-  if $IS_JENKINS ; then
-    source ${REPO_ROOT}/wavefront/release/npm-env.sh
-  fi
 
   if [[ -z ${WAVEFRONT_TOKEN} ]]; then
     print_usage_and_exit "wavefront token required"
@@ -64,11 +55,19 @@ function main() {
     print_usage_and_exit "previously released chart version required"
   fi
 
+  cd $REPO_ROOT
+  helm repo add stable https://charts.helm.sh/stable
+  helm lint wavefront
+  rm -rf _build
+  pushd wavefront
+    helm dependency update
+  popd
+
+  ./release.sh wavefront
+  helm repo update
   helm uninstall wavefront --namespace wavefront &>/dev/null || true
 
   kubectl create namespace wavefront &>/dev/null || true
-
-  ${REPO_ROOT}/wavefront/release/run-local-helm-repo.sh > /dev/null
 
   echo "Testing fresh install of v${VERSION}"
   local FRESH_INSTALL_CLUSTER_NAME="${CONFIG_CLUSTER_NAME}-$(date +%Y%m%d%H%M%S)"
