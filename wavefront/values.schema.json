@@ -8,6 +8,7 @@
   "examples": [
     {
       "clusterName": "KUBERNETES_CLUSTER_NAME",
+      "installationMethod": "helm",
       "wavefront": {
         "url": "https://YOUR_CLUSTER.wavefront.com",
         "token": "YOUR_API_TOKEN"
@@ -140,6 +141,16 @@
       "default": "",
       "examples": [
         "KUBERNETES_CLUSTER_NAME"
+      ]
+    },
+    "installationMethod": {
+      "$id": "#/properties/installationMethod",
+      "type": "string",
+      "title": "The installationMethod schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "openshift-helm"
       ]
     },
     "wavefront": {
