@@ -15,7 +15,6 @@ pipeline {
   stages {
     stage("Setup Tools") {
       steps {
-        sh './wavefront/release/setup-for-testing.sh'
         withEnv(["PATH+GCLOUD=${HOME}/google-cloud-sdk/bin"]) {
           sh './wavefront/release/setup-for-integration-test.sh'
         }
@@ -28,7 +27,7 @@ pipeline {
           script {
             env.PREV_CHART_VERSION = sh(returnStdout: true, script: "curl -s -X 'GET' 'https://artifacthub.io/api/v1/packages/helm/wavefront/wavefront' -H 'accept: application/json' | jq -r '.available_versions[0].version'").trim()
           }
-          sh './wavefront/release/run-e2e-tests.sh -t ${WAVEFRONT_TOKEN} -p ${PREV_CHART_VERSION} -j'
+          sh './wavefront/release/run-e2e-tests.sh -t ${WAVEFRONT_TOKEN} -p ${PREV_CHART_VERSION}'
         }
       }
     }
