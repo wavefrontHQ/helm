@@ -41,7 +41,6 @@ options for this chart.
 The **requried** options are `clusterName`, `wavefront.url` and `wavefront.token`.
 You will need to provide values for those options for a successful installation of the chart.
 
-
 ## Parameters
 
 The following tables lists the configurable parameters of the Wavefront chart and their default values.
