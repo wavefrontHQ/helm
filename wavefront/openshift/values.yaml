@@ -4,7 +4,7 @@ collector:
   enabled: true
   image:
     repository: registry.connect.redhat.com/wavefronthq/wavefront-kubernetes-collector
-    tag: 1.10.0
+    tag: "1.10.0"
     pullPolicy: IfNotPresent
   discovery:
     # Exclude resources from annotation-based discovery
@@ -17,7 +17,7 @@ proxy:
   enabled: true
   image:
     repository: registry.connect.redhat.com/wavefronthq/proxy
-    tag: 11.0
+    tag: "11.0"
     pullPolicy: IfNotPresent
 
 openshift:
