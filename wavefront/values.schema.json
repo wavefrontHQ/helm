@@ -8,6 +8,7 @@
   "examples": [
     {
       "clusterName": "KUBERNETES_CLUSTER_NAME",
+      "installationMethod": "helm",
       "wavefront": {
         "url": "https://YOUR_CLUSTER.wavefront.com",
         "token": "YOUR_API_TOKEN"
@@ -60,7 +61,15 @@
         },
         "discovery": {
           "enabled": true,
-          "enableRuntimeConfigs": true
+          "enableRuntimeConfigs": true,
+          "annotationExcludes": [
+            {
+              "resourceType": "service",
+              "namespaces": [
+                "openshift-*"
+              ]
+            }
+          ]
         },
         "resources": {
           "requests": {
@@ -77,7 +86,7 @@
         "enabled": true,
         "image": {
           "repository": "projects.registry.vmware.com/tanzu_observability/proxy",
-          "tag": 10.13,
+          "tag": 11.0,
           "pullPolicy": "IfNotPresent"
         },
         "resources": {
@@ -132,6 +141,16 @@
       "default": "",
       "examples": [
         "KUBERNETES_CLUSTER_NAME"
+      ]
+    },
+    "installationMethod": {
+      "$id": "#/properties/installationMethod",
+      "type": "string",
+      "title": "The installationMethod schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "openshift-helm"
       ]
     },
     "wavefront": {
@@ -190,6 +209,9 @@
           },
           "useDaemonset": true,
           "useProxy": true,
+          "controlplane": {
+            "enabled": false
+          },
           "kubernetesState": true,
           "hostOSMetrics": false,
           "filters": {
@@ -229,7 +251,15 @@
           },
           "discovery": {
             "enabled": true,
-            "enableRuntimeConfigs": true
+            "enableRuntimeConfigs": true,
+            "annotationExcludes": [
+              {
+                "resourceType": "service",
+                "namespaces": [
+                  "openshift-*"
+                ]
+              }
+            ]
           },
           "resources": {
             "requests": {
@@ -248,6 +278,7 @@
         "image",
         "useDaemonset",
         "useProxy",
+        "controlplane",
         "kubernetesState",
         "hostOSMetrics",
         "filters",
@@ -338,6 +369,34 @@
           "examples": [
             true
           ]
+        },
+        "controlplane": {
+          "$id": "#/properties/collector/properties/controlplane",
+          "type": "object",
+          "title": "The controlplane schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": {},
+          "examples": [
+            {
+              "enabled": false
+            }
+          ],
+          "required": [
+            "enabled"
+          ],
+          "properties": {
+            "enabled": {
+              "$id": "#/properties/collector/properties/controlplane/properties/enabled",
+              "type": "boolean",
+              "title": "The enabled schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": false,
+              "examples": [
+                false
+              ]
+            }
+          },
+          "additionalProperties": true
         },
         "kubernetesState": {
           "$id": "#/properties/collector/properties/kubernetesState",
@@ -581,7 +640,15 @@
           "examples": [
             {
               "enabled": true,
-              "enableRuntimeConfigs": true
+              "enableRuntimeConfigs": true,
+              "annotationExcludes": [
+                {
+                  "resourceType": "service",
+                  "namespaces": [
+                    "openshift-*"
+                  ]
+                }
+              ]
             }
           ],
           "required": [
@@ -608,6 +675,89 @@
               "examples": [
                 true
               ]
+            },
+            "annotationExcludes": {
+              "$id": "#/properties/collector/properties/discovery/properties/annotationExcludes",
+              "type": "array",
+              "title": "The annotationExcludes schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": [],
+              "examples": [
+                [
+                  {
+                    "resourceType": "service",
+                    "namespaces": [
+                      "openshift-*"
+                    ]
+                  }
+                ]
+              ],
+              "additionalItems": true,
+              "items": {
+                "$id": "#/properties/collector/properties/discovery/properties/annotationExcludes/items",
+                "anyOf": [
+                  {
+                    "$id": "#/properties/collector/properties/discovery/properties/annotationExcludes/items/anyOf/0",
+                    "type": "object",
+                    "title": "The first anyOf schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                      {
+                        "resourceType": "service",
+                        "namespaces": [
+                          "openshift-*"
+                        ]
+                      }
+                    ],
+                    "required": [
+                      "resourceType",
+                      "namespaces"
+                    ],
+                    "properties": {
+                      "resourceType": {
+                        "$id": "#/properties/collector/properties/discovery/properties/annotationExcludes/items/anyOf/0/properties/resourceType",
+                        "type": "string",
+                        "title": "The resourceType schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                          "service"
+                        ]
+                      },
+                      "namespaces": {
+                        "$id": "#/properties/collector/properties/discovery/properties/annotationExcludes/items/anyOf/0/properties/namespaces",
+                        "type": "array",
+                        "title": "The namespaces schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": [],
+                        "examples": [
+                          [
+                            "openshift-*"
+                          ]
+                        ],
+                        "additionalItems": true,
+                        "items": {
+                          "$id": "#/properties/collector/properties/discovery/properties/annotationExcludes/items/anyOf/0/properties/namespaces/items",
+                          "anyOf": [
+                            {
+                              "$id": "#/properties/collector/properties/discovery/properties/annotationExcludes/items/anyOf/0/properties/namespaces/items/anyOf/0",
+                              "type": "string",
+                              "title": "The first anyOf schema",
+                              "description": "An explanation about the purpose of this instance.",
+                              "default": "",
+                              "examples": [
+                                "openshift-*"
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "additionalProperties": true
+                  }
+                ]
+              }
             }
           },
           "additionalProperties": true
@@ -732,7 +882,7 @@
           "enabled": true,
           "image": {
             "repository": "projects.registry.vmware.com/tanzu_observability/proxy",
-            "tag": 10.13,
+            "tag": 11.0,
             "pullPolicy": "IfNotPresent"
           },
           "resources": {
@@ -754,7 +904,8 @@
         "image",
         "resources",
         "replicas",
-        "port"
+        "port",
+        "useHttpProxyCAcert"
       ],
       "properties": {
         "enabled": {
@@ -776,7 +927,7 @@
           "examples": [
             {
               "repository": "projects.registry.vmware.com/tanzu_observability/proxy",
-              "tag": 10.13,
+              "tag": 11.0,
               "pullPolicy": "IfNotPresent"
             }
           ],
@@ -798,12 +949,12 @@
             },
             "tag": {
               "$id": "#/properties/proxy/properties/image/properties/tag",
-              "type": "number",
+              "type": "string",
               "title": "The tag schema",
               "description": "An explanation about the purpose of this instance.",
-              "default": 0.0,
+              "default": "11.0.1",
               "examples": [
-                10.13
+                "11.0.1"
               ]
             },
             "pullPolicy": {
@@ -943,6 +1094,16 @@
           "default": 0,
           "examples": [
             2878
+          ]
+        },
+        "useHttpProxyCAcert": {
+          "$id": "#/properties/proxy/properties/useHttpProxyCAcert",
+          "type": "boolean",
+          "title": "The useHttpProxyCAcert schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": false,
+          "examples": [
+            true
           ]
         }
       },
@@ -1112,6 +1273,44 @@
         }
       },
       "additionalProperties": true
+    },
+    "openshift": {
+      "$id": "#/properties/openshift",
+      "type": "object",
+      "title": "The openshift schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "enabled": false
+        }
+      ],
+      "required": [
+        "enabled"
+      ],
+      "properties": {
+        "enabled": {
+          "$id": "#/properties/openshift/properties/enabled",
+          "type": "boolean",
+          "title": "The enabled schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": false,
+          "examples": [
+            false
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "testCollectorImage": {
+      "$id": "#/properties/testCollectorImage",
+      "type": "string",
+      "title": "The testCollectorImage schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "registry.connect.redhat.com/seldonio/kubectl",
+      "examples": [
+        "registry.connect.redhat.com/seldonio/kubectl"
+      ]
     }
   },
   "additionalProperties": true
