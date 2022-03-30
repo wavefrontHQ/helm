@@ -108,6 +108,8 @@ data:
           - 'kube.apiserver.apiserver.request.total.counter'
           - 'kube.apiserver.workqueue.adds.total.counter'
           - 'kube.apiserver.workqueue.queue.duration.seconds.bucket'
+        tags:
+          control_plane_alert: true
           {{- end }}
       {{- end }}
     {{- if .Values.collector.events.enabled }}
@@ -182,6 +184,8 @@ data:
           {{- if .Values.collector.controlplane.enabled }}
           - 'kube.coredns.coredns.dns.request.duration.seconds.bucket'
           - 'kube.coredns.coredns.dns.responses.total.counter'
+        tags:
+          control_plane_alert: true
           {{- end }}
 
     {{- if .Values.collector.discovery.config }}
