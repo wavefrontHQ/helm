@@ -29,6 +29,6 @@ maintainers:
     email: pselvaganesa@vmware.com
 dependencies:
   - name: kube-state-metrics
-    version: ^2.2.1
-    repository: https://charts.helm.sh/stable
+    version: ^4.7.0
+    repository: https://prometheus-community.github.io/helm-charts
     condition: kubeStateMetrics.enabled
