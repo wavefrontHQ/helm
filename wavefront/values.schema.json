@@ -210,7 +210,7 @@
           "useDaemonset": true,
           "useProxy": true,
           "controlplane": {
-            "enabled": true
+            "enabled": false
           },
           "kubernetesState": true,
           "hostOSMetrics": false,
@@ -378,7 +378,7 @@
           "default": {},
           "examples": [
             {
-              "enabled": true
+              "enabled": false
             }
           ],
           "required": [
