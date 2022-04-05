@@ -28,10 +28,19 @@ helm install wavefront ./wavefront --namespace wavefront \
 --set wavefront.token=$WAVEFRONT_TOKEN
 
 # Ensure that collector/proxy are at the correct version and the metrics are getting to nimba, then
+# TODO: Run e2e ?
 helm uninstall wavefront
 
 # Run ./wavefront/release/run-chart-verifier-generate-report.sh to generate report.yaml under _build directory.
 ./wavefront/release/run-chart-verifier-generate-report.sh
 
 # Ensure that all checks pass!
-cat _build/report.yaml
+# sort _build/report.yaml | uniq -c | grep 'outcome: PASS'
+if  grep -q "outcome: FAIL" "_build/report.yaml" ; then
+         echo 'the string exists' ;
+         exit 1
+else
+         echo 'the string does not exist' ;
+fi
+
+#cat _build/report.yaml
