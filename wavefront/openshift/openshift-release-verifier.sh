@@ -20,7 +20,7 @@ helm dependency update
 cd ..
 ./release.sh wavefront
 
-export CLUSTER_NAME=${CLUSTER_NAME}
+export FRESH_INSTALL_CLUSTER_NAME="openshift-helm-test-$(date +%Y%m%d%H%M%S)"
 export WAVEFRONT_TOKEN=${WAVEFRONT_TOKEN}
 helm install wavefront ./wavefront --namespace wavefront \
 --set clusterName=$CLUSTER_NAME \
@@ -28,7 +28,10 @@ helm install wavefront ./wavefront --namespace wavefront \
 --set wavefront.token=$WAVEFRONT_TOKEN
 
 # Ensure that collector/proxy are at the correct version and the metrics are getting to nimba, then
-# TODO: Run e2e ?
+# TODO: Future (upgrade and downgrade test)
+REPO_ROOT=$(git rev-parse --show-toplevel)
+${REPO_ROOT}/wavefront/release/test-wavefront-metrics.sh -t ${WAVEFRONT_TOKEN} -n ${FRESH_INSTALL_CLUSTER_NAME}
+
 helm uninstall wavefront
 
 # Run ./wavefront/release/run-chart-verifier-generate-report.sh to generate report.yaml under _build directory.

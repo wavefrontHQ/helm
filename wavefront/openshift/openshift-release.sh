@@ -26,8 +26,8 @@ sed -i "s/${OLD_APP_VERSION}/${NEW_APP_VERSION}/g" ../values.yaml
 sed -i "s/version: ${OLD_CHART_VERSION}/version: ${NEW_CHART_VERSION}/g" ../Chart.yaml
 sed -i "s/${OLD_CHART_VERSION}/${NEW_CHART_VERSION}/g" ../release/run-chart-verifier-generate-report.sh.yaml
 
-# TODO: Ensure that any schema.json changes have been made for new properties
-# TODO: Ensure that any  ./wavefront/README.md changes have made it to ./wavefront/openshift/README.md
+# TODO (provide a warning): Ensure that any schema.json changes have been made for new properties
+# TODO (provide a warning): Ensure that any  ./wavefront/README.md changes have made it to ./wavefront/openshift/README.md
 
 git commit -am "Bump OpenShift helm chart version to $NEW_CHART_VERSION"
 
