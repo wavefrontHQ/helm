@@ -65,6 +65,10 @@ function main() {
 
   ./release.sh wavefront
   helm repo update
+
+  kubectl delete clusterrolebinding wavefront-collector &>/dev/null || true
+  kubectl delete clusterrole wavefront-collector &>/dev/null || true
+
   helm uninstall wavefront --namespace wavefront &>/dev/null || true
 
   kubectl create namespace wavefront &>/dev/null || true
