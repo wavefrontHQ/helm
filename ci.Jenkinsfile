@@ -17,22 +17,24 @@ pipeline {
         }
       }
     }
-//     stage("Run Tests on GKE") {
-//       environment {
-//         GCP_PROJECT = "wavefront-gcp-dev"
-//         GKE_CLUSTER_NAME = "k8po-jenkins-pr-testing"
-//         WAVEFRONT_TOKEN = credentials('WAVEFRONT_TOKEN_NIMBA')
-//       }
-//       steps {
-//         withEnv(["PATH+EXTRA=${PWD}/node-v16.14.0-linux-x64/bin", "PATH+GCLOUD=${HOME}/google-cloud-sdk/bin"]) {
-//           sh 'gcloud container clusters get-credentials ${GKE_CLUSTER_NAME} --zone us-central1-c --project ${GCP_PROJECT}'
-//           script {
-//             env.PREV_CHART_VERSION = sh(returnStdout: true, script: "curl -s -X 'GET' 'https://artifacthub.io/api/v1/packages/helm/wavefront/wavefront' -H 'accept: application/json' | jq -r '.available_versions[0].version'").trim()
-//           }
-//           sh './wavefront/release/run-e2e-tests.sh -t ${WAVEFRONT_TOKEN} -p ${PREV_CHART_VERSION}'
-//         }
-//       }
-//     }
+     stage("Run Tests on GKE") {
+       environment {
+         GCP_PROJECT = "wavefront-gcp-dev"
+         GKE_CLUSTER_NAME = "k8po-jenkins-pr-testing"
+         WAVEFRONT_TOKEN = credentials('WAVEFRONT_TOKEN_NIMBA')
+       }
+       steps {
+         withEnv(["PATH+EXTRA=${PWD}/node-v16.14.0-linux-x64/bin", "PATH+GCLOUD=${HOME}/google-cloud-sdk/bin"]) {
+             lock("integration-test-gke") {
+             sh 'gcloud container clusters get-credentials ${GKE_CLUSTER_NAME} --zone us-central1-c --project ${GCP_PROJECT}'
+             script {
+               env.PREV_CHART_VERSION = sh(returnStdout: true, script: "curl -s -X 'GET' 'https://artifacthub.io/api/v1/packages/helm/wavefront/wavefront' -H 'accept: application/json' | jq -r '.available_versions[0].version'").trim()
+             }
+             sh './wavefront/release/run-e2e-tests.sh -t ${WAVEFRONT_TOKEN} -p ${PREV_CHART_VERSION}'
+           }
+         }
+       }
+     }
     stage("Run Tests on EKS") {
       environment {
         AWS_SHARED_CREDENTIALS_FILE = credentials("k8po-ci-aws-creds")
@@ -44,12 +46,14 @@ pipeline {
       }
       steps {
         withEnv(["PATH+EXTRA=${PWD}/node-v16.14.0-linux-x64/bin", "PATH+GCLOUD=${HOME}/google-cloud-sdk/bin"]) {
-          sh 'aws ecr get-login-password --region $AWS_REGION --profile $AWS_PROFILE |  docker login --username AWS --password-stdin $ECR_ENDPOINT'
-          sh 'aws eks --region $AWS_REGION update-kubeconfig --name k8s-saas-team-dev --profile $AWS_PROFILE'
-          script {
-            env.PREV_CHART_VERSION = sh(returnStdout: true, script: "curl -s -X 'GET' 'https://artifacthub.io/api/v1/packages/helm/wavefront/wavefront' -H 'accept: application/json' | jq -r '.available_versions[0].version'").trim()
+          lock("integration-test-eks") {
+            sh 'aws ecr get-login-password --region $AWS_REGION --profile $AWS_PROFILE |  docker login --username AWS --password-stdin $ECR_ENDPOINT'
+            sh 'aws eks --region $AWS_REGION update-kubeconfig --name k8s-saas-team-dev --profile $AWS_PROFILE'
+            script {
+              env.PREV_CHART_VERSION = sh(returnStdout: true, script: "curl -s -X 'GET' 'https://artifacthub.io/api/v1/packages/helm/wavefront/wavefront' -H 'accept: application/json' | jq -r '.available_versions[0].version'").trim()
+            }
+            sh './wavefront/release/run-e2e-tests.sh -t ${WAVEFRONT_TOKEN} -p ${PREV_CHART_VERSION}'
           }
-          sh './wavefront/release/run-e2e-tests.sh -t ${WAVEFRONT_TOKEN} -p ${PREV_CHART_VERSION}'
         }
       }
     }
