@@ -17,11 +17,10 @@ sed -i "s/CHART_VERSION=\"${OLD_CHART_VERSION}\"/CHART_VERSION=\"${NEW_CHART_VER
 # Bump app version
 sed -i "s/appVersion: ${OLD_APP_VERSION}/appVersion: ${NEW_APP_VERSION}/g" ../Chart.yaml
 sed -i "s/${OLD_APP_VERSION}/${NEW_APP_VERSION}/g" ../values.yaml
-echo pwd
-pwd
+
 ## Bump chart version
 sed -i "s/version: ${OLD_CHART_VERSION}/version: ${NEW_CHART_VERSION}/g" ../Chart.yaml
-sed -i "s/${OLD_CHART_VERSION}/${NEW_CHART_VERSION}/g" ../release/run-chart-verifier-generate-report.sh.yaml
+sed -i "s/${OLD_CHART_VERSION}/${NEW_CHART_VERSION}/g" ../release/run-chart-verifier-generate-report.sh
 
 git commit -am "Bump OpenShift helm chart version to $NEW_CHART_VERSION"
 
