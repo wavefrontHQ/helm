@@ -5,6 +5,9 @@ pipeline {
     go 'Go 1.17'
   }
 
+  environment {
+    GCP_CREDS = credentials("GCP_CREDS")
+  }
 
   stages {
     stage("Setup Tools") {
@@ -16,7 +19,6 @@ pipeline {
     }
     stage("Run Tests on GKE") {
       environment {
-        GCP_CREDS = credentials("GCP_CREDS")
         GCP_PROJECT = "wavefront-gcp-dev"
         GKE_CLUSTER_NAME = "k8po-jenkins-pr-testing"
         WAVEFRONT_TOKEN = credentials('WAVEFRONT_TOKEN_NIMBA')
