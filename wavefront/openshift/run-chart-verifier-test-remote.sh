@@ -4,7 +4,7 @@
 # TODO: Revisit if we should send password (install other tools like sshpass?)
 # TODO-cont: or setup ssh keys in the VM instead
 # TODO-cont: or use a Jenkins plugin
-retcode=$(sshpass -p "${OPENSHIFT_DEV_PWD}" ssh root@10.172.103.25 'bash -s' < ./openshift-release-verifier.sh)
+retcode=$(sshpass -p "${OPENSHIFT_DEV_PWD}" ssh root@${OPENSHIFT_VM} 'bash -s' < ./openshift-release-verifier.sh)
 if [ $retcode -ne 0 ]; then
   echo "Chart verification failed with exit code $retcode."
   exit $retcode
@@ -28,8 +28,8 @@ git reset --hard upstream/main
 git push origin main --force
 git checkout -b $GIT_BRANCH
 mkdir charts/partners/wavefronthq/wavefront/${NEW_CHART_VERSION}
-sshpass -p "${OPENSHIFT_DEV_PWD}" scp root@10.172.103.25:/root/workspace/helm/_build/wavefront-${NEW_CHART_VERSION}.tgz ~/workspace/charts/charts/partners/wavefronthq/wavefront/${NEW_CHART_VERSION}
-sshpass -p "${OPENSHIFT_DEV_PWD}" scp root@10.172.103.25:/root/workspace/helm/_build/report.yaml ~/workspace/charts/charts/partners/wavefronthq/wavefront/${NEW_CHART_VERSION}
+sshpass -p "${OPENSHIFT_DEV_PWD}" scp root@${OPENSHIFT_VM}:/root/workspace/helm/_build/wavefront-${NEW_CHART_VERSION}.tgz ~/workspace/charts/charts/partners/wavefronthq/wavefront/${NEW_CHART_VERSION}
+sshpass -p "${OPENSHIFT_DEV_PWD}" scp root@${OPENSHIFT_VM}:/root/workspace/helm/_build/report.yaml ~/workspace/charts/charts/partners/wavefronthq/wavefront/${NEW_CHART_VERSION}
 
 # Commit and push the change to your forked version
 # Create a new PR against https://github.com/openshift-helm-charts/charts and this should trigger the pipeline

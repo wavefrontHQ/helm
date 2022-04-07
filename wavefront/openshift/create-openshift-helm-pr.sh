@@ -18,8 +18,8 @@ git reset --hard upstream/main
 git push origin main --force
 git checkout -b $GIT_BRANCH
 mkdir charts/partners/wavefronthq/wavefront/${NEW_CHART_VERSION}
-sshpass -p "${OPENSHIFT_DEV_PWD}" scp root@10.172.103.25:/root/workspace/helm/_build/wavefront-${NEW_CHART_VERSION}.tgz ~/workspace/charts/charts/partners/wavefronthq/wavefront/${NEW_CHART_VERSION}
-sshpass -p "${OPENSHIFT_DEV_PWD}" scp root@10.172.103.25:/root/workspace/helm/_build/report.yaml ~/workspace/charts/charts/partners/wavefronthq/wavefront/${NEW_CHART_VERSION}
+sshpass -p "${OPENSHIFT_DEV_PWD}" scp root@${OPENSHIFT_VM}:/root/workspace/helm/_build/wavefront-${NEW_CHART_VERSION}.tgz ~/workspace/charts/charts/partners/wavefronthq/wavefront/${NEW_CHART_VERSION}
+sshpass -p "${OPENSHIFT_DEV_PWD}" scp root@${OPENSHIFT_VM}:/root/workspace/helm/_build/report.yaml ~/workspace/charts/charts/partners/wavefronthq/wavefront/${NEW_CHART_VERSION}
 
 # Commit and push the change to your forked version
 # Create a new PR against https://github.com/openshift-helm-charts/charts and this should trigger the pipeline
