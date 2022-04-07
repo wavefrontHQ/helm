@@ -1,8 +1,5 @@
 #!/bin/bash -e
 
-OPENSHIFT_DEV_PWD=1Wavefront!
-NEW_CHART_VERSION=1.10.3-test
-
 # Runs the chart-verifier test
 # TODO: Revisit if we should send password (install other tools like sshpass?)
 # TODO-cont: or setup ssh keys in the VM instead

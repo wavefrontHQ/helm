@@ -1,9 +1,5 @@
 #!/bin/bash -e
 
-OPENSHIFT_DEV_PWD=1Wavefront!
-NEW_CHART_VERSION=1.10.3-test
-
-
 # TODO for K8SSAAS-816 from here onwards.
 # 1st time only - Create a fork for and subsequently rebase with upstream and clone to jenkins
 #sh '''
