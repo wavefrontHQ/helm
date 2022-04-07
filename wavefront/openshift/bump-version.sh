@@ -15,11 +15,11 @@ sed -i "s/APP_VERSION=\"${OLD_APP_VERSION}\"/APP_VERSION=\"${NEW_APP_VERSION}\"/
 sed -i "s/CHART_VERSION=\"${OLD_CHART_VERSION}\"/CHART_VERSION=\"${NEW_CHART_VERSION}\"/g" VERSION
 
 # Bump app version
-sed -i "s/appVersion: ${OLD_APP_VERSION}/appVersion: ${NEW_APP_VERSION}/g" ../Chart.yaml
-sed -i "s/${OLD_APP_VERSION}/${NEW_APP_VERSION}/g" ../values.yaml
+sed -i "s/appVersion: ${OLD_APP_VERSION}/appVersion: ${NEW_APP_VERSION}/g" Chart.yaml
+sed -i "s/${OLD_APP_VERSION}/${NEW_APP_VERSION}/g" values.yaml
 
 ## Bump chart version
-sed -i "s/version: ${OLD_CHART_VERSION}/version: ${NEW_CHART_VERSION}/g" ../Chart.yaml
+sed -i "s/version: ${OLD_CHART_VERSION}/version: ${NEW_CHART_VERSION}/g" Chart.yaml
 sed -i "s/${OLD_CHART_VERSION}/${NEW_CHART_VERSION}/g" ../release/run-chart-verifier-generate-report.sh
 
 git commit -am "Bump OpenShift helm chart version to $NEW_CHART_VERSION"
@@ -29,7 +29,7 @@ git push --set-upstream origin $GIT_BRANCH
 PR_URL=$(curl \
   -X POST \
   -H "Authorization: token ${TOKEN}" \
-  -d "{\"head\":\"${GIT_BRANCH}\",\"base\":\"master\",\"title\":\"Bump helm chart version to ${NEW_CHART_VERSION}\",\"description\":\"1. Ensure that any schema.json changes have been made for new properties \n 2.Ensure that any  ./wavefront/README.md changes have made it to ./wavefront/openshift/README.md\"}" \
+  -d "{\"head\":\"${GIT_BRANCH}\",\"base\":\"master\",\"title\":\"Bump helm chart version to ${NEW_CHART_VERSION}\",\"body\":\"1. Ensure that any schema.json changes have been made for new properties \n 2.Ensure that any  ./wavefront/README.md changes have made it to ./wavefront/openshift/README.md\"}" \
   https://api.github.com/repos/wavefrontHQ/helm/pulls |
   jq -r '.html_url')
 
