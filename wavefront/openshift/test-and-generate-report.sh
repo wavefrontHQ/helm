@@ -48,4 +48,4 @@ else
          echo 'Chart verifier - All checks passed' ;
 fi
 
-#cat _build/report.yaml
+cat _build/report.yaml
