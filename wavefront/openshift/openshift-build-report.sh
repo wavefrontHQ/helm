@@ -6,8 +6,5 @@
 # TODO-cont: or use a Jenkins plugin
 
 sudo yum install sshpass
-retcode=$(sshpass -p "${OPENSHIFT_CREDS_PSW}" ssh root@${OPENSHIFT_VM} 'bash -s' < wavefront/openshift/test-and-generate-report.sh)
-if [ $retcode -ne 0 ]; then
-  echo "Chart verification failed with exit code $retcode."
-  exit $retcode
-fi
+sshpass -p "${OPENSHIFT_CREDS_PSW}" ssh root@${OPENSHIFT_VM} 'bash -s' < wavefront/openshift/test-and-generate-report.sh
+
