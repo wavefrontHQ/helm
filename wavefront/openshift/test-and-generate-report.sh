@@ -23,7 +23,7 @@ cd ..
 export FRESH_INSTALL_CLUSTER_NAME="openshift-helm-test-$(date +%Y%m%d%H%M%S)"
 export WAVEFRONT_TOKEN=${WAVEFRONT_TOKEN}
 helm install wavefront ./wavefront --namespace wavefront \
---set clusterName=$CLUSTER_NAME \
+--set clusterName=$FRESH_INSTALL_CLUSTER_NAME \
 --set wavefront.url=https://nimba.wavefront.com \
 --set wavefront.token=$WAVEFRONT_TOKEN
 
