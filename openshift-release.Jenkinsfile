@@ -26,6 +26,7 @@ pipeline {
 //         sh './wavefront/openshift/openshift-release.sh'
 //       }
 //     }
+}
 
   post {
     // Notify only on null->failure or success->failure or failure->success
