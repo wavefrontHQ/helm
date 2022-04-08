@@ -50,4 +50,4 @@ echo ${WAVEFRONT_TOKEN}
 #         echo 'Chart verifier - All checks passed' ;
 #fi
 
-exit 0
+exit
