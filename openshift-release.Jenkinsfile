@@ -5,6 +5,7 @@ pipeline {
     OPENSHIFT_VM = credentials("OPENSHIFT_VM")
     OPENSHIFT_CREDS_PSW = credentials("OPENSHIFT_CREDS_PSW")
     GITHUB_CREDS_PSW = credentials("GITHUB_TOKEN")
+    WAVEFRONT_TOKEN = credentials('WAVEFRONT_TOKEN_NIMBA')
   }
 
   stages {
@@ -16,13 +17,13 @@ pipeline {
 
     stage("Openshift Build Report") {
       steps {
-        sh './wavefront/openshift/openshift-helm-build-report.sh'
+        sh './wavefront/openshift/openshift-build-report.sh'
       }
     }
 
     stage("Create Helm Release PR") {
       steps {
-        sh './wavefront/openshift/openshift-helm-release.sh'
+        sh './wavefront/openshift/openshift-release.sh'
       }
     }
 

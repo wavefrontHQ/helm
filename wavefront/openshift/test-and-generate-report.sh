@@ -37,13 +37,15 @@ helm uninstall wavefront
 # Run ./wavefront/release/run-chart-verifier-generate-report.sh to generate report.yaml under _build directory.
 ./wavefront/release/run-chart-verifier-generate-report.sh
 
+cat _build/report.yaml
+
 # Ensure that all checks pass!
 # sort _build/report.yaml | uniq -c | grep 'outcome: PASS'
 if  grep -q "outcome: FAIL" "_build/report.yaml" ; then
-         echo 'the string exists' ;
+         echo 'ERROR :: Chart verification failed ' ;
          exit 1
 else
-         echo 'the string does not exist' ;
+         echo 'Chart verifier - All checks passed' ;
 fi
 
 #cat _build/report.yaml
