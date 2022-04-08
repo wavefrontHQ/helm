@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 WAVEFRONT_TOKEN=$1
-
+echo $WAVEFRONT_TOKEN
 #cd ~/workspace/helm
 #git clean -dfx
 #git checkout master
