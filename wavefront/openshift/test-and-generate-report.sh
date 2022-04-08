@@ -47,5 +47,3 @@ if  grep -q "outcome: FAIL" "_build/report.yaml" ; then
 else
          echo 'Chart verifier - All checks passed' ;
 fi
-
-cat _build/report.yaml
