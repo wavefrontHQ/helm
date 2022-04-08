@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-echo ${WAVEFRONT_TOKEN}
+WAVEFRONT_TOKEN=$1
 
 #cd ~/workspace/helm
 #git clean -dfx
