@@ -32,15 +32,15 @@ pipeline {
     failure {
       script {
         if(currentBuild.previousBuild == null) {
-          slackSend (channel: '#open-channel', color: '#FF0000', message: "OPENSHIFT BUMP VERSION JOB FAILED: <${env.BUILD_URL}|${env.JOB_NAME} [${env.BUILD_NUMBER}]>")
+          slackSend (channel: '#open-channel', color: '#FF0000', message: "OPENSHIFT RELEASE JOB FAILED: <${env.BUILD_URL}|${env.JOB_NAME} [${env.BUILD_NUMBER}]>")
         }
       }
     }
     regression {
-      slackSend (channel: '#open-channel', color: '#FF0000', message: "OPENSHIFT BUMP VERSION JOB FAILED: <${env.BUILD_URL}|${env.JOB_NAME} [${env.BUILD_NUMBER}]>")
+      slackSend (channel: '#open-channel', color: '#FF0000', message: "OPENSHIFT RELEASE JOB FAILED: <${env.BUILD_URL}|${env.JOB_NAME} [${env.BUILD_NUMBER}]>")
     }
     fixed {
-      slackSend (channel: '#open-channel', color: '#008000', message: "OPENSHIFT BUMP VERSION JOB FIXED: <${env.BUILD_URL}|${env.JOB_NAME} [${env.BUILD_NUMBER}]>")
+      slackSend (channel: '#open-channel', color: '#008000', message: "OPENSHIFT RELEASE JOB FIXED: <${env.BUILD_URL}|${env.JOB_NAME} [${env.BUILD_NUMBER}]>")
     }
     always {
       cleanWs()
