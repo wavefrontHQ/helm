@@ -6,5 +6,5 @@
 # TODO-cont: or use a Jenkins plugin
 
 #sudo yum install sshpass
-sshpass -p "${OPENSHIFT_CREDS_PSW}" ssh -o StrictHostKeyChecking=no -tt root@${OPENSHIFT_VM} 'bash -s' < WAVEFRONT_TOKEN=${WAVEFRONT_TOKEN} wavefront/openshift/test-and-generate-report.sh
+sshpass -p "${OPENSHIFT_CREDS_PSW}" ssh -o StrictHostKeyChecking=no -tt root@${OPENSHIFT_VM} 'bash -s' < wavefront/openshift/test-and-generate-report.sh WAVEFRONT_TOKEN=${WAVEFRONT_TOKEN}
 
