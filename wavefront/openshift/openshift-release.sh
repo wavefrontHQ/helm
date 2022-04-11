@@ -15,7 +15,7 @@ git clone https://github.com/wf-jenkins/charts.git
 cd charts
 git config --global user.email "svc.wf-jenkins@vmware.com"
 git config --global user.name "svc.wf-jenkins"
-git remote set-url origin https://${GITHUB_CREDS_PSW}@github.com/openshift-helm-charts/charts.git
+git remote set-url origin https://${GITHUB_CREDS_PSW}@github.com/wf-jenkins/charts.git
 
 # Reset main branch on forked repo with upstream
 git remote add upstream https://github.com/openshift-helm-charts/charts
