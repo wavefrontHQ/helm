@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 source ./VERSION
-# 1st time only - Create a fork for and subsequently rebase with upstream and clone to jenkins
+# 1st time only - Create a fork for openshift-helm-charts/charts repo via jenkins.
 #sh '''
 #    PR_URL=$(curl \
 #      -X POST \
