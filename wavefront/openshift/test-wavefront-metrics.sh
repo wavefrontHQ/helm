@@ -85,7 +85,7 @@ function exit_on_fail() {
 function wait_for_cluster_ready_openshift() {
   echo "Waiting for all Pods to be 'Ready'"
   # The below kubectl command queries the wavefront namespace because openshift considers
-  # it as the configured ns when we run "oc project wavefront".
+  # it as the configured ns when we run "oc project wavefront"
   while ! kubectl wait --for=condition=Ready pod --all -l exclude-me!=true &> /dev/null; do
     echo "Waiting for all Pods to be 'Ready'"
     sleep 5
