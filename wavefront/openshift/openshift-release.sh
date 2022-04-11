@@ -32,7 +32,6 @@ sshpass -p "${OPENSHIFT_DEV_PWD}" scp root@${OPENSHIFT_VM}:/root/workspace/helm/
 # Commit and push the change to your forked version
 # Create a new PR against https://github.com/openshift-helm-charts/charts and this should trigger the openshift pipeline
 
-mv ./_build/* .
 git add . && git commit -am "Build openshift wavefront chart release : ${CHART_VERSION}"
 git push origin $GIT_BRANCH
 
