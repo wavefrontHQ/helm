@@ -28,8 +28,10 @@ git push origin main --force
 GIT_BRANCH=main
 echo ${CHART_VERSION}
 mkdir charts/partners/wavefronthq/wavefront/${CHART_VERSION}
-sshpass -p "${OPENSHIFT_DEV_PWD}" scp root@${OPENSHIFT_VM}:/root/workspace/helm/_build/wavefront-${CHART_VERSION}.tgz workspace/openshift-helm-release/charts/charts/partners/wavefronthq/wavefront/${CHART_VERSION}
-sshpass -p "${OPENSHIFT_DEV_PWD}" scp root@${OPENSHIFT_VM}:/root/workspace/helm/_build/report.yaml workspace/openshift-helm-release/charts/charts/partners/wavefronthq/wavefront/${CHART_VERSION}
+echo "downloading tar file"
+sshpass -p "${OPENSHIFT_DEV_PWD}" scp root@${OPENSHIFT_VM}:/root/workspace/helm/_build/wavefront-${CHART_VERSION}.tgz ./charts/partners/wavefronthq/wavefront/${CHART_VERSION}
+echo "downloading report"
+sshpass -p "${OPENSHIFT_DEV_PWD}" scp root@${OPENSHIFT_VM}:/root/workspace/helm/_build/report.yaml ./charts/partners/wavefronthq/wavefront/${CHART_VERSION}
 
 # Commit and push the change to your forked version
 # Create a new PR against https://github.com/openshift-helm-charts/charts and this should trigger the openshift pipeline
@@ -37,9 +39,10 @@ sshpass -p "${OPENSHIFT_DEV_PWD}" scp root@${OPENSHIFT_VM}:/root/workspace/helm/
 git add . && git commit -am "Build openshift wavefront chart release : ${CHART_VERSION}"
 git push origin $GIT_BRANCH
 
+echo "Creating PR"
 PR_URL=$(curl \
   -X POST \
-  -H "Authorization: token ${TOKEN}" \
+  -H "Authorization: token ${GITHUB_CREDS_PSW}" \
   -d "{\"head\":\"${GIT_BRANCH}\",\"base\":\"main\",\"title\":\"Build openshift wavefront chart release ${CHART_VERSION}\"}" \
   https://api.github.com/repos/akodali18/openshift-helm-charts/pulls |
   jq -r '.html_url')
