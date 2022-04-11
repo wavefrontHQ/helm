@@ -28,6 +28,7 @@ git push origin main --force
 GIT_BRANCH=main
 echo ${CHART_VERSION}
 mkdir charts/partners/wavefronthq/wavefront/1.10.3
+pwd
 echo "downloading tar file"
 sshpass -p "${OPENSHIFT_DEV_PWD}" scp root@${OPENSHIFT_VM}:/root/workspace/helm/_build/wavefront-${CHART_VERSION}.tgz ./charts/partners/wavefronthq/wavefront/1.10.3
 echo "downloading report"
