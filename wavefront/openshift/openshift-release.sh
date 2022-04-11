@@ -30,9 +30,9 @@ echo ${CHART_VERSION}
 mkdir charts/partners/wavefronthq/wavefront/1.10.3
 pwd
 echo "downloading tar file"
-sshpass -p "${OPENSHIFT_DEV_PWD}" scp root@${OPENSHIFT_VM}:/root/workspace/helm/_build/wavefront-${CHART_VERSION}.tgz ./charts/partners/wavefronthq/wavefront/1.10.3
+sshpass -p "${OPENSHIFT_CREDS_PSW}" scp root@${OPENSHIFT_VM}:/root/workspace/helm/_build/wavefront-${CHART_VERSION}.tgz charts/partners/wavefronthq/wavefront/1.10.3
 echo "downloading report"
-sshpass -p "${OPENSHIFT_DEV_PWD}" scp root@${OPENSHIFT_VM}:/root/workspace/helm/_build/report.yaml ./charts/partners/wavefronthq/wavefront/1.10.3
+sshpass -p "${OPENSHIFT_CREDS_PSW}" scp root@${OPENSHIFT_VM}:/root/workspace/helm/_build/report.yaml charts/partners/wavefronthq/wavefront/1.10.3
 
 # Commit and push the change to your forked version
 # Create a new PR against https://github.com/openshift-helm-charts/charts and this should trigger the openshift pipeline
