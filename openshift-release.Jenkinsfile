@@ -21,11 +21,11 @@ pipeline {
       }
     }
 
-//     stage("Create Helm Release PR") {
-//       steps {
-//         sh './wavefront/openshift/openshift-release.sh'
-//       }
-//     }
+    stage("Create Helm Release PR") {
+      steps {
+        sh './wavefront/openshift/openshift-release.sh'
+      }
+    }
 }
 
   post {
