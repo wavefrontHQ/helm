@@ -44,7 +44,7 @@ echo "Creating PR"
 PR_URL=$(curl \
   -X POST \
   -H "Authorization: token ${GITHUB_CREDS_PSW}" \
-  -d "{\"head\":\"${GIT_BRANCH}\",\"base\":\"main\",\"title\":\"Build openshift wavefront chart release ${CHART_VERSION}\"}" \
+  -d "{\"head\":\"wf-jenkins:${GIT_BRANCH}\",\"base\":\"main\",\"title\":\"Build openshift wavefront chart release ${CHART_VERSION}\"}" \
   https://api.github.com/repos/akodali18/openshift-helm-charts/pulls |
   jq -r '.html_url')
 
