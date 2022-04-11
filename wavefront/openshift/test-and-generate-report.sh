@@ -31,7 +31,7 @@ helm install wavefront ./wavefront --namespace wavefront \
 # Ensure that collector/proxy are at the correct version and the metrics are getting to nimba, then
 # TODO: Future (upgrade and downgrade test)
 REPO_ROOT=$(git rev-parse --show-toplevel)
-${REPO_ROOT}/wavefront/release/test-wavefront-metrics.sh -t ${WAVEFRONT_TOKEN} -n ${FRESH_INSTALL_CLUSTER_NAME}
+${REPO_ROOT}/wavefront/release/openshift/test-wavefront-metrics.sh -t ${WAVEFRONT_TOKEN} -n ${FRESH_INSTALL_CLUSTER_NAME}
 
 helm uninstall wavefront
 
