@@ -3,7 +3,8 @@
 WAVEFRONT_TOKEN=$1
 cd ~/workspace/helm
 git clean -dfx
-git checkout master
+# TODO :: Change to 'git checkout master'
+git checkout K8SSAAS-816-openshift-pipeline-2
 # Also make sure you are in a clean state
 git checkout .
 git pull
