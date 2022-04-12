@@ -33,5 +33,5 @@ PR_URL=$(curl \
   https://api.github.com/repos/wavefrontHQ/helm/pulls |
   jq -r '.html_url')
 
-echo "Please verify and merge PR : ${PR_URL}"
+echo "Next Human Steps :: Please verify and merge PR - ${PR_URL}"
 
