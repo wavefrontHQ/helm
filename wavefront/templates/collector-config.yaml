@@ -78,6 +78,12 @@ data:
         {{- end}}
       {{ end }}
 
+      {{- if .Values.collector.kubernetesControlPlane.enabled }}
+      kubernetes_control_plane_source:
+        collection:
+{{ tpl (toYaml .Values.collector.kubernetesControlPlane.collection) . | indent 10 }}
+      {{ end }}
+
       {{- if .Values.collector.hostOSMetrics }}
       telegraf_sources:
       - plugins: []

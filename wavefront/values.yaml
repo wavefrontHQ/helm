@@ -120,6 +120,10 @@ collector:
           - 'kubernetes.cadvisor.container.cpu.cfs.throttled.seconds.total.counter'
           - 'kubernetes.cadvisor.container.cpu.cfs.throttled.periods.total.counter'
 
+  kubernetesControlPlane:
+    enabled: false
+    collection:
+      interval: 120s
 
   ## Events can also be collected and sent to Wavefront.
   ## Requires Wavefront Proxy 6.0 or greater.
