@@ -378,11 +378,16 @@
           "default": {},
           "examples": [
             {
-              "enabled": false
+              "enabled": false,
+              "collection": {
+                "interval": "120s",
+                "timeout": "60s"
+              }
             }
           ],
           "required": [
-            "enabled"
+            "enabled",
+            "collection"
           ],
           "properties": {
             "enabled": {
@@ -394,6 +399,48 @@
               "examples": [
                 false
               ]
+            },
+            "collection": {
+              "$id": "#/properties/collector/properties/collection",
+              "type": "object",
+              "title": "The collection schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": {
+                "interval": "120s",
+                "timeout": "60s"
+              },
+              "examples": [
+                {
+                  "interval": "120s",
+                  "timeout": "60s"
+                }
+              ],
+              "required": [
+                "interval"
+              ],
+              "properties": {
+                "interval": {
+                  "$id": "#/properties/collector/properties/image/properties/interval",
+                  "type": "string",
+                  "title": "The interval schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": "120s",
+                  "examples": [
+                    "120s"
+                  ]
+                },
+                "timeout": {
+                  "$id": "#/properties/collector/properties/image/properties/timeout",
+                  "type": "string",
+                  "title": "The timeout schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": "60s",
+                  "examples": [
+                    "60s"
+                  ]
+                }
+              },
+              "additionalProperties": true
             }
           },
           "additionalProperties": true
