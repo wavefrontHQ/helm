@@ -92,26 +92,26 @@ collector:
   filters:
     # Optimized metrics collection to omit peripheral metrics.
     metricDenyList:
-      - 'kubernetes.sys_container.*'
-      - 'kubernetes.collector.runtime.*'
-      - 'kubernetes.*.network.rx_rate'
-      - 'kubernetes.*.network.rx_errors_rate'
-      - 'kubernetes.*.network.tx_rate'
-      - 'kubernetes.*.network.tx_errors_rate'
-      - 'kubernetes.*.memory.page_faults'
-      - 'kubernetes.*.memory.page_faults_rate'
-      - 'kubernetes.*.memory.major_page_faults'
-      - 'kubernetes.*.memory.major_page_faults_rate'
-      - 'kubernetes.*.filesystem.inodes'
-      - 'kubernetes.*.filesystem.inodes_free'
-      - 'kubernetes.*.ephemeral_storage.request'
-      - 'kubernetes.*.ephemeral_storage.limit'
+    - 'kubernetes.sys_container.*'
+    - 'kubernetes.collector.runtime.*'
+    - 'kubernetes.*.network.rx_rate'
+    - 'kubernetes.*.network.rx_errors_rate'
+    - 'kubernetes.*.network.tx_rate'
+    - 'kubernetes.*.network.tx_errors_rate'
+    - 'kubernetes.*.memory.page_faults'
+    - 'kubernetes.*.memory.page_faults_rate'
+    - 'kubernetes.*.memory.major_page_faults'
+    - 'kubernetes.*.memory.major_page_faults_rate'
+    - 'kubernetes.*.filesystem.inodes'
+    - 'kubernetes.*.filesystem.inodes_free'
+    - 'kubernetes.*.ephemeral_storage.request'
+    - 'kubernetes.*.ephemeral_storage.limit'
 
     # Filter out generated labels
     tagExclude:
-      - 'label?controller?revision*'
-      - 'label?pod?template*'
-      - 'annotation_kubectl_kubernetes_io_last_applied_configuration'
+    - 'label?controller?revision*'
+    - 'label?pod?template*'
+    - 'annotation_kubectl_kubernetes_io_last_applied_configuration'
 
   ## cAdvisor gives detailed metrics about container resource usage
   ## See https://github.com/google/cadvisor/blob/master/docs/storage/prometheus.md for details on available metrics.
@@ -119,8 +119,8 @@ collector:
     enabled: false
     filters:
       metricAllowList:
-        - 'kubernetes.cadvisor.container.cpu.cfs.throttled.seconds.total.counter'
-        - 'kubernetes.cadvisor.container.cpu.cfs.throttled.periods.total.counter'
+      - 'kubernetes.cadvisor.container.cpu.cfs.throttled.seconds.total.counter'
+      - 'kubernetes.cadvisor.container.cpu.cfs.throttled.periods.total.counter'
 
 
   ## Events can also be collected and sent to Wavefront.
@@ -375,7 +375,7 @@ serviceAccount:
 
 ## Optional array of imagePullSecrets containing private registry credentials
 ## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
-imagePullSecrets: [ ]
+imagePullSecrets: []
 # - name: secretName
 
 ## kube-state-metrics are used to get metrics about the state of the Kubernetes scheduler
