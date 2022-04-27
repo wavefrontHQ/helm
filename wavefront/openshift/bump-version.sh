@@ -29,7 +29,7 @@ git push --set-upstream origin $GIT_BRANCH
 PR_URL=$(curl \
   -X POST \
   -H "Authorization: token ${TOKEN}" \
-  -d "{\"head\":\"${GIT_BRANCH}\",\"base\":\"master\",\"title\":\"Bump helm chart version to ${NEW_CHART_VERSION}\",\"body\":\" ## Review checklist: \n - [ ]  Verify modifications to wavefront/openshift/values.yaml are reflected in wavefront/values.schema.json \n -[ ]  Verify any wavefront/README.md changes have made it to wavefront/openshift/README.md \n **Note**: Openshift does not support the option vspheretanzu.enabled so that will always be missing from the wavefront/openshift/README.md \"}" \
+  -d "{\"head\":\"${GIT_BRANCH}\",\"base\":\"master\",\"title\":\"Bump Openshift helm chart version to ${NEW_CHART_VERSION}\",\"body\":\" ## Review checklist: \n - [ ]  Verify modifications to wavefront/openshift/values.yaml are reflected in wavefront/values.schema.json \n -[ ]  Verify any wavefront/README.md changes have made it to wavefront/openshift/README.md \n **Note**: Openshift does not support the option vspheretanzu.enabled so that will always be missing from the wavefront/openshift/README.md \"}" \
   https://api.github.com/repos/wavefrontHQ/helm/pulls |
   jq -r '.html_url')
 
