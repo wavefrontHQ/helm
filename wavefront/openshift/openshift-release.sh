@@ -44,7 +44,7 @@ echo "NOTE :: Currently wf-jenkins is not allowed to submit the chart on behalf 
 #PR_URL=$(curl \
 #  -X POST \
 #  -H "Authorization: token ${GITHUB_CREDS_PSW}" \
-#  -d "{\"head\":\"wf-jenkins:${GIT_BRANCH}\",\"base\":\"main\",\"title\":\"DO NOT MERGE - Test Build openshift wavefront chart release ${CHART_VERSION}\"}" \
+#  -d "{\"head\":\"wf-jenkins:${GIT_BRANCH}\",\"base\":\"main\",\"title\":\"Build openshift wavefront chart release ${CHART_VERSION}\"}" \
 #  https://api.github.com/repos/openshift-helm-charts/charts/pulls |
 #  jq -r '.html_url')
 #
