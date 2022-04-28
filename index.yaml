@@ -81,6 +81,44 @@ entries:
     version: 0.1.0
   wavefront:
   - apiVersion: v2
+    appVersion: 1.11.0
+    created: "2022-04-28T13:11:20.569263255-07:00"
+    dependencies:
+    - condition: kubeStateMetrics.enabled
+      name: kube-state-metrics
+      repository: https://prometheus-community.github.io/helm-charts
+      version: ^4.7.0
+    description: Wavefront Collector for Kubernetes
+    digest: 10cafa47434d6bc0123cd5278ed0854476a440f2cae0edb2212c0adccb65d101
+    home: https://www.wavefront.com
+    keywords:
+    - metric
+    - monitoring
+    - observability
+    - alerting
+    maintainers:
+    - email: akodali@vmware.com
+      name: akodali18
+    - email: jcornish@vmware.com
+      name: johncornish
+    - email: jgee@vmware.com
+      name: josephgee
+    - email: shaoh@vmware.com
+      name: helen-shao
+    - email: matthewco@vmware.com
+      name: mceldeen
+    - email: mamichael@vmware.com
+      name: mmichael
+    - email: pselvaganesa@vmware.com
+      name: priyaselvaganesan
+    name: wavefront
+    sources:
+    - https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes
+    - https://github.com/wavefrontHQ/wavefront-proxy
+    urls:
+    - wavefront-1.11.0.tgz
+    version: 1.11.0
+  - apiVersion: v2
     appVersion: 1.10.0
     created: "2022-03-22T12:50:00.79845682-07:00"
     dependencies:
@@ -1871,4 +1909,4 @@ entries:
     urls:
     - wavefront-hpa-adapter-0.1.0.tgz
     version: 0.1.0
-generated: "2022-03-22T12:50:00.790264421-07:00"
+generated: "2022-04-28T13:11:20.564468579-07:00"
