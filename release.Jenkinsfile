@@ -1,10 +1,6 @@
 pipeline {
   agent any
 
-  tools {
-    go 'Go 1.17'
-  }
-
   environment {
     NEW_APP_VERSION = "${params.NEW_APP_VERSION}"
     NEW_CHART_VERSION = "${params.NEW_CHART_VERSION}"
