@@ -26,7 +26,7 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         command:
         - /bin/adapter
-        - -listen={{ .Values.adapter.listenPort }}
+        - -listen={{ .Values.adapter.targetPort }}
         {{- if .Values.proxy.enabled }}
         - -proxy={{ .Release.Name }}-wavefront-proxy.{{ .Release.Namespace }}.svc.cluster.local
         {{- else }}
