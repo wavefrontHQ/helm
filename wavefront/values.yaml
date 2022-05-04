@@ -126,7 +126,7 @@ collector:
   ## Events can also be collected and sent to Wavefront.
   ## Requires Wavefront Proxy 6.0 or greater.
   ## Events should be filtered before being enabled, see event filtering documentation for details
-  ## Ref: https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/blob/master/docs/filtering.md
+  ## Ref: https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/blob/main/docs/filtering.md
   events:
     enabled: false
   #   filters:
@@ -151,7 +151,7 @@ collector:
     #  annotationPrefix: "wavefront.com"
 
     ## Whether to enable runtime discovery configurations
-    ## Ref: https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/blob/master/docs/discovery.md#runtime-configurations
+    ## Ref: https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/blob/main/docs/discovery.md#runtime-configurations
     enableRuntimeConfigs: true
 
   ## Exclude resources from annotation-based discovery
