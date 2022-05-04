@@ -1,13 +1,15 @@
 image:
   repository: wavefronthq/prometheus-storage-adapter
-  tag: 1.0.6
+  tag: latest
   pullPolicy: IfNotPresent
 
 adapter:
   ## Port/address to listen on in the format `[address:]port`.
   ## If no address is specified, the adapter listens on all interfaces.
   ## Required
-  listenPort: 1234
+  listenPort: 80
+
+  targetPort: 1234
 
   ## The Wavefront proxy host address.
   ## The proxy can be anywhere network reachable including outside of the cluster.

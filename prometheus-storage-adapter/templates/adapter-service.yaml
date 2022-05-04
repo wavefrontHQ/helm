@@ -16,4 +16,4 @@ spec:
     - name: adapter-port
       protocol: TCP
       port: {{ .Values.adapter.listenPort }}
-      targetPort: {{ .Values.adapter.listenPort }}
+      targetPort: {{ .Values.adapter.targetPort }}
