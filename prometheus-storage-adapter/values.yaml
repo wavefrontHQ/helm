@@ -1,6 +1,6 @@
 image:
   repository: wavefronthq/prometheus-storage-adapter
-  tag: 1.0.2
+  tag: 1.0.6
   pullPolicy: IfNotPresent
 
 adapter:
