@@ -142,7 +142,7 @@ collector:
   #       - "Failed*"
 
   ## Rules based discovery configuration
-  ## Ref: https://github.com/wavefrontHQ/wavefront-kubernetes-collector/blob/master/docs/discovery.md
+  ## Ref: https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes/blob/main/docs/discovery.md
   discovery:
     enabled: true
 
