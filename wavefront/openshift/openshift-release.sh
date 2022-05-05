@@ -39,8 +39,6 @@ sshpass -p "${OPENSHIFT_CREDS_PSW}" scp root@${OPENSHIFT_VM}:/root/workspace/hel
 git add . && git commit -am "Build openshift wavefront chart release : ${CHART_VERSION}"
 git push origin $GIT_BRANCH
 
-echo "NOTE :: Currently wf-jenkins is not allowed to submit the chart on behalf of wavefronthq"
-# TODO:: Uncomment the below code after wf-jenkins is added as a contributor to wavefronthq helm chart
 PR_URL=$(curl \
   -X POST \
   -H "Authorization: token ${GITHUB_CREDS_PSW}" \
@@ -48,9 +46,7 @@ PR_URL=$(curl \
   https://api.github.com/repos/openshift-helm-charts/charts/pulls |
   jq -r '.html_url')
 
-
-#echo "Next Human Steps :: Please monitor openshift pipeline for PR - ${PR_URL}"
-echo "Next Human Steps :: Please create a PR manually to https://github.com/openshift-helm-charts/charts from https://github.com/wf-jenkins/charts:main"
+echo "Next Human Steps :: Please monitor openshift pipeline for PR - ${PR_URL}"
 
 
 
