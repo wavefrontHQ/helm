@@ -1,4 +1,4 @@
 annotations:
   charts.openshift.io/name: wavefront
 kubeVersion: ">= 1.19"
-version: 1.11.0
+version: 1.12.0-test
