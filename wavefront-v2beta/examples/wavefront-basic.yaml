@@ -5,8 +5,8 @@ metadata:
   name: wavefront
   namespace: wavefront
 spec:
-  clusterName: helm-operator-test-06-10-22 #{{ .Values.clusterName }}
-  wavefrontUrl: https://nimba.wavefront.com #{{ .Values.wavefrontUrl }}
+  clusterName: YOUR_CLUSTER_NAME
+  wavefrontUrl: YOUR_WAVEFRONT_URL
   dataCollection:
     metrics:
       enable: true
