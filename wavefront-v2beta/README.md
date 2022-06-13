@@ -35,6 +35,11 @@ helm install wavefront-v2beta wavefront/wavefront-v2beta --namespace wavefront
 The [wavefront-basic.yaml](./examples/wavefront-basic.yaml) file contains information about basic configuration
 options for the Wavefront Operator for Kubernetes.
 
+_Apply Custom Resource Configuration_
+```
+kubectl apply -f wavefront-basic.yaml
+```
+
 The **requried** fields are `clusterName` and `wavefrontUrl`.
 You will need to provide values for those options for a successful creation of operator custom resource.
 
