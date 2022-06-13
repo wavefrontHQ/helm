@@ -25,9 +25,15 @@ _If not already done, create a wavefront secret by providing `YOUR_WAVEFRONT_TOK
 kubectl create -n wavefront secret generic wavefront-secret --from-literal token=YOUR_WAVEFRONT_TOKEN
 ```
 
+_If not already done, add chart repo by running_
+```
+helm repo add wavefront-v2beta https://projects.registry.vmware.com/chartrepo/tanzu_observability
+helm repo update
+```
+
 _Install Wavefront Operator for Kubernetes_
 ```
-helm install wavefront-v2beta wavefront/wavefront-v2beta --namespace wavefront
+helm install wavefront-v2beta wavefront-v2beta/wavefront-v2beta --namespace wavefront
 ```
 
 ## Custom Resource Configuration
