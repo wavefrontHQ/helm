@@ -67,6 +67,7 @@ collector:
   # proxyAddress: wavefront-proxy:2878
 
   ## Enable metrics for control plane dashboard
+  ## If controlplane is omitted, controlplane.enabled is defaulted to false
   controlplane:
     enabled: true
     collection:
