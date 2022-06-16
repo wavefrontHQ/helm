@@ -66,7 +66,7 @@ collector:
   ## Required if `collector.useProxy` is true and `proxy.enabled` is false
   # proxyAddress: wavefront-proxy:2878
 
-  ## Enable metrics for control plane dashboard (default false)
+  ## Enable metrics for control plane dashboard
   controlplane:
     enabled: true
     collection:
