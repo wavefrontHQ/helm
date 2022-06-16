@@ -1,0 +1,29 @@
+apiVersion: v2
+name: wavefront-v2beta
+description: Operator for deploying Wavefront Collector for Kubernetes and Wavefront Proxy
+type: application
+version: 0.10.0
+appVersion: "0.10.0"
+keywords:
+- metric
+- monitoring
+- observability
+- alerting
+home: https://www.wavefront.com
+sources:
+- https://github.com/wavefrontHQ/wavefront-operator-for-kubernetes
+maintainers:
+- name: akodali18
+  email: akodali@vmware.com
+- name: johncornish
+  email: jcornish@vmware.com
+- name: josephgee
+  email: jgee@vmware.com
+- name: helen-shao
+  email: shaoh@vmware.com
+- name: mceldeen
+  email: matthewco@vmware.com
+- name: mmichael
+  email: mamichael@vmware.com
+- name: priyaselvaganesan
+  email: pselvaganesa@vmware.com
