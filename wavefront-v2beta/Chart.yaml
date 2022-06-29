@@ -2,8 +2,8 @@ apiVersion: v2
 name: wavefront-v2beta
 description: Operator for deploying Wavefront Collector for Kubernetes and Wavefront Proxy
 type: application
-version: 0.10.0
-appVersion: "0.10.0"
+version: 2.0.0
+appVersion: "2.0.0"
 keywords:
 - metric
 - monitoring
