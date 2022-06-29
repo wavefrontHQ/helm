@@ -13,5 +13,5 @@ You can learn more about the Wavefront and Kubernetes integration [here](https:/
 
 ## Installation and Configuration
 
-See [Wavefront Operator for Kubernetes](https://github.com/wavefrontHQ/wavefront-operator-for-kubernetes/tree/main)
+See [Wavefront Operator for Kubernetes](https://github.com/wavefrontHQ/wavefront-operator-for-kubernetes#installation)
 for Helm installation and configuration options.
