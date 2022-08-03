@@ -51,7 +51,7 @@ spec:
           {{- if .Values.proxy.histogramMinutePort }} --histogramMinuteListenerPorts {{ .Values.proxy.histogramMinutePort }}{{- end -}}
           {{- if .Values.proxy.histogramHourPort }} --histogramHourListenerPorts {{ .Values.proxy.histogramHourPort }}{{- end -}}
           {{- if .Values.proxy.histogramDayPort }} --histogramDayListenerPorts {{ .Values.proxy.histogramDayPort }}{{- end -}}
-          {{- if .Values.proxy.deltaCounterPort }} --deltaCounterPorts {{ .Values.proxy.deltaCounterPort }}{{- end -}}
+          {{- if .Values.proxy.deltaCounterPort }} --deltaCountersAggregationListenerPorts {{ .Values.proxy.deltaCounterPort }}{{- end -}}
           {{- if .Values.proxy.preprocessor }} --preprocessorConfigFile /etc/wavefront/wavefront-proxy/preprocessor/rules.yaml{{- end -}}
           {{- if .Values.proxy.httpProxyHost }} --proxyHost {{ .Values.proxy.httpProxyHost }}{{- end -}}
           {{- if .Values.proxy.httpProxyPort }} --proxyPort {{ .Values.proxy.httpProxyPort }}{{- end -}}
