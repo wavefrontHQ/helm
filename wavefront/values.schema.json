@@ -86,7 +86,7 @@
         "enabled": true,
         "image": {
           "repository": "projects.registry.vmware.com/tanzu_observability/proxy",
-          "tag": 11.0,
+          "tag": 11.3,
           "pullPolicy": "IfNotPresent"
         },
         "resources": {
@@ -935,7 +935,7 @@
           "enabled": true,
           "image": {
             "repository": "projects.registry.vmware.com/tanzu_observability/proxy",
-            "tag": 11.0,
+            "tag": 11.3,
             "pullPolicy": "IfNotPresent"
           },
           "resources": {
@@ -980,7 +980,7 @@
           "examples": [
             {
               "repository": "projects.registry.vmware.com/tanzu_observability/proxy",
-              "tag": 11.0,
+              "tag": 11.3,
               "pullPolicy": "IfNotPresent"
             }
           ],
@@ -1005,9 +1005,9 @@
               "type": "string",
               "title": "The tag schema",
               "description": "An explanation about the purpose of this instance.",
-              "default": "11.0.1",
+              "default": "11.3.1",
               "examples": [
-                "11.0.1"
+                "11.3.1"
               ]
             },
             "pullPolicy": {
