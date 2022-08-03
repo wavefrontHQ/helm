@@ -17,7 +17,7 @@ proxy:
   enabled: true
   image:
     repository: registry.connect.redhat.com/wavefronthq/proxy
-    tag: "11.0"
+    tag: "11.3"
     pullPolicy: IfNotPresent
 
 openshift:
