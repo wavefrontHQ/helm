@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -ex
 
 cd "$(dirname "$0")"
 
@@ -11,6 +11,9 @@ helm dependency update
 
 cd .. # ./
 ./release.sh wavefront
+
+git status
+git diff
 
 GIT_BRANCH="gh-pages-${NEW_CHART_VERSION}"
 
