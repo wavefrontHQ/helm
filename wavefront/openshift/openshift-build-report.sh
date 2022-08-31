@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -ex
 
 # Runs the chart-verifier test
 # TODO: Revisit if we should send password (install other tools like sshpass?)

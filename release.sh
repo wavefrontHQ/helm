@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -ex
 
 function print_usage_and_exit() {
     echo "Failure: $1"

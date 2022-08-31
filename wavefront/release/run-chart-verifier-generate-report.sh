@@ -1,5 +1,4 @@
-#!/usr/bin/env bash
-set -e
+#!/bin/bash -ex
 
 REPO_ROOT=$(git rev-parse --show-toplevel)
 source "$REPO_ROOT"/wavefront/release/k8s-utils.sh

@@ -1,6 +1,13 @@
-#!/bin/bash -e
+#!/bin/bash -ex
 
 WAVEFRONT_TOKEN=$1
+
+if ! [ -x "$(command -v yq)" ]; then
+  curl -H "Authorization: token ${GITHUB_CREDS_PSW}" -L "https://github.com/mikefarah/yq/releases/download/v4.27.3/yq_linux_amd64" > ./yq
+  chmod +x ./yq
+  sudo mv ./yq /usr/local/bin
+fi
+
 cd ~/workspace/helm
 git clean -dfx
 git checkout master

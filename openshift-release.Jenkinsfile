@@ -16,6 +16,9 @@ pipeline {
     }
 
     stage("Openshift Build Report") {
+      options {
+        timeout(time: 30, unit: 'MINUTES')
+      }
       steps {
         sh './wavefront/openshift/openshift-build-report.sh'
       }
