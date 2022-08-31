@@ -29,9 +29,9 @@ GIT_BRANCH=main
 echo ${CHART_VERSION}
 mkdir charts/partners/wavefronthq/wavefront/${CHART_VERSION}
 echo "downloading tgz"
-sshpass -p "${OPENSHIFT_CREDS_PSW}" scp root@${OPENSHIFT_VM}:/root/workspace/helm/_build/wavefront-${CHART_VERSION}.tgz charts/partners/wavefronthq/wavefront/${CHART_VERSION}
+sshpass -p "${OPENSHIFT_VM_PSW}" scp root@${OPENSHIFT_VM_IP}:/root/workspace/helm/_build/wavefront-${CHART_VERSION}.tgz charts/partners/wavefronthq/wavefront/${CHART_VERSION}
 echo "downloading report"
-sshpass -p "${OPENSHIFT_CREDS_PSW}" scp root@${OPENSHIFT_VM}:/root/workspace/helm/_build/report.yaml charts/partners/wavefronthq/wavefront/${CHART_VERSION}
+sshpass -p "${OPENSHIFT_VM_PSW}" scp root@${OPENSHIFT_VM_IP}:/root/workspace/helm/_build/report.yaml charts/partners/wavefronthq/wavefront/${CHART_VERSION}
 
 # Commit and push the change to your forked version
 # Create a new PR against https://github.com/openshift-helm-charts/charts and this should trigger the openshift pipeline
