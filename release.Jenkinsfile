@@ -30,6 +30,9 @@ pipeline {
     }
     stage("Create GitHub Pages PR") {
       steps {
+        sh 'git config --global user.email "svc.wf-jenkins@vmware.com"'
+        sh 'git config --global user.name "svc.wf-jenkins"'
+        sh 'git remote set-url origin https://${TOKEN}@github.com/wavefronthq/helm.git'
         sh './wavefront/release/create-release-pr.sh'
       }
     }
