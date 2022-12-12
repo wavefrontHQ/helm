@@ -1,5 +1,10 @@
 # Wavefront Collector for Kubernetes
 
+**Note:** We will deprecate the Helm installed Wavefront Collector for Kubernetes and Wavefront proxy next year.
+Our new Kubernetes Operator replaces the Helm installed Wavefront Collector for Kubernetes and Wavefront proxy for all
+Kubernetes Distributions except for OpenShift Container Platform. For more information, see [Obsolescence
+and Remediation](https://docs.wavefront.com/wavefront_obsolescence_policy.html#kubernetes-integration).
+
 [Wavefront](https://wavefront.com) is a cloud-native monitoring and analytics platform that provides
 three dimensional microservices observability with metrics, histograms and OpenTracing-compatible distributed tracing.
 
