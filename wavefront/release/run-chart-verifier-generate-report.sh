@@ -21,7 +21,7 @@ else
 fi
 
 
-VERIFY_YAML=$(docker run --rm \
+VERIFY_YAML=$(docker run --rm --net=host \
   -v "$REPO_ROOT":/charts:z \
   -v "${KUBE_CONFIG_PATH}":/etc/kubernetes/config:z \
   -e KUBECONFIG=/etc/kubernetes/config \
