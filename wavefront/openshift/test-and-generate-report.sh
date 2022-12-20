@@ -23,7 +23,7 @@ mv merged-values.yaml wavefront/values.yaml
 cp wavefront/openshift/README.md wavefront/README.md
 
 oc project wavefront
-helm uninstall wavefront
+helm uninstall wavefront || true
 cd wavefront
 helm dependency update
 cd ..
@@ -40,7 +40,7 @@ helm install wavefront ./wavefront --namespace wavefront \
 REPO_ROOT=$(git rev-parse --show-toplevel)
 ${REPO_ROOT}/wavefront/openshift/test-wavefront-metrics.sh -t ${WAVEFRONT_TOKEN} -n ${FRESH_INSTALL_CLUSTER_NAME}
 
-helm uninstall wavefront
+helm uninstall wavefront || true
 
 # Run ./wavefront/release/run-chart-verifier-generate-report.sh to generate report.yaml under _build directory.
 ./wavefront/release/run-chart-verifier-generate-report.sh

@@ -14,9 +14,16 @@ popd
 
 ${REPO_ROOT}/release.sh wavefront
 
-VERIFY_YAML=$(docker run --rm \
-  -v "$REPO_ROOT":/charts \
-  -v ~/.kube/config:/etc/kubernetes/config \
+if [[ -z "${KUBECONFIG}" ]]; then
+  KUBE_CONFIG_PATH="~/.kube/config"
+else
+  KUBE_CONFIG_PATH="${KUBECONFIG}"
+fi
+
+
+VERIFY_YAML=$(docker run --rm --net=host \
+  -v "$REPO_ROOT":/charts:z \
+  -v "${KUBE_CONFIG_PATH}":/etc/kubernetes/config:z \
   -e KUBECONFIG=/etc/kubernetes/config \
   quay.io/redhat-certification/chart-verifier verify \
     --set chart-testing.namespace=wavefront \
