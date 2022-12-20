@@ -9,11 +9,11 @@ if ! [ -x "$(command -v yq)" ]; then
 fi
 
 cd ~/workspace/helm
-#git clean -dfx
-#git checkout master
+git clean -dfx
+git checkout master
 # Also make sure you are in a clean state
-#git checkout .
-#git pull
+git checkout .
+git pull
 rm -rf _build/*
 # Update Chart.yaml and values.yaml template values for OpenShift
 yq ea '. as $item ireduce ({}; . * $item )' wavefront/Chart.yaml wavefront/openshift/Chart.yaml > merged-Chart.yaml
