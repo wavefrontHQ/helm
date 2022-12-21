@@ -2,8 +2,8 @@ pipeline {
   agent any
 
   environment {
-    OPENSHIFT_VM_IP = credentials("OPENSHIFT_VM_IP")
-    OPENSHIFT_VM_PSW = credentials("OPENSHIFT_VM_PSW")
+    OPENSHIFT_VM_IP = credentials("OPENSHIFT_VM")
+    OPENSHIFT_VM_PSW = credentials("OPENSHIFT_CREDS_PSW")
     GITHUB_CREDS_PSW = credentials("GITHUB_TOKEN")
     WAVEFRONT_TOKEN = credentials('WAVEFRONT_TOKEN_NIMBA')
   }
