@@ -15,13 +15,19 @@ sources:
 maintainers:
   - name: akodali18
     email: akodali@vmware.com
+  - name: ginwoopak
+    email: pginwoo@vmware.com
+  - name: iplay88keys
+    email: jalvis@vmware.com
+  - name: jerrybelmonte
+    email: bjerry@vmware.com
   - name: johncornish
     email: jcornish@vmware.com
   - name: josephgee
     email: jgee@vmware.com
-  - name: helen-shao
-    email: shaoh@vmware.com
-  - name: mceldeen
+  - name: jyuqi
+    email: jyuqi@vmware.com
+  - name: m25n
     email: matthewco@vmware.com
   - name: mmichael
     email: mamichael@vmware.com
