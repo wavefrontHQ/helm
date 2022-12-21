@@ -20,8 +20,7 @@ else
   KUBE_CONFIG_PATH="${KUBECONFIG}"
 fi
 
-
-VERIFY_YAML=$(docker run --rm --net=host \
+VERIFY_YAML=$(podman run --rm --net=host \
   -v "$REPO_ROOT":/charts:z \
   -v "${KUBE_CONFIG_PATH}":/etc/kubernetes/config:z \
   -e KUBECONFIG=/etc/kubernetes/config \
