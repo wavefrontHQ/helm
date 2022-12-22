@@ -20,13 +20,13 @@ pipeline {
      stage("Run Tests on GKE") {
        environment {
          GCP_PROJECT = "wavefront-gcp-dev"
-         GKE_CLUSTER_NAME = "k8po-jenkins-pr-testing"
+         GKE_CLUSTER_NAME = "k8po-jenkins-ci-zone-a"
          WAVEFRONT_TOKEN = credentials('WAVEFRONT_TOKEN_NIMBA')
        }
        steps {
          withEnv(["PATH+EXTRA=${PWD}/node-v16.14.0-linux-x64/bin", "PATH+GCLOUD=${HOME}/google-cloud-sdk/bin"]) {
              lock("integration-test-gke") {
-             sh 'gcloud container clusters get-credentials ${GKE_CLUSTER_NAME} --zone us-central1-c --project ${GCP_PROJECT}'
+             sh 'gcloud container clusters get-credentials ${GKE_CLUSTER_NAME} --zone us-central1-a --project ${GCP_PROJECT}'
              script {
                env.PREV_CHART_VERSION = sh(returnStdout: true, script: "curl -s -X 'GET' 'https://artifacthub.io/api/v1/packages/helm/wavefront/wavefront' -H 'accept: application/json' | jq -r '.available_versions[0].version'").trim()
              }
