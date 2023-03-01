@@ -18,21 +18,25 @@ You can learn more about the Wavefront and Kubernetes integration [here](https:/
 
 ## Installation
 
-**Helm 2**
+**Helm 3+**
+
+_If not already done, create a namespace to install this chart_
 ```
-helm install wavefront/wavefront --name wavefront --namespace wavefront \
+helm repo add wavefront https://wavefronthq.github.io/helm/
+
+helm repo update
+
+kubectl create namespace wavefront
+
+helm install wavefront wavefront/wavefront --namespace wavefront \
     --set clusterName=<K8s-CLUSTER-NAME> \
     --set wavefront.url=https://<YOUR_CLUSTER>.wavefront.com \
     --set wavefront.token=<YOUR_API_TOKEN>
 ```
 
-**Helm 3+**
-
-_If not already done, create a namespace to install this chart_
+**Helm 2**
 ```
-kubectl create namespace wavefront
-
-helm install wavefront wavefront/wavefront --namespace wavefront \
+helm install wavefront/wavefront --name wavefront --namespace wavefront \
     --set clusterName=<K8s-CLUSTER-NAME> \
     --set wavefront.url=https://<YOUR_CLUSTER>.wavefront.com \
     --set wavefront.token=<YOUR_API_TOKEN>

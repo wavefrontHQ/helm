@@ -33,6 +33,10 @@ istioctl install --set values.prometheus.enabled=true --set values.telemetry.v1.
 
 _If not already done, create a namespace to install this chart_
 ```
+helm repo add wavefront https://wavefronthq.github.io/helm/
+
+helm repo update
+
 kubectl create namespace wavefront-istio
 
 helm install wavefront-adapter-for-istio wavefront/wavefront-adapter-for-istio --namespace wavefront-istio \

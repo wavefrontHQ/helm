@@ -10,20 +10,24 @@ You can learn more about the Wavefront and Kubernetes integration [here](https:/
 
 ## Installation
 
-**Helm 2**
-```
-helm install wavefront/wavefront-hpa-adapter --name wavefront-adapter --namespace wavefront-adapter \
-    --set wavefront.url=https://<YOUR_CLUSTER>.wavefront.com \
-    --set wavefront.token=<YOUR_API_TOKEN>
-```
-
 **Helm 3+**
 
 _If not already done, create a namespace to install this chart_
 ```
+helm repo add wavefront https://wavefronthq.github.io/helm/
+
+helm repo update
+
 kubectl create namespace wavefront-adapter
 
 helm install wavefront-adapter wavefront/wavefront-hpa-adapter --namespace wavefront-adapter \
+    --set wavefront.url=https://<YOUR_CLUSTER>.wavefront.com \
+    --set wavefront.token=<YOUR_API_TOKEN>
+```
+
+**Helm 2**
+```
+helm install wavefront/wavefront-hpa-adapter --name wavefront-adapter --namespace wavefront-adapter \
     --set wavefront.url=https://<YOUR_CLUSTER>.wavefront.com \
     --set wavefront.token=<YOUR_API_TOKEN>
 ```
