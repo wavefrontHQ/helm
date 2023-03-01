@@ -7,7 +7,7 @@
 This chart will deploy the [Prometheus Storage Adapter](https://github.com/wavefrontHQ/prometheus-storage-adapter) and the [Wavefront Proxy](https://docs.wavefront.com/proxies.html) to your Kubernetes cluster.
 
 ## Installation
-### Helm 3
+### Helm 3+
 
 _If not already done, create a namespace to install this chart_
 ```
