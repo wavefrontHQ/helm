@@ -86,7 +86,7 @@
         "enabled": true,
         "image": {
           "repository": "projects.registry.vmware.com/tanzu_observability/proxy",
-          "tag": 11.3,
+          "tag": 12.3,
           "pullPolicy": "IfNotPresent"
         },
         "resources": {
