@@ -17,7 +17,7 @@
         "enabled": true,
         "image": {
           "repository": "projects.registry.vmware.com/tanzu_observability/kubernetes-collector",
-          "tag": "1.7.4",
+          "tag": "1.13.0",
           "pullPolicy": "IfNotPresent"
         },
         "useDaemonset": true,
@@ -204,7 +204,7 @@
           "enabled": true,
           "image": {
             "repository": "projects.registry.vmware.com/tanzu_observability/kubernetes-collector",
-            "tag": "1.7.4",
+            "tag":"1.13.0",
             "pullPolicy": "IfNotPresent"
           },
           "useDaemonset": true,
@@ -307,7 +307,7 @@
           "examples": [
             {
               "repository": "projects.registry.vmware.com/tanzu_observability/kubernetes-collector",
-              "tag": "1.7.4",
+              "tag": "1.13.0",
               "pullPolicy": "IfNotPresent"
             }
           ],
@@ -935,7 +935,7 @@
           "enabled": true,
           "image": {
             "repository": "projects.registry.vmware.com/tanzu_observability/proxy",
-            "tag": 11.3,
+            "tag": 12.3,
             "pullPolicy": "IfNotPresent"
           },
           "resources": {
@@ -980,7 +980,7 @@
           "examples": [
             {
               "repository": "projects.registry.vmware.com/tanzu_observability/proxy",
-              "tag": 11.3,
+              "tag": 12.3,
               "pullPolicy": "IfNotPresent"
             }
           ],
@@ -1005,9 +1005,9 @@
               "type": "string",
               "title": "The tag schema",
               "description": "An explanation about the purpose of this instance.",
-              "default": "11.3.1",
+              "default": "12.3",
               "examples": [
-                "11.3.1"
+                "12.3"
               ]
             },
             "pullPolicy": {
