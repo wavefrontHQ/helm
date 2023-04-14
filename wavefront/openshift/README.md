@@ -38,7 +38,7 @@ helm install wavefront openshift-helm-charts/wavefronthq-wavefront \
 The [values.yaml](./values.yaml) file contains information about all configuration
 options for this chart.
 
-The **requried** options are `clusterName`, `wavefront.url` and `wavefront.token`.
+The **required** options are `clusterName`, `wavefront.url` and `wavefront.token`.
 You will need to provide values for those options for a successful installation of the chart.
 
 ## Parameters
