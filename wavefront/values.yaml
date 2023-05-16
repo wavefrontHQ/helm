@@ -241,7 +241,7 @@ proxy:
   enabled: true
   image:
     repository: projects.registry.vmware.com/tanzu_observability/proxy
-    tag: "12.4"
+    tag: "12.4.1"
     pullPolicy: IfNotPresent
 
   ## Wavefront Collector resource requests and limits
