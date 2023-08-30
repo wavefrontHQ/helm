@@ -21,10 +21,22 @@ spec:
       - name: custom-metrics-apiserver
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+      {{- if .Values.wavefront.secret }}
+        env:
+        - name: WAVEFRONT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.wavefront.secret.name }}
+              key: api-token
+      {{- end }}}
         args:
         - "/wavefront-adapter"
         - "--wavefront-url={{ required "You must configure a valid URL" .Values.wavefront.url }}"
+      {{- if .Values.wavefront.token }}
         - "--wavefront-token={{ required "You must configure a valid Token" .Values.wavefront.token }}"
+      {{- else }}
+        - "--wavefront-token=${WAVEFRONT_TOKEN}"
+      {{- end }}
         - "--wavefront-metric-prefix={{ .Values.adapter.metricPrefix }}"
         - "--metrics-relist-interval={{ .Values.adapter.metricRelistInterval }}"
         - "--api-client-timeout={{ .Values.adapter.apiClientTimeout }}"
