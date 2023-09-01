@@ -14,11 +14,21 @@ if [[ -z $CHART_NAME ]] ; then
 fi
 echo "Chart name: $CHART_NAME"
 
+if [[ ! -d "./${CHART_NAME}" ]] ; then
+    echo "Failure: helm release folder not found"
+    exit 1
+fi
+
 helm_path=$(which helm || echo "")
 if [[ -z $helm_path ]] ; then
     echo "Failure: helm not found"
     exit 1
 fi
+
+# update helm dependencies
+pushd $CHART_NAME
+    helm dependency update
+popd $CHART_NAME
 
 # initialize build variables
 BUILD_DIR="./_build"
@@ -43,4 +53,8 @@ echo "generating updated index.yaml"
 helm repo index --merge "${INDEX_FILE}" ${BUILD_DIR}
 
 echo "Complete. new index and package files can be found under: ${BUILD_DIR}"
-echo "Next Human Steps :: Run 'git checkout gh-pages && cp ${BUILD_DIR}/* .' and commit to update the helm chart"
+echo "Next Human Steps :: Run 'git checkout gh-pages && git pull' to update the gh-pages branch"
+echo "Next Human Steps :: Run 'git checkout -b gh-pages-${CHART_NAME}-<NEW_VERSION_NUMBER>' to create a new branch"
+echo "Next Human Steps :: Run 'cp ${BUILD_DIR}/* .' to copy the contents of the ./_build directory"
+echo "Next Human Steps :: Run 'git commit -am \"Release ${CHART_NAME} chart <NEW_CHART_VERSION>\"' to commit and update the helm chart"
+echo "Next Human Steps :: Push your changes to GitHub and create a PR against the 'gh-pages' branch"
