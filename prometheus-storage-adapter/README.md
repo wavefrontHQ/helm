@@ -11,6 +11,10 @@ This chart will deploy the [Prometheus Storage Adapter](https://github.com/wavef
 
 _If not already done, create a namespace to install this chart_
 ```
+helm repo add wavefront https://wavefronthq.github.io/helm/
+
+helm repo update
+
 kubectl create namespace prom-adapter
 
 helm install prom-adapter wavefront/prometheus-storage-adapter --namespace prom-adapter \
