@@ -27,8 +27,8 @@ spec:
           valueFrom:
             secretKeyRef:
               name: {{ .Values.wavefront.secret.name }}
-              key: api-token
-      {{- end }}}
+              key: {{ .Values.wavefront.secret.key }}
+      {{- end }}
         args:
         - "/wavefront-adapter"
         - "--wavefront-url={{ required "You must configure a valid URL" .Values.wavefront.url }}"

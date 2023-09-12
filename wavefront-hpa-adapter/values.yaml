@@ -18,7 +18,7 @@ wavefront:
     name: ""
 
     # Key in the secret containing the Wavefront API token
-    key: "api-token"
+    key: ""
 
 adapter:
   # Metrics under this prefix are exposed via the custom metrics API
