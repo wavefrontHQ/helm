@@ -13,12 +13,7 @@ wavefront:
   token: YOUR_API_TOKEN
 
   # OPTIONAL, Allow to use a secret to pull the credentials.
-  secret:
-    # Name of the secret containing the Wavefront API token
-    name: ""
-
-    # Key in the secret containing the Wavefront API token
-    key: ""
+  tokenFromSecret: ""
 
 adapter:
   # Metrics under this prefix are exposed via the custom metrics API

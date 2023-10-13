@@ -48,8 +48,7 @@ The following tables lists the configurable parameters of the Wavefront chart an
 | --- | --- | --- |
 | `wavefront.url` | Wavefront URL for your cluster | `https://YOUR_CLUSTER.wavefront.com` |
 | `wavefront.token` | Wavefront API Token | `YOUR_API_TOKEN` |
-| `wavefront.secret.name` | Wavefront secret name API Token | `nil` |
-| `wavefront.secret.key` | Wavefront secret key API Token | `nil` |
+| `wavefront.secret.tokenFromSecret` | Name of the secret where the api token is stored | `nil` |
 | `image.repository` | Wavefront HPA adapter image registry and name | `wavefronthq/wavefront-hpa-adapter` |
 | `image.tag` | Wavefront HPA adapter image tag | `{TAG_NAME}` |
 | `image.pullPolicy` | Wavefront HPA adapter image pull policy | `IfNotPresent` |
