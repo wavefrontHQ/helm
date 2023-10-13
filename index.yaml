@@ -2118,9 +2118,9 @@ entries:
   wavefront-hpa-adapter:
   - apiVersion: v1
     appVersion: 0.9.12
-    created: "2023-10-12T15:26:58.086993-07:00"
+    created: "2023-10-12T17:36:25.448986-07:00"
     description: Wavefront HPA Adapter for Kubernetes
-    digest: 5c3a0039a9d8b29724222fbb64613c8e7970bc12be8fc94d3f65885266dda692
+    digest: 40f0e1d3aca871aa15a6e3da65e471bba96aa82e221ef761be0b683ec336340f
     home: https://www.wavefront.com
     keywords:
     - metric
@@ -2395,4 +2395,4 @@ entries:
     urls:
     - wavefront-hpa-adapter-0.1.0.tgz
     version: 0.1.0
-generated: "2023-10-12T15:26:58.083087-07:00"
+generated: "2023-10-12T17:36:25.448008-07:00"
