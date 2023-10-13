@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -e
 
 function print_usage_and_exit() {
@@ -18,6 +18,7 @@ if [[ ! -d "./${CHART_NAME}" ]] ; then
     echo "Failure: helm release folder not found"
     exit 1
 fi
+echo "Helm release folder: ./${CHART_NAME}"
 
 helm_path=$(which helm || echo "")
 if [[ -z $helm_path ]] ; then
@@ -26,35 +27,35 @@ if [[ -z $helm_path ]] ; then
 fi
 
 # update helm dependencies
-pushd $CHART_NAME
+echo "Updating charts/ based on the contents of Chart.yaml"
+pushd $CHART_NAME >/dev/null
     helm dependency update
-popd $CHART_NAME
+popd >/dev/null
 
 # initialize build variables
 BUILD_DIR="./_build"
 INDEX_FILE=${BUILD_DIR}/index.yaml
 
 rm -rf ${BUILD_DIR}
-echo "using build directory: ${BUILD_DIR}"
+echo "Using build directory: ${BUILD_DIR}"
 mkdir ${BUILD_DIR}
 
 # create new tgz
-echo "creating new \"${CHART_NAME}\" helm package"
+echo "Creating new \"${CHART_NAME}\" helm package"
 if ! helm package -d ${BUILD_DIR} "./${CHART_NAME}"; then
     echo "Failure: error creating helm package"
     exit 1
 fi
 
 # download current index.yaml
-echo "downloading latest index.yaml to: ${INDEX_FILE}"
-curl -sL https://raw.githubusercontent.com/wavefrontHQ/helm/gh-pages/index.yaml > ${INDEX_FILE}
+echo "Downloading latest index.yaml to: ${INDEX_FILE}"
+curl -sSL https://raw.githubusercontent.com/wavefrontHQ/helm/gh-pages/index.yaml > ${INDEX_FILE}
 
-echo "generating updated index.yaml"
+echo "Generating updated index.yaml"
 helm repo index --merge "${INDEX_FILE}" ${BUILD_DIR}
 
-echo "Complete. new index and package files can be found under: ${BUILD_DIR}"
-echo "Next Human Steps :: Run 'git checkout gh-pages && git pull' to update the gh-pages branch"
+echo "Complete. New index and package files can be found under: ${BUILD_DIR}"
+echo "Next Human Steps :: Run 'git checkout gh-pages && cp ${BUILD_DIR}/* . && git add .' and commit to update the helm chart"
 echo "Next Human Steps :: Run 'git checkout -b gh-pages-${CHART_NAME}-<NEW_VERSION_NUMBER>' to create a new branch"
-echo "Next Human Steps :: Run 'cp ${BUILD_DIR}/* .' to copy the contents of the ./_build directory"
-echo "Next Human Steps :: Run 'git commit -am \"Release ${CHART_NAME} chart <NEW_CHART_VERSION>\"' to commit and update the helm chart"
+echo "Next Human Steps :: Run 'git commit -m \"Release ${CHART_NAME} chart version <NEW_CHART_VERSION>\"' to commit and update the helm chart"
 echo "Next Human Steps :: Push your changes to GitHub and create a PR against the 'gh-pages' branch"
