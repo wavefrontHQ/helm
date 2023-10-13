@@ -3,14 +3,14 @@ entries:
   prometheus-storage-adapter:
   - apiVersion: v1
     appVersion: 1.0.9
-    created: "2023-10-12T15:15:36.157511-07:00"
+    created: "2023-10-12T17:31:15.807208-07:00"
     dependencies:
     - condition: proxy.enabled
       name: wavefront
       repository: https://wavefronthq.github.io/helm/
       version: ^1.11.0
     description: Wavefront Remote Storage Adapter for Prometheus
-    digest: 2a1579b74ec17c22c93d96238d9af632880c63303931d722adb4477ccccf93da
+    digest: 44ee16df3b19ef6f96de02f42674ded40cd0566be64a110a7b97a942ec2801e6
     home: https://www.wavefront.com
     keywords:
     - metric
