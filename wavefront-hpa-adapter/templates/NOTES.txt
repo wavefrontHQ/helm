@@ -1,5 +1,5 @@
 {{- $validUrl := and (.Values.wavefront.url) (ne .Values.wavefront.url "https://YOUR_CLUSTER.wavefront.com") -}}
-{{- $validToken := and (.Values.wavefront.token) (ne .Values.wavefront.token "YOUR_API_TOKEN") -}}
+{{- $validToken := or (.Values.wavefront.token) (.Values.wavefront.tokenFromSecret) -}}
 
 {{- if or (not $validUrl) (not $validToken) }}
 

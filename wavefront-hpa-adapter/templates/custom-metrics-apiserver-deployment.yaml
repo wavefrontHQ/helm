@@ -33,7 +33,7 @@ spec:
         - "/wavefront-adapter"
         - "--wavefront-url={{ required "You must configure a valid URL" .Values.wavefront.url }}"
       {{- if .Values.wavefront.tokenFromSecret }}
-        - "--wavefront-token=${WAVEFRONT_TOKEN}"
+        - "--wavefront-token=$(WAVEFRONT_TOKEN)"
       {{- else }}
         - "--wavefront-token={{ required "You must configure a valid Token" .Values.wavefront.token }}"
       {{- end }}
