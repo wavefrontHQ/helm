@@ -31,11 +31,19 @@ spec:
         env:
         - name: WAVEFRONT_URL
           value: {{ .Values.wavefront.url }}/api
+        {{- if .Values.wavefront.tokenFromSecret }}
+        - name: WAVEFRONT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.wavefront.tokenFromSecret }}
+              key: api-token
+        {{- else }}
         - name: WAVEFRONT_TOKEN
           valueFrom:
             secretKeyRef:
               name: {{ template "wavefront.fullname" . }}
               key: api-token
+        {{- end }}
         - name: WAVEFRONT_PROXY_ARGS
           value: {{ .Values.proxy.args }}
           {{- if .Values.proxy.tracePort }} --traceListenerPorts {{ .Values.proxy.tracePort }}{{- end -}}
