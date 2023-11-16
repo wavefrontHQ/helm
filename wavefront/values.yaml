@@ -13,6 +13,8 @@ installationMethod: helm
 wavefront:
   url: https://YOUR_CLUSTER.wavefront.com
   token: YOUR_API_TOKEN
+# OPTIONAL, Allow to use a secret to pull the credentials, the required key is `api-token`
+  tokenFromSecret: ""
 
 
 ## Wavefront Collector is responsible to get all Kubernetes metrics from your cluster.
