@@ -307,6 +307,9 @@ proxy:
   ## Custom application name for traces received on Jaeger's traceJaegerListenerPorts or traceJaegerHttpListenerPorts.
   # traceJaegerApplicationName: MyJaegerDemo
 
+  ##  A name unique across your account representing the name of the proxy. The value is used for the source tag of the proxy metrics, such as JVM statistics, per-proxy point rates, and so on.                                      |                                                                          |
+  # proxyName: "My source name"
+
   ## Custom application name for traces received on Zipkin's traceZipkinListenerPorts.
   # traceZipkinApplicationName: MyZipkinDemo
 

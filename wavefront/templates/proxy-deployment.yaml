@@ -57,6 +57,7 @@ spec:
           {{- if .Values.proxy.httpProxyPort }} --proxyPort {{ .Values.proxy.httpProxyPort }}{{- end -}}
           {{- if .Values.proxy.httpProxyUser }} --proxyUser {{ .Values.proxy.httpProxyUser }}{{- end -}}
           {{- if .Values.proxy.httpProxyPassword }} --proxyPassword {{ .Values.proxy.httpProxyPassword }}{{- end -}}
+          {{- if .Values.proxy.proxyName }} --proxyName {{ .Values.proxy.proxyName }}{{- end -}}
         {{- if .Values.proxy.heap }}
         - name: JAVA_HEAP_USAGE
           value: {{ .Values.proxy.heap | quote }}
