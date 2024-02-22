@@ -57,6 +57,9 @@ spec:
           {{- if .Values.proxy.httpProxyPort }} --proxyPort {{ .Values.proxy.httpProxyPort }}{{- end -}}
           {{- if .Values.proxy.httpProxyUser }} --proxyUser {{ .Values.proxy.httpProxyUser }}{{- end -}}
           {{- if .Values.proxy.httpProxyPassword }} --proxyPassword {{ .Values.proxy.httpProxyPassword }}{{- end -}}
+          {{- if .Values.proxy.graphitePort }} --graphitePorts {{ .Values.proxy.graphitePort }}{{- end -}}
+          {{- if .Values.proxy.graphiteDelimiters }} --graphiteDelimiters {{ .Values.proxy.graphiteDelimiters }}{{- end -}}
+          {{- if .Values.proxy.graphiteFormat }} --graphiteFormat {{ .Values.proxy.graphiteFormat }}{{- end -}}
         {{- if .Values.proxy.heap }}
         - name: JAVA_HEAP_USAGE
           value: {{ .Values.proxy.heap | quote }}
@@ -102,6 +105,10 @@ spec:
         {{- end }}
         {{- if .Values.proxy.deltaCounterPort }}
         - containerPort: {{ .Values.proxy.deltaCounterPort }}
+          protocol: TCP
+        {{- end }}
+        {{- if .Values.proxy.graphitePort }}
+        - containerPort: {{ .Values.proxy.graphitePort }}
           protocol: TCP
         {{- end }}
         resources:

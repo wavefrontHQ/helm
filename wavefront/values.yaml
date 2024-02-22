@@ -330,6 +330,17 @@ proxy:
   ## This is usually 50000
   # deltaCounterPort: 50000
 
+  ## The port number the proxy will listen on for metrics in Graphite data format.
+  ## This is usually 2003
+  # graphitePort: 2003
+
+  ## Characters that should be replaced by dots, in case they were escaped within Graphite and collectd before sending.
+  ## A common delimiter is underscore
+  # graphiteDelimiters: _
+
+  ## Indexes of fields within Graphite and collectd metric names that correspond to a hostname.
+  # graphiteFormat: 4,2,5
+
   ## Any configuration property can be passed to the proxy via command line args in
   ## in the format: `--<property_name> <value>`. Multiple properties can be specified
   ## separated by whitespace.
